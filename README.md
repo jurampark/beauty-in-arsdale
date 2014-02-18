@@ -1,7 +1,7 @@
-flask-basic-registration
+beauty-in-arsdale
 ========================
 
-Basic user registration package for Flask. Use this as a boilerplate for your app.
+aaaBasic user registration package for Flask. Use this as a boilerplate for your app.
 
 - Flask==0.10.1
 - Flask-SQLAlchemy==0.16
