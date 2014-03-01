@@ -1,0 +1,88 @@
+{% extends "mobile_base.html" %}
+{% block header %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/insert_profile_info.css') }}"/>
+<script src="{{ url_for('static', filename='js/insert_profile_info.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+       <form>
+			<div class="ui-grid-solo">
+				<div class="ui-block-a form-box">
+					<div class="boxed">
+						<div class="form-header">
+							성별
+						</div>
+						<div class="form-contents">
+							<div data-role="controlgroup">
+								<label for="sex-m">남자</label>
+						        <input type="radio" name="sex" value="M" id="sex-m">
+							    <label for="sex-f">여자</label>
+							    <input type="radio" name="sex" value="F" id="sex-f" >
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="ui-block-a form-box">
+					<div class="boxed">
+						<div class="form-header">
+							연령대
+						</div>
+						<div class="form-contents">
+							<div class="ui-field-contain">
+						    <select name="user_age" id="userAge">
+						        <option value="10">10대 후반</option>
+			                    <option value="20">20~24</option>
+			                    <option value="25">25~29</option>
+			                    <option value="30">30~34</option>
+			                    <option value="35">35~39</option>
+			                    <option value="40">40~44</option>
+			                    <option value="45">45~</option>
+						    </select>
+						</div>
+						</div>
+					</div>
+				</div>
+				<div class="ui-block-a form-box">
+					<div class="boxed">
+						<div class="form-header">
+							피부타입
+						</div>
+						<div class="form-contents">
+						   <div data-role="controlgroup">
+								<label for="skin-dry">건성</label>
+						        <input type="radio" name="skin_type" value="D" id="skin-dry">
+							    <label for="skin-oily">지성</label>
+							    <input type="radio" name="skin_type" value="O" id="skin-oily" >
+							    <label for="skin-combination">복합성</label>
+							    <input type="radio" name="skin_type" value="C" id="skin-combination" >
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="ui-block-a form-box">
+					<div class="boxed">
+						<div class="form-header">
+							피부색
+						</div>
+						<div class="form-contents">
+							<input type="hidden" name="skin_color" id="skin_color"/>
+							<div class="ui-grid-b">
+								<div class="ui-block-a color-section" data-attribute="e0a27b" style="background-color: #e0a27b;"></div>
+								<div class="ui-block-b color-section" data-attribute="e0a28b" style="background-color: #e0a28b;"></div>
+								<div class="ui-block-c color-section" data-attribute="e0a29b" style="background-color: #e0a29b;"></div>
+								<div class="ui-block-a color-section" data-attribute="e0a27a" style="background-color: #e0a27a;"></div>
+								<div class="ui-block-b color-section" data-attribute="e0b28b" style="background-color: #e0b28b;"></div>
+								<div class="ui-block-c color-section" data-attribute="e0c29c" style="background-color: #e0c29c;"></div>
+								<div class="ui-block-a color-section" data-attribute="e0a32a" style="background-color: #e0a32a;"></div>
+								<div class="ui-block-b color-section" data-attribute="e0a33b" style="background-color: #e0a33b;"></div>
+								<div class="ui-block-c color-section" data-attribute="e0a34c" style="background-color: #e0a34c;"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="ui-block-a">
+					<input type="submit" value="프로필 수정" class="ui-btn ui-shadow">
+				</div>
+			</div>
+		</form>
+{% endblock %}

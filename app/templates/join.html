@@ -1,139 +1,47 @@
 {% extends "mobile_base.html" %}
 {% block header %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/insert_profile_info.css') }}"/>
 {% endblock %}
 
 {% block content %}
-        <div class="ui-grid-solo">
-			<div class="ui-block-a">
-				<div class="skin-color-box">
-					<div style="margin-top : 4px; width : 100%; height: 90px; border-radius:50%; background-color: #e0a27b;">
-              			<p class="skin-color-str">선택하신<br/>피부색</p>
-              		</div>
+       <form method="post" action="">
+			<div class="ui-grid-solo">
+				<div class="ui-block-a">
+					<a href="#" class="ui-btn ui-shadow ui-btn-inline" style="margin:12px 0;">Facebook을 통해 가입</a>
 				</div>
-				<div class="profile-contents-box">
-					<h2 class="user-name">한도건</h2>
-					<div class="profile-content">
-						남자, 25~30
+				<div class="ui-block-a form-box">
+					<div class="boxed">
+						<div class="form-header">
+							회원가입
+						</div>
+						<div class="form-contents">
+							<div>
+								<label for="email">Email</label>
+								<input type="text" name="email" id="email"/>
+							</div>
+							<div>
+								<label for="name_i">이름</label>
+								<input type="text" name="name" id="name_i"/>
+							</div>
+							<div>
+								<label for="password_i">비밀번호</label>
+								<input type="password" name="password" id="password_i"/>
+							</div>
+							<div>
+								<label for="sex">성별</label>
+								<select name="sex" id="sex">
+						        	<option value="M">남자</option>
+						        	<option value="F">여자</option>
+						        </select>
+						    </div>
+						</div>
 					</div>
-					<div class="profile-content">
-						피부타입: <span class="profile-skin-type">지성</span>
-					</div>
-				</div>
-				<div class="clearfix"></div>
-			</div>
-		</div>
-		<div class="ui-grid-solo">
-			<div class="ui-block-a">
-				<div data-role="tabs" id="profileTabs">
-				  <div data-role="navbar">
-				    <ul>
-				      <li><a href="#interest" class="ui-btn-active ui-icon-star ui-btn-icon-left" data-ajax="false">관심상품</a></li>
-				      <li><a href="#purchaseList" class="ui-icon-shop ui-btn-icon-left" data-ajax="false">구매목록</a></li>
-				    </ul>
-				  </div>
-				  <div id="interest">
-				  	<div class="ui-grid-a">
-				    	<div class="ui-block-a">
-				    		<div class="service-list team">
-				    			<div class="service-item boxed bg-image-star2">
-						            <div class="service-content">
-						                <div class="service-image ">
-						                    <a href="#"><img src="{{ url_for('static', filename='img/service-img-1.jpg') }}" alt="" /></a>
-						                </div>
-						                <div class="service-title profile-interesting-title">
-						                	<a href="#">꽃을 든 남자 밝은 피부</a>
-						                	<div class="product-price-box">
-						                		$33,300
-						                	</div>
-						                </div>
-						            </div>
-						            <div class="service-meta-bot">
-						                <ul class="service-links green clearfix">
-						                    <li class="service-social"><a href="#" class="nanum-font-tab"><i class="icon-small-twitter"></i>구매</a></li>
-						                    <li class="service-social"><a href="#" class="nanum-font-tab"><i class="icon-small-pinterest"></i>삭제</a></li>
-						                </ul>
-						            </div>
-						        </div>
-				    		</div>
-				    	</div>
-				    	<div class="ui-block-b">
-				    		<div class="service-list team">
-				    			<div class="service-item boxed bg-image-star2">
-						            <div class="service-content">
-						                <div class="service-image ">
-						                    <a href="#"><img src="{{ url_for('static', filename='img/service-img-1.jpg') }}" alt="" /></a>
-						                </div>
-						                <div class="service-title profile-interesting-title">
-						                	<a href="#">꽃을 든 남자 밝은 피부</a>
-						                	<div class="product-price-box">
-						                		$33,300
-						                	</div>
-						                </div>
-						            </div>
-						            <div class="service-meta-bot">
-						                <ul class="service-links green clearfix">
-						                    <li class="service-social"><a href="#" class="nanum-font-tab"><i class="icon-small-twitter"></i>구매</a></li>
-						                    <li class="service-social"><a href="#" class="nanum-font-tab"><i class="icon-small-pinterest"></i>삭제</a></li>
-						                </ul>
-						            </div>
-						        </div>
-				    		</div>
-				    	</div>
-				    </div>
-				    <div class="ui-grid-a">
-				    	<div class="ui-block-a">
-				    		<div class="service-list team">
-				    			<div class="service-item boxed bg-image-star2">
-						            <div class="service-content">
-						                <div class="service-image ">
-						                    <a href="#"><img src="{{ url_for('static', filename='img/service-img-1.jpg') }}" alt="" /></a>
-						                </div>
-						                <div class="service-title profile-interesting-title">
-						                	<a href="#">꽃을 든 남자 밝은 피부</a>
-						                	<div class="product-price-box">
-						                		$33,300
-						                	</div>
-						                </div>
-						            </div>
-						            <div class="service-meta-bot">
-						                <ul class="service-links green clearfix">
-						                    <li class="service-social"><a href="#" class="nanum-font-tab"><i class="icon-small-twitter"></i>구매</a></li>
-						                    <li class="service-social"><a href="#" class="nanum-font-tab"><i class="icon-small-pinterest"></i>삭제</a></li>
-						                </ul>
-						            </div>
-						        </div>
-				    		</div>
-				    	</div>
-				    	<div class="ui-block-b">
-				    		<div class="service-list team">
-				    			<div class="service-item boxed bg-image-star2">
-						            <div class="service-content">
-						                <div class="service-image ">
-						                    <a href="#"><img src="{{ url_for('static', filename='img/service-img-1.jpg') }}" alt="" /></a>
-						                </div>
-						                <div class="service-title profile-interesting-title">
-						                	<a href="#">꽃을 든 남자 밝은 피부</a>
-						                	<div class="product-price-box">
-						                		$33,300
-						                	</div>
-						                </div>
-						            </div>
-						            <div class="service-meta-bot">
-						                <ul class="service-links green clearfix">
-						                    <li class="service-social"><a href="#" class="nanum-font-tab"><i class="icon-small-twitter"></i>구매</a></li>
-						                    <li class="service-social"><a href="#" class="nanum-font-tab"><i class="icon-small-pinterest"></i>삭제</a></li>
-						                </ul>
-						            </div>
-						        </div>
-				    		</div>
-				    	</div>
-				    </div>
-				  </div>
-				  <div id="purchaseList">
-				    구매목록
-				  </div>
 				</div>
 			</div>
-		</div>
+			<div class="ui-grid-solo">
+				<div class="ui-block-a">
+					<input type="submit" value="회원가입" class="ui-btn ui-shadow">
+				</div>
+			</div>
+		</form>
 {% endblock %}
