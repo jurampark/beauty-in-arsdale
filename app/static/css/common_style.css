@@ -186,11 +186,12 @@ ol, ul {
     text-decoration: none;
 }
 .comment-author .comment-meta {
-    float: right;
+    /*float: right;*/
+    display:block;
     font-size: 13px;
     font-weight: 700;
     color: #7380b0;
-    text-align: right;
+    text-align: left;
     text-transform: uppercase;
 }
 .comment-author .comment-meta .link-reply {
