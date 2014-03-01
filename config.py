@@ -5,3 +5,4 @@ DATABASE = 'test.db'
 SECRET_KEY = 'my precious'
 
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'test.db')
+

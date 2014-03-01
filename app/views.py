@@ -55,7 +55,7 @@ def login():
 def members():
     return render_template('members.html')
 
-@app.route('/mypage/', methods=['GET','POST'])
+@app.route('/mypage/', methods=['GET'])
 ###@login_required
 def myPage():
     return render_template('my_page.html')
