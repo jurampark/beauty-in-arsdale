@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Cosmetic</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.1/jquery.mobile-1.4.1.min.css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/common_style.css') }}"/>
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.1/jquery.mobile-1.4.1.min.js"></script>
+    {% block header %}
+    {% endblock %}
+</head>
+<body>
+<div data-role="page">
+
+	<div data-role="panel" id="menuPanel" data-position="left" data-display="push" data-position-fixed="true">
+	    <!-- panel content goes here -->
+	   <div>
+	   		<h1>Cosmetic</h1>
+	   </div>
+	   <ul data-role="listview">
+	   		<li data-role="list-divider"></li>
+		    <li><a href="#">홈</a></li>
+		    <li><a href="#">프로필</a></li>
+		    <li><a href="#">쇼핑</a></li>
+		    <li><a href="#">맞춤 검색</a></li>
+		    <li><a href="#">제품 비교</a></li>
+		    <li data-role="list-divider"></li>
+		    <li><a href="#">About</a></li>
+		    <li><a href="#">Help</a></li>
+		    <li><a href="#">로그아웃</a></li>
+		    <li data-role="list-divider"></li>
+		</ul>
+	</div><!-- /panel -->
+	<div data-role="panel" data-position="right" data-position-fixed="true" data-display="overlay" data-theme="a" id="loginForm">
+        <form class="userform">
+            <h2>로그인</h2>
+            <label for="name">Email:</label>
+            <input type="text" name="email" id="name" value="" data-clear-btn="true" data-mini="true">
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" value="" data-clear-btn="true" autocomplete="off" data-mini="true">
+            <div class="ui-grid-solo">
+                <div class="ui-block-a"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">로그인</a></div>
+            </div>
+            <div class="ui-grid-solo">
+                <div class="ui-block-a"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">회원가입</a></div>
+            </div>
+			<div class="ui-grid-solo">
+                <div class="ui-block-a"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">페이스북 로그인</a></div>
+            </div>
+        </form>
+    </div><!-- /panel -->
+	<div data-role="header" data-position="fixed">
+		<a href="#menuPanel" class="ui-btn-left ui-btn ui-btn-inline ui-btn-icon-notext ui-corner-all ui-icon-grid">Menu</a>
+    	<h2 class="ui-title">Cosmetic</h2>
+    	<div  class="ui-btn-right">
+	    	<a href="#" class="ui-btn ui-btn-inline ui-icon-shop ui-btn-icon-notext ui-corner-all">No text</a>
+	    	<a href="#loginForm" class="ui-btn ui-btn-inline ui-icon-user ui-btn-icon-notext ui-corner-all">No text</a>
+    	</div>
+	</div>
+	<div data-role="main" class="ui-content">
+		{% block content %}
+        {% endblock %}
+	</div>
+	<div data-role="footer">
+		<h4>Page Footer</h4>
+	</div>
+</div>
+
+</body>
+</html>

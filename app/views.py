@@ -55,6 +55,11 @@ def login():
 def members():
     return render_template('members.html')
 
+@app.route('/mypage/')
+###@login_required
+def myPage():
+    return render_template('my_page.html')
+
 @app.route('/register/', methods=['GET','POST'])
 def register():
     error = None

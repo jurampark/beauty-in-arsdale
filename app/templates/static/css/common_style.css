@@ -1,0 +1,144 @@
+
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+body{
+	font-family: 'Nanum Gothic';
+	font-size : 15px;
+}
+
+.ui-btn {
+	font-family: 'Nanum Gothic';
+}
+.clearfix{
+	clear:both;
+}
+
+ol, ul {
+	list-style: none;
+	padding:0;
+	margin:0;
+}
+
+.boxed {
+    background-color: #fff;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
+	position: relative;
+}
+.boxed-transparent {
+    background-color: #a9728e;
+    background-color: rgba(255,255,255,0.1);
+}
+
+.service-links {
+    background: #7978b4;
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 0 14px 5px -10px rgba(0,0,0,0.3);
+}
+.service-links li {float: left; width: 50%;}
+
+.service-links:before {
+    font-size: 80px;
+    font-weight: 700;
+    color: #8c8bc8;
+    letter-spacing: -5px;
+    position: absolute;
+    white-space: nowrap;
+    top: -6px;
+    left: -7px;
+}
+.service-links a {
+    display: block;
+    padding: 8px 0;
+    text-align: center;
+    border-left: 1px solid #6d6cac;
+    font-size: 12px;
+    text-shadow:none;
+    font-weight:800;
+    color: #fff;
+    padding-bottom: 200px;
+    margin-bottom: -190px;
+}
+.service-links li:first-child a {border-left-width: 0;}
+.service-links a:hover {color: #fff !important;}
+
+.service-links [class*="icon-small-"] {
+    display: block;
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 18px;
+    line-height: 22px;
+    color: #53529b;
+    -webkit-transition: all 0.16s ease;
+    -moz-transition: all 0.16s ease;
+    -ms-transition: all 0.16s ease;
+    transition: all 0.16s ease;
+}
+.service-links .icon-small-prev, .service-links .icon-small-next {font-size: 22px;}
+.service-links a:hover [class*="icon-small-"] {color: #d4e729;}
+
+/*Green Links*/
+.service-links.green {background: #b8c901; box-shadow: none;}
+.service-links.green:before {color: #989f01;}
+.service-links.green a {
+    border-left: 1px solid #b4c201;
+    -webkit-transition: all 0.16s ease;
+    -moz-transition: all 0.16s ease;
+    -ms-transition: all 0.16s ease;
+    transition: all 0.16s ease;
+}
+.service-links.green a:hover {background: #989f01; box-shadow: inset 0 16px 10px -10px rgba(77, 83, 14, 0.8);}
+.service-links.green [class*="icon-small-"] {color: #fff;}
+.service-links.green a:hover [class*="icon-small-"] {color: #b8c901;}
+
+/*Red Links*/
+.service-links.red {background: #bf5d90;}
+.service-links.red:before {color: #cc6b9e;}
+.service-links.red a {border-left: 1px solid #ab447a;}
+.service-links.red [class*="icon-small-"] {color: #fff;}
+.service-links.red a:hover [class*="icon-small-"] {color: #FFB3DB;}
+
+.service-desc p {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 20px;
+    margin-bottom: 16px;
+}
+.service-image img {display: block; width: 100%;}
+
+.service-list.team{
+	padding: 0 0px 0 0;
+}
+
+.ui-block-a .team{
+	padding: 0 3px 0 3px;
+}
+
+.ui-block-b .team{
+	padding: 0 3px 0 3px;
+}
+
+.service-list.team .service-content {padding: 6px 0px;}
+.service-list.team .service-title {font-size: 10px; line-height: 18px; margin-bottom: 0; text-align: center;}
+.service-list.team .service-title a {color: #644370; text-decoration: none;}
+.service-list.team .service-subtitle {color: #bf5d90; text-transform: uppercase; margin-bottom: 22px;}
+.service-list.team .service-image {margin: 0 0px 6px; width : 100%;}
+.service-image img{width : 100%;}
+.service-list.team .service-links li {width: 50%; font-size: 10px;}
+
+
+/*Green Links*/
+.service-links.green {background: #b8c901; box-shadow: none;}
+.service-links.green:before {color: #989f01;}
+.service-links.green a {
+	text-decoration:none;
+    border-left: 1px solid #b4c201;
+    -webkit-transition: all 0.16s ease;
+    -moz-transition: all 0.16s ease;
+    -ms-transition: all 0.16s ease;
+    transition: all 0.16s ease;
+}
+.service-links.green a:hover {background: #989f01; box-shadow: inset 0 16px 10px -10px rgba(77, 83, 14, 0.8);}
+.service-links.green [class*="icon-small-"] {color: #fff;}
+.service-links.green a:hover [class*="icon-small-"] {color: #b8c901;}
