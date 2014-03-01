@@ -55,6 +55,10 @@ def login():
 def members():
     return render_template('members.html')
 
+@app.route('/mockup', methods = ['GET', 'POST'])
+def test():
+    return 'register'
+
 @app.route('/register/', methods=['GET','POST'])
 def register():
     error = None
