@@ -1,0 +1,25 @@
+.form-header{
+	background-color: #b8c901;
+	color: white;
+	/*font-weight : bold;*/
+	font-size: 18px;
+	padding : 8px 14px;
+}
+
+.form-contents{
+	padding : 6px 8px;
+}
+
+.form-box{
+	
+	margin-bottom : 18px;
+}
+
+.color-section {
+	height : 50px;
+	border: 1px solid #ddd;
+}
+
+.selected-color{
+	border : 2px dotted red;
+}

@@ -1,0 +1,89 @@
+.skin-color-box{
+	margin-top : 4px;
+	width : 90px;
+	float: left;
+	margin-right : 20px;
+}
+
+.profile-contents-box{
+	width : 165px;
+	float:left;
+	font-size: 14px;
+}
+
+@media all and (min-width: 35em) {
+	.skin-color-box{
+		background-color: yellow;
+	}
+	
+	.profile-contents-box{
+	}
+}
+
+@media all and (min-width: 42em) {
+	.skin-color-box{
+		background-color: red;
+	}
+	
+	.profile-contents-box{
+	}
+}
+
+
+@media all and (min-width: 55em) {
+	.skin-color-box{
+		background-color: green;
+	}
+	
+	.profile-contents-box{
+	}
+}
+
+@media all and (min-width: 75em) {
+	.skin-color-box{
+		background-color: blue;
+	}
+	
+	.profile-contents-box{
+	}
+}
+
+
+
+#profileTabs{
+	margin-top : 18px;
+	padding : 0;
+}
+
+
+.user-name{
+	margin-top : 0px;
+}
+
+.skin-color-str{
+	font-size : 14px;
+	font-weight:bold;
+	margin : 2px auto;
+	padding-top : 30px;
+	color : #644370;
+	text-align: center;
+	margin-bottom: 12px;
+}
+
+
+.profile-skin-type{
+	font-weight: bold;
+	color : #985965;
+}
+
+.profile-content{
+	margin-top : 4px;
+}
+
+.product-price-box{
+	font-weight:bold;
+}
+
+#interest{
+	padding-top : 12px;
+}
