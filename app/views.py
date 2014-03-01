@@ -60,6 +60,17 @@ def members():
 def myPage():
     return render_template('my_page.html')
 
+@app.route('/join/', methods=['GET'])
+###@login_required
+def join():
+    return render_template('join.html')
+
+@app.route('/convertprofile/', methods=['GET'])
+###@login_required
+def convertProfile():
+    return render_template('insert_profile_info.html')
+
+
 @app.route('/register/', methods=['GET','POST'])
 def register():
     error = None
