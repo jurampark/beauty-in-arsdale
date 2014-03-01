@@ -52,3 +52,8 @@
 2014-02-05 23:33:44,637 INFO: errors [in /root/flask/src/flask-basic-registration-master/app/__init__.py:25]
 2014-02-07 01:15:43,641 INFO: errors [in /root/flask/src/flask-basic-registration-master/app/__init__.py:25]
 2014-02-07 01:15:45,021 INFO: errors [in /root/flask/src/flask-basic-registration-master/app/__init__.py:25]
+2014-03-01 11:07:14,291 INFO: errors [in /root/flask/src/beauty-alpha/app/__init__.py:25]
+2014-03-01 11:07:14,862 INFO: errors [in /root/flask/src/beauty-alpha/app/__init__.py:25]
+2014-03-01 11:18:05,931 INFO: errors [in /root/flask/src/beauty-alpha/app/__init__.py:25]
+2014-03-01 11:18:06,441 INFO: errors [in /root/flask/src/beauty-alpha/app/__init__.py:25]
+2014-03-01 11:26:33,466 INFO: errors [in /root/flask/src/beauty-alpha/app/__init__.py:25]

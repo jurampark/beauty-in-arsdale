@@ -59,6 +59,11 @@ def members():
 def test():
     return 'register'
 
+@app.route('/mypage/', methods=['GET','POST'])
+###@login_required
+def myPage():
+    return render_template('my_page.html')
+
 @app.route('/register/', methods=['GET','POST'])
 def register():
     error = None
