@@ -22,10 +22,11 @@
 }
 
 #menuListView a{
+    font-size:14px;
     background: inherit;
     color : white;
     font-weight : normal;
-
+    border-color: black;
 }
 
 .ui-page{
