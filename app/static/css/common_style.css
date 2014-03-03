@@ -21,6 +21,10 @@
     color : white;
 }
 
+.menu-list-view-divider{
+    background-color: black!important;
+}
+
 #menuListView a{
     font-size:14px;
     background: inherit;
