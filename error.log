@@ -52,6 +52,7 @@
 2014-02-05 23:33:44,637 INFO: errors [in /root/flask/src/flask-basic-registration-master/app/__init__.py:25]
 2014-02-07 01:15:43,641 INFO: errors [in /root/flask/src/flask-basic-registration-master/app/__init__.py:25]
 2014-02-07 01:15:45,021 INFO: errors [in /root/flask/src/flask-basic-registration-master/app/__init__.py:25]
+<<<<<<< HEAD
 2014-03-01 11:07:14,291 INFO: errors [in /root/flask/src/beauty-alpha/app/__init__.py:25]
 2014-03-01 11:07:14,862 INFO: errors [in /root/flask/src/beauty-alpha/app/__init__.py:25]
 2014-03-01 11:18:05,931 INFO: errors [in /root/flask/src/beauty-alpha/app/__init__.py:25]
@@ -75,3 +76,10 @@
 2014-03-03 16:38:34,837 INFO: errors [in /root/flask/src/beauty-alpha/app/__init__.py:25]
 2014-03-03 17:05:08,539 INFO: errors [in /root/flask/src/beauty-alpha/app/__init__.py:25]
 2014-03-03 17:05:09,388 INFO: errors [in /root/flask/src/beauty-alpha/app/__init__.py:25]
+=======
+2014-03-03 23:05:16,903 INFO: errors [in D:\python_workspace\beauty\beauty-in-arsdale\app\__init__.py:25]
+2014-03-03 23:05:56,727 INFO: errors [in D:\python_workspace\beauty\beauty-in-arsdale\app\__init__.py:25]
+2014-03-03 23:05:56,727 INFO: errors [in D:/python_workspace/beauty/beauty-in-arsdale/app/__init__.py:25]
+2014-03-03 23:07:13,236 INFO: errors [in D:\python_workspace\beauty\beauty-in-arsdale\app\__init__.py:25]
+2014-03-03 23:07:13,509 INFO: errors [in D:\python_workspace\beauty\beauty-in-arsdale\app\__init__.py:25]
+>>>>>>> e06082807d045bfd4a16d0fa7b11b2e189650ad3
