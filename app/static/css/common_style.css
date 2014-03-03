@@ -6,6 +6,9 @@
     background: url("../img/menu_bar2.png") top left !important;
 }
 
+.ui-page{
+    background: url("../img/bg1.png") top left !important;
+}
 
 body{
 	font-family: 'Nanum Gothic';
