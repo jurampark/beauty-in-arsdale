@@ -16,6 +16,16 @@
     color : white;
 }
 
+#menuListView{
+    background: inherit;
+    color : white;
+}
+
+#menuListView li{
+    background: inherit;
+    color : white;
+}
+
 .ui-page{
     background: url("../img/bg1.png") top left !important;
 }
