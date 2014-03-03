@@ -4,7 +4,7 @@
 
 .ui-header{
     background: url("../img/menu_bar1.png") top left !important;
-    border-bottom: 1px solid #999999;
+    border-bottom: 1px solid #999999 !important;
 }
 
 #menuPanel{
