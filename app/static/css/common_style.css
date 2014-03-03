@@ -24,6 +24,8 @@
 #menuListView a{
     background: inherit;
     color : white;
+    font-weight : normal;
+
 }
 
 .ui-page{
