@@ -1,6 +1,11 @@
 
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
+
+.ui-header{
+    background: url("../img/menu_bar1.png") top left repeat-x repeat-y;
+}
+
 body{
 	font-family: 'Nanum Gothic';
 	font-size : 15px;
@@ -201,3 +206,5 @@ ol, ul {
 }
 .comment-author .comment-meta .link-reply i {vertical-align: -32%; margin: 0;}
 .comment-entry {line-height: 24px;}
+
+
