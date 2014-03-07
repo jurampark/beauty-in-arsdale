@@ -1,0 +1,38 @@
+.product-info{
+    margin-bottom : 40px;
+}
+
+.product-info-img img{
+    width : 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.product-info-table{
+    margin: 0 auto;
+    width :90%;
+    border-collapse: collapse;
+}
+
+.product-info-table td{
+    padding : 8px 8px;
+    text-align: center;
+    border: 0;
+    border-top: 1px solid #777777;
+    border-bottom: 1px solid #777777;
+}
+
+td.product-info-title{
+    font-weight: bold;
+    font-size: 16px;
+    text-align: right;
+}
+
+td.row-first, td.row-last {
+    border: 0;
+}
+
+
+
+
+

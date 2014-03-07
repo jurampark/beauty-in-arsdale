@@ -1,0 +1,93 @@
+.product-detail-img img{
+    width : 100%;
+}
+
+.product-detail-title{
+    padding: 20px 30px 5px;
+}
+
+.product-detail-contents{
+    padding : 10px 30px 5px;
+    margin-bottom: 25px;
+    line-height: 25px;
+}
+
+.product-detail-link{
+    margin : 0;
+    padding : 0;
+    border:0;
+    overflow: hidden;
+    position: relative;
+    background-color: #373737;
+    border-top:1px solid #eee;
+}
+
+.product-detail-link li{
+    width : 32.5%;
+    padding: 20px 0px;
+    float:left;
+    color : #333;
+    text-align: center;
+    border-left : 1px solid #eee;
+}
+
+.product-detail-link a{
+    font-size: 14px;
+    color :#fff;
+    text-shadow: none;
+    text-decoration: none;
+}
+.product-detail-link a:visited{
+    color : #333
+}
+
+.product-detail-link a:hover{
+    color : #eee;
+}
+
+a.try-on-btn{
+    color :#fff;
+    margin-top : 20px;
+    margin-left: 1px !important;
+    margin-right : 1px !important;
+    font-size: 14px;
+}
+
+.blog-review-header{
+    margin-top : 28px;
+}
+
+.blogger-review-img{
+    width :28%;
+    float: left;
+}
+
+.blogger-review-img img{
+    width : 100%;
+}
+
+.blogger-review-contents{
+    width : 65%;
+    padding: 8px 6px 8px 8px;
+    float:left;
+}
+
+.blogger-review-title{
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.blogger-review-desc{
+    margin-top: 8px;
+    font-size: 10px;
+}
+
+.blogger-review-writer{
+    margin-top: 8px;
+    text-align: right;
+    font-size: 10px;
+}
+
+.before-after-box{
+ margin-top : 25px;
+}

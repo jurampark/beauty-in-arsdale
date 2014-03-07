@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>Cosmetic</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.1/jquery.mobile-1.4.1.min.css" />
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/common_style.css') }}"/>
-	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.4.1/jquery.mobile-1.4.1.min.js"></script>
+    <title>Cosmetic</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.1/jquery.mobile-1.4.1.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/common_style.css') }}"/>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.1/jquery.mobile-1.4.1.min.js"></script>
     {% block header %}
     {% endblock %}
 </head>
@@ -18,14 +18,14 @@
 	<div data-role="panel" id="menuPanel" data-position="left" data-display="push" data-position-fixed="true">
 	    <!-- panel content goes here -->
 	   <div>
-	   		<h1 id="menuPanelTitle">Cosmetic</h1>
+	   		<h1 id="menuPanelTitle">Motion9</h1>
 	   </div>
 	   <ul data-role="listview" id="menuListView">
 		    <li data-icon="false"><a href="/">홈</a></li>
 		    <li data-icon="false"><a href="/mypage" data-ajax="false">프로필</a></li>
 		    <li data-icon="false"><a href="#">쇼핑</a></li>
 		    <li data-icon="false"><a href="#">맞춤 검색</a></li>
-		    <li data-icon="false"><a href="#">제품 비교</a></li>
+		    <li data-icon="false"><a href="/comparablelist" data-ajax="false">제품 비교</a></li>
 		    <li data-icon="false"><a href="#">About</a></li>
 		    <li data-icon="false"><a href="#">Help</a></li>
 		    <li data-icon="false"><a href="#">로그아웃</a></li>
@@ -51,7 +51,9 @@
     </div><!-- /panel -->
 	<div data-role="header" data-position="fixed">
 		<a href="#menuPanel" class="ui-btn-left ui-btn ui-btn-inline ui-btn-icon-notext ui-corner-all ui-icon-grid">Menu</a>
-    	<h2 class="ui-title">Cosmetic</h2>
+        {% block title %}
+    	<h2 class="ui-title">Motion9</h2>
+        {% endblock %}
     	<div  class="ui-btn-right">
 	    	<a href="#" class="ui-btn ui-btn-inline ui-icon-shop ui-btn-icon-notext ui-corner-all">No text</a>
 	    	<a href="#loginForm" class="ui-btn ui-btn-inline ui-icon-user ui-btn-icon-notext ui-corner-all">No text</a>

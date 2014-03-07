@@ -3,7 +3,9 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/insert_profile_info.css') }}"/>
 <script src="{{ url_for('static', filename='js/insert_profile_info.js') }}"></script>
 {% endblock %}
-
+{% block title %}
+    <h2 class="ui-title">내정보 수정</h2>
+{% endblock %}
 {% block content %}
        <form>
 			<div class="ui-grid-solo">

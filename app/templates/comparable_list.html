@@ -1,0 +1,74 @@
+{% extends "mobile_base.html" %}
+{% block header %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/comparable_list.css') }}"/>
+<script src="{{ url_for('static', filename='js/comparable_list.js') }}"></script>
+{% endblock %}
+{% block title %}
+    <h2 class="ui-title">제품 비교</h2>
+{% endblock %}
+{% block content %}
+<div class="ui-grid-solo">
+    <div class="ui-block-a">
+        <div style="text-align: right;">
+            <span id="selectedItemCnt">0</span>개 아이템 선택함.&nbsp;
+            <a href="/comparabledetaillist" data-ajax="false" class="ui-btn ui-btn-inline">비교하기</a>
+        </div>
+        <input type="search" name="search_box" id="searchBox" value="">
+    </div>
+    <div class="ui-block-a">
+        <ul class="compare-list">
+           <li>
+               <img class="product-img" src="{{ url_for('static', filename='img/comment-1.jpg') }}"/>
+               <div class="product-contents">
+                   <div class="product-info">
+                       <h4>IOPE 남자 white skin </h4>
+                       <p class="product-desc">
+                           남자 BB 크림
+                       </p>
+                   </div>
+                   <div class="product-checkbox-wrapper">
+                       <div class="product-checkbox">
+                           <input type="checkbox" class="product-checkbox-input" data-attr="a" id="li-1" />
+                       </div>
+                   </div>
+               </div>
+
+           </li>
+            <li>
+               <img class="product-img" src="{{ url_for('static', filename='img/comment-2.jpg') }}"/>
+               <div class="product-contents">
+                   <div class="product-info">
+                       <h4>꽃을 든 남자 Men's blacasdfas a sfda </h4>
+                       <p class="product-desc">
+                           남자 BB 크림
+                       </p>
+                   </div>
+                   <div class="product-checkbox-wrapper">
+                       <div class="product-checkbox">
+                           <input type="checkbox" class="product-checkbox-input" data-attr="b" id="li-2" />
+                       </div>
+                   </div>
+               </div>
+
+           </li>
+            <li>
+               <img class="product-img" src="{{ url_for('static', filename='img/comment-3.jpg') }}"/>
+               <div class="product-contents">
+                   <div class="product-info">
+                       <h4>이니스프리 </h4>
+                       <p class="product-desc">
+                           남자 BB 크림
+                       </p>
+                   </div>
+                   <div class="product-checkbox-wrapper">
+                       <div class="product-checkbox">
+                           <input type="checkbox" class="product-checkbox-input" data-attr="c" id="li-3" />
+                       </div>
+                   </div>
+               </div>
+
+           </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

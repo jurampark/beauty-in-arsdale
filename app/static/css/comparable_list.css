@@ -1,0 +1,110 @@
+.compare-list{
+    margin:0;
+    padding : 0;
+    list-style: none;
+    -webkit-box-shadow : 0 1px 3px rgba(0,0,0,.15);
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,.15);
+    box-shadow: 0 1px 3px rgba(0,0,0,.15);
+    -webkit-border-radius: .3125em;
+    border-radius: .3125em;
+    background-color: #f6f6f6;
+}
+
+.compare-list li{
+    /*
+     border-top-left-radius: inherit;
+     border-top-right-radius: inherit;
+     -webkit-border-top-left-radius: inherit;
+     -webkit-border-top-right-radius: inherit;
+     */
+    overflow: hidden;
+    border:1px solid rgb(221, 221, 221);
+    white-space: nowrap;
+    cursor: pointer;
+    margin-top: -1px;
+}
+
+.compare-list h4{
+    margin : 8px 0px;
+    padding : 0;
+}
+
+.product-img{
+    width : 80px;
+    height : 80px;
+    float:left;
+    margin-right: 8px;
+}
+
+.product-contents{
+    min-width : 50%;
+    overflow: hidden;
+}
+
+.product-info{
+    width : 80%;
+    display: block;
+    overflow: hidden;
+    float: left;
+}
+
+.product-info h4{
+    word-break: break-all;
+    white-space: pre-line;
+}
+
+.product-desc{
+    font-size: 12px;
+    margin-bottom: 2px;
+}
+
+.product-checkbox-wrapper{
+    width : 20%;
+    float:left;
+    height : 70px;
+}
+
+.product-checkbox{
+    border-left: 1px solid rgb(221, 221, 221);
+    margin-top : 12px;
+    height : 100%;
+    text-align: center;
+    overflow: hidden;
+}
+
+.ui-checkbox{
+    padding: 0;
+    text-align: center;
+    margin-top: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    width : 24px;
+}
+
+.ui-checkbox input{
+    margin:0;
+    padding:0;
+    width : 20px;
+    height : 20px;
+    position: relative;
+    left: 0;
+    top : 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
