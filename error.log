@@ -83,3 +83,7 @@
 2014-03-03 23:07:13,236 INFO: errors [in D:\python_workspace\beauty\beauty-in-arsdale\app\__init__.py:25]
 2014-03-03 23:07:13,509 INFO: errors [in D:\python_workspace\beauty\beauty-in-arsdale\app\__init__.py:25]
 >>>>>>> e06082807d045bfd4a16d0fa7b11b2e189650ad3
+2014-03-04 01:22:25,838 INFO: errors [in /root/flask/src/beauty-alpha/app/__init__.py:25]
+2014-03-04 01:22:26,257 INFO: errors [in /root/flask/src/beauty-alpha/app/__init__.py:25]
+2014-03-04 01:23:46,597 INFO: errors [in /root/flask/src/beauty-alpha/app/__init__.py:25]
+2014-03-04 01:23:46,989 INFO: errors [in /root/flask/src/beauty-alpha/app/__init__.py:25]
