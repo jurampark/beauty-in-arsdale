@@ -1,0 +1,104 @@
+{% extends "mobile_base.html" %}
+{% block header %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/product_detail.css') }}"/>
+{% endblock %}
+{% block title %}
+    <h2 class="ui-title">제품 정보</h2>
+{% endblock %}
+{% block content %}
+<div class="ui-grid-solo">
+    <div class="ui-block-a">
+        <div class="product-detail boxed">
+            <div class="product-detail-img">
+                <img src="{{ url_for('static', filename='img/post-img-1.jpg') }}"/>
+            </div>
+            <div class="product-detail-title">
+                <h2>꽃을 든 남자 </h2>
+                <h5>남자 BB 크림</h5>
+            </div>
+            <div class="product-detail-contents">
+                Praesent magna nunc, tincidunt pretium consequat d apibus, mollis nec odi. Nunc feugiat molestie orci, eu rutrum velit dignissim. Donec vel semper elit. Nunc dapibus tincidunt arcu, ac congue turpis semper vitae molestie orcifeugia ac congue turpi. Sed aliquam ac tellus sed aliquam. Aenean eget nulla nec felis
+            </div>
+            <div class="product-detail-link-box">
+                <ul class="product-detail-link">
+                    <li><a href="#">블로거</a></li>
+                    <li><a href="#">겟잇뷰티</a></li>
+                    <li><a href="#">관심</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ui-grid-a">
+    <div class="ui-block-a">
+        <a href="#" class="ui-btn ui-btn-b ui-shadow try-on-btn">Virtual Try on</a>
+    </div>
+    <div class="ui-block-b">
+        <a href="#" class="ui-btn ui-btn-b ui-shadow try-on-btn">Home Try on</a>
+    </div>
+</div>
+<div class="ui-grid-solo">
+    <div class="ui-block-a">
+        <div class="before-after-box">
+            <h3>비포 애프터 동영상</h3>
+            <div class="before-after-video">
+                <iframe width="100%" height="285" src="//www.youtube.com/embed/PxSXrJ0ircg" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ui-grid-solo">
+    <div class="ui-block-a">
+        <div class="blog-review-header">
+            <span style="font-weight: bold; font-size: 18px;">블로거 리뷰</span>&nbsp; <a href="/blogdetail" data-ajax="false" class="ui-btn ui-btn-b ui-btn-inline ui-mini">더보기</a>
+        </div>
+        <div class="blogger-reviews">
+            <div class="blogger-review boxed">
+                <div class="blogger-review-img">
+                    <img src="{{ url_for('static', filename='img/post-img-5.jpg') }}" alt="" />
+                </div>
+                <div class="blogger-review-contents">
+                    <a href="#" class="blogger-review-title">신기하게 잘맞는 BB</a>
+                    <div class="blogger-review-desc">
+                        강자이너가 알아보는 남자에게 딱 맞는 BB 크림!
+                    </div>
+                    <div class="blogger-review-writer">
+                        kdesigner@naver.com
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="blogger-review boxed">
+                <div class="blogger-review-img">
+                    <img src="{{ url_for('static', filename='img/post-img-5.jpg') }}" alt="" />
+                </div>
+                <div class="blogger-review-contents">
+                    <a href="#" class="blogger-review-title">신기하게 잘맞는 BB</a>
+                    <div class="blogger-review-desc">
+                        강자이너가 알아보는 남자에게 딱 맞는 BB 크림!
+                    </div>
+                    <div class="blogger-review-writer">
+                        kdesigner@naver.com
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="blogger-review boxed">
+                <div class="blogger-review-img">
+                    <img src="{{ url_for('static', filename='img/post-img-5.jpg') }}" alt="" />
+                </div>
+                <div class="blogger-review-contents">
+                    <a href="#" class="blogger-review-title">신기하게 잘맞는 BB</a>
+                    <div class="blogger-review-desc">
+                        강자이너가 알아보는 남자에게 딱 맞는 BB 크림!
+                    </div>
+                    <div class="blogger-review-writer">
+                        kdesigner@naver.com
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

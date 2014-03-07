@@ -1,0 +1,115 @@
+{% extends "mobile_base.html" %}
+{% block header %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/comparable_detail_list.css') }}"/>
+{% endblock %}
+{% block title %}
+    <h2 class="ui-title">2개 제품 비교</h2>
+{% endblock %}
+{% block content %}
+<div class="ui-grid-solo">
+    <div class="ui-block-a">
+        <div class="product-info boxed">
+            <div class="product-info-img">
+                <img src="{{ url_for('static', filename='img/post-img-12.jpg') }}"/>
+            </div>
+            <div class="product-info-contents">
+                <table class="product-info-table">
+                    <thead>
+                        <tr>
+                            <td class="product-info-title row-first">브랜드</td>
+                            <td class="row-first">이니스프리</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="product-info-title">카테고리</td>
+                            <td>BB 크림</td>
+                        </tr>
+                        <tr>
+                            <td class="product-info-title">용량/가격</td>
+                            <td>100ml/4900</td>
+                        </tr>
+                        <tr>
+                            <td class="product-info-title">피부타입</td>
+                            <td>건성</td>
+                        </tr>
+                        <tr>
+                            <td class="product-info-title">색</td>
+                            <td>19호</td>
+                        </tr>
+                        <tr>
+                            <td class="product-info-title">블로그 리뷰</td>
+                            <td>23개</td>
+                        </tr>
+                        <tr>
+                            <td class="product-info-title">겟잇뷰티</td>
+                            <td>6위</td>
+                        </tr>
+                        <tr>
+                            <td class="product-info-title">영상리뷰</td>
+                            <td>있음</td>
+                        </tr>
+                        <tr>
+                            <td class="product-info-title row-last">Wish</td>
+                            <td class="row-last">79</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="/productdetail" data-ajax="false" class="ui-btn ui-shadow ui-btn-b">상품 보러가기</a>
+            </div>
+        </div>
+    </div>
+    <div class="ui-block-a">
+        <div class="product-info boxed">
+            <div class="product-info-img">
+                <img src="{{ url_for('static', filename='img/post-img-11.jpg') }}"/>
+            </div>
+            <div class="product-info-contents">
+                <table class="product-info-table">
+                    <thead>
+                        <tr>
+                            <td class="product-info-title row-first">브랜드</td>
+                            <td class="row-first">꽃을 든 남자</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="product-info-title">카테고리</td>
+                            <td>BB 크림</td>
+                        </tr>
+                        <tr>
+                            <td class="product-info-title">용량/가격</td>
+                            <td>100ml/4900</td>
+                        </tr>
+                        <tr>
+                            <td class="product-info-title">피부타입</td>
+                            <td>건성</td>
+                        </tr>
+                        <tr>
+                            <td class="product-info-title">색</td>
+                            <td>19호</td>
+                        </tr>
+                        <tr>
+                            <td class="product-info-title">블로그 리뷰</td>
+                            <td>23개</td>
+                        </tr>
+                        <tr>
+                            <td class="product-info-title">겟잇뷰티</td>
+                            <td>6위</td>
+                        </tr>
+                        <tr>
+                            <td class="product-info-title">영상리뷰</td>
+                            <td>있음</td>
+                        </tr>
+                        <tr>
+                            <td class="product-info-title row-last">Wish</td>
+                            <td class="row-last">79</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="/productdetail" data-ajax="false" class="ui-btn ui-shadow ui-btn-b">상품 보러가기</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

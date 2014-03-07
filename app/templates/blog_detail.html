@@ -1,0 +1,77 @@
+{% extends "mobile_base.html" %}
+{% block header %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/blog_detail.css') }}"/>
+{% endblock %}
+{% block title %}
+    <h2 class="ui-title">제품 블로그 리뷰</h2>
+{% endblock %}
+{% block content %}
+<div class="ui-grid-solo">
+    <div class="ui-block-a">
+        <div class="blog-list boxed">
+            <div class="blog-list-img">
+                <img src="{{ url_for('static', filename='img/post-img-5.jpg') }}"/>
+            </div>
+            <div class="blog-list-title">
+                <h3><a href="productdetail" data-ajax="false">정말 좋은 꽃을 든 남자! 뷰티! </a></h3>
+                <h5>남자 BB 크림</h5>
+                <h5>kdesinger@naver.com</h5>
+            </div>
+            <div class="blog-list-contents">
+                Praesent magna nunc, tincidunt pretium consequat d apibus, mollis nec odi. Nunc feugiat molestie orci, eu rutrum velit dignissim. Donec vel semper elit. Nunc dapibus tincidunt arcu, ac congue turpis semper vitae molestie orcifeugia ac congue turpi. Sed aliquam ac tellus sed aliquam. Aenean eget nulla nec felis
+            </div>
+            <div class="blog-list-link-box">
+                <ul class="blog-list-link">
+                    <li class="link-text">Blog</li>
+                    <li><a href="http://demos.jquerymobile.com/1.4.2/listview-autocomplete/" data-ajax="false" target="_blank">원글보기</a></li>
+                    <li><a href="#">사진보기</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="ui-block-a">
+        <div class="blog-list boxed">
+            <div class="blog-list-img">
+                <img src="{{ url_for('static', filename='img/post-img-5.jpg') }}"/>
+            </div>
+            <div class="blog-list-title">
+                <h3><a href="productdetail" data-ajax="false">정말 좋은 꽃을 든 남자! 뷰티! </a></h3>
+                <h5>남자 BB 크림</h5>
+                <h5>kdesinger@naver.com</h5>
+            </div>
+            <div class="blog-list-contents">
+                Praesent magna nunc, tincidunt pretium consequat d apibus, mollis nec odi. Nunc feugiat molestie orci, eu rutrum velit dignissim. Donec vel semper elit. Nunc dapibus tincidunt arcu, ac congue turpis semper vitae molestie orcifeugia ac congue turpi. Sed aliquam ac tellus sed aliquam. Aenean eget nulla nec felis
+            </div>
+            <div class="blog-list-link-box">
+                <ul class="blog-list-link">
+                    <li class="link-text">Blog</li>
+                    <li><a href="http://demos.jquerymobile.com/1.4.2/listview-autocomplete/" data-ajax="false">원글보기</a></li>
+                    <li><a href="#">사진보기</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="ui-block-a">
+        <div class="blog-list boxed">
+            <div class="blog-list-img">
+                <img src="{{ url_for('static', filename='img/post-img-5.jpg') }}"/>
+            </div>
+            <div class="blog-list-title">
+                <h3><a href="productdetail" data-ajax="false">정말 좋은 꽃을 든 남자! 뷰티! </a></h3>
+                <h5>남자 BB 크림</h5>
+                <h5>kdesinger@naver.com</h5>
+            </div>
+            <div class="blog-list-contents">
+                Praesent magna nunc, tincidunt pretium consequat d apibus, mollis nec odi. Nunc feugiat molestie orci, eu rutrum velit dignissim. Donec vel semper elit. Nunc dapibus tincidunt arcu, ac congue turpis semper vitae molestie orcifeugia ac congue turpi. Sed aliquam ac tellus sed aliquam. Aenean eget nulla nec felis
+            </div>
+            <div class="blog-list-link-box">
+                <ul class="blog-list-link">
+                    <li class="link-text">Blog</li>
+                    <li><a href="http://demos.jquerymobile.com/1.4.2/listview-autocomplete/" data-ajax="false">원글보기</a></li>
+                    <li><a href="#">사진보기</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

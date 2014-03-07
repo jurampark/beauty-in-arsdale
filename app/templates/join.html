@@ -2,7 +2,9 @@
 {% block header %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/insert_profile_info.css') }}"/>
 {% endblock %}
-
+{% block title %}
+    <h2 class="ui-title">회원가입</h2>
+{% endblock %}
 {% block content %}
        <form method="post" action="http://ramju.cafe24.com:5000/signup">
 			<div class="ui-grid-solo">

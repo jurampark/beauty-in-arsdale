@@ -69,10 +69,30 @@ def myPage():
 def join():
     return render_template('join.html')
 
+@app.route('/productdetail/', methods=['GET'])
+###@login_required
+def productDetail():
+    return render_template('product_detail.html')
+
+@app.route('/blogdetail/', methods=['GET'])
+###@login_required
+def blogDetail():
+    return render_template('blog_detail.html')
+
 @app.route('/convertprofile/', methods=['GET'])
 ###@login_required
 def convertProfile():
     return render_template('insert_profile_info.html')
+
+@app.route('/comparablelist/', methods=['GET'])
+###@login_required
+def comparableList():
+    return render_template('comparable_list.html')
+
+@app.route('/comparabledetaillist/', methods=['GET'])
+###@login_required
+def comparableDetailList():
+    return render_template('comparable_detail_list.html')
 
 
 @app.route('/register/', methods=['GET','POST'])
