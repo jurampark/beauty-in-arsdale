@@ -1,8 +1,8 @@
 {% extends "mobile_base.html" %}
 {% block header %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/my_page.css') }}"/>
-    <script src="{{ url_for('static', filename='js/imagesloaded.pkgd.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/masonry.pkgd.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/masonry.pkgd.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/imagesloaded.pkgd.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/my_page.js') }}"></script>
 {% endblock %}
 {% block title %}
@@ -38,7 +38,8 @@
 				    </ul>
 				  </div>
 				  <div id="interest">
-                      <div id="interestGrid">
+				  	<div class="ui-grid-a">
+				    	<div class="ui-block-a">
 				    		<div class="service-list team">
 				    			<div class="service-item boxed bg-image-star2">
 						            <div class="service-content">
@@ -61,8 +62,9 @@
 						            </div>
 						        </div>
 				    		</div>
-
-                            <div class="service-list team">
+				    	</div>
+				    	<div class="ui-block-b">
+				    		<div class="service-list team">
 				    			<div class="service-item boxed bg-image-star2">
 						            <div class="service-content">
 						                <div class="service-image ">
@@ -84,8 +86,11 @@
 						            </div>
 						        </div>
 				    		</div>
-
-                            <div class="service-list team">
+				    	</div>
+				   <!--  </div>
+				   <div class="ui-grid-a">-->
+				    	<div class="ui-block-a">
+				    		<div class="service-list team">
 				    			<div class="service-item boxed bg-image-star2">
 						            <div class="service-content">
 						                <div class="service-image ">
@@ -107,8 +112,9 @@
 						            </div>
 						        </div>
 				    		</div>
-
-                            <div class="service-list team">
+				    	</div>
+				    	<div class="ui-block-b">
+				    		<div class="service-list team">
 				    			<div class="service-item boxed bg-image-star2">
 						            <div class="service-content">
 						                <div class="service-image ">
@@ -130,7 +136,8 @@
 						            </div>
 						        </div>
 				    		</div>
-                      </div>
+				    	</div>
+				   <!-- </div>-->
 				  </div>
 				  <div id="purchaseList">
 				    <div class="ui-grid-solo">
