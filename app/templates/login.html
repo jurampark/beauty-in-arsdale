@@ -1,11 +1,23 @@
-{% extends "base.html" %}
+{% extends "mobile_base.html" %}
 {% block content %}
-  <h1>Welcome to Flask-Basic-Registration</h1>
-  <h3>Please login.</h3>
-    <br/>
-    <form method="post" action="">
-      <p>{{ form.name.label }}&nbsp;{{ form.name }}&nbsp;{{ form.password.label }}&nbsp;{{ form.password }}<br/><br/><input class="btn btn-primary" type="submit" value="Submit"></p>
-    </form>
-    <p><em>Want to login by facebook? </em><a href="/loginbyfacebook">Login By FB!!</a></p>
-    <p><em>Need an account? </em><a href="/register">Signup!!</a></p>
+
+    <div class="login-wrapper">
+        <form class="userform" method="post" action="{{url_for('login')}}" data-ajax="false">
+            <h2>로그인</h2>
+            <label for="name">Email:</label>
+            <input type="text" name="email" id="name" value="" data-clear-btn="true" data-mini="true">
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" value="" data-clear-btn="true" autocomplete="off" data-mini="true">
+            <div class="ui-grid-solo">
+                <div class="ui-block-a"><input type="submit" data-mini="true" value="로그인"/></div>
+            </div>
+            <div class="ui-grid-solo">
+                <div class="ui-block-a"><a href="/join" data-ajax="false" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">회원가입</a></div>
+            </div>
+			<div class="ui-grid-solo">
+                <div class="ui-block-a"><a href="#" data-ajax="false" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">페이스북 로그인</a></div>
+            </div>
+        </form>
+    </div>
+
 {% endblock %}
