@@ -1,12 +1,21 @@
 
 $(function(){
+        var setItemWidth = function(){
+            var width = $('#interestGrid').width();
+            $('.service-list').css({width : parseInt((width - 14)/2)});
+        };
+
 		var container = document.querySelector('#interestGrid');
 		var msnry;
 
+        var width = $('#interestGrid').width();
+
 		imagesLoaded(container, function(){	//when all images are loaded, it is triggered
+            setItemWidth();
+
 			msnry = new Masonry( container, {	// api for displaying images as a grid
 			  // options
-			  columnWidth: 138,
+			  columnWidth: parseInt(width / 2),
 			  gutter : 1,
 			  itemSelector: '.service-list'
 			});
