@@ -1,10 +1,111 @@
 from app import app, db
-from flask import flash, redirect, render_template, request, session, url_for
-from functools import wraps
-from app.forms import RegisterForm, LoginForm
 from app.models import User
+from flask import flash, redirect, render_template, request, session, url_for, g
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 from werkzeug import generate_password_hash, check_password_hash
+from functools import wraps
+
+@app.before_request
+def before_request():
+    g.db = db
+    g.user = None
+    if 'user_id' in session:
+        g.user = g.db.session.query(User).filter(User.id == session['user_id']).first()
+        if g.user is None:
+            session.pop('user_id', None )
+
+@app.teardown_request
+def teardown_request( exception ):
+    pass
+
+def login_required( func ):
+    @wraps ( func )
+    def wrap(*args, **kwargs ):
+        if g.user:
+            return func( *args, **kwargs )
+        else:
+            return redirect( url_for('login') )
+    return wrap
+
+@app.route('/')
+def home():
+    return redirect( url_for('myPage') )
+
+@app.route('/login', methods=['GET', 'POST'] )
+def login():
+    if g.user: # already login
+        return redirect( url_for('home') )
+
+    error = None
+
+    if request.method == 'POST':
+        # get post params
+        email = request.form.get('email')
+        password = request.form.get('password')
+
+        user = g.db.session.query( User ).filter(User.email == email ).first()
+        if user is None:
+            error = 'fail_invalid_email'
+        else:
+            if not check_password_hash( user.password, password ):
+                error = 'fail_invalid_password'
+            else:
+                session['user_id'] = user.id
+                return redirect( url_for('home' ) )
+
+    if error is not None:
+        flash( error )
+    return render_template( 'login.html' )
+
+@app.route('/logout')
+def logout():
+    session.pop('user_id', None )
+    return redirect( url_for('home') )
+
+@app.route('/register', methods=['GET', 'POST'] )
+def register():
+    if g.user: # already login
+        return redirect( url_for('home') )
+
+    error = None
+
+    if request.method == 'POST':
+        #get post params
+        name = request.form.get('name')
+        email = request.form.get('email')
+        password = request.form.get('password')
+        sex = request.form.get('sex')
+
+        error = validate_register( name, email, password, sex )
+        if error is None:
+            new_user = User( name, email, generate_password_hash(password), sex, )
+            try:
+                g.db.session.add( new_user )
+                g.db.session.commit()
+                return redirect( url_for('home') )
+            except IntegrityError:
+                error = 'fail_register'
+
+    return render_template( 'register.html' )
+
+# should return error if exist
+def validate_register( name, email, password, sex ):
+    return None
+
+@app.route('/mypage')
+@login_required
+def myPage():
+    return render_template('my_page.html')
+
+
+
+
+
+
+
+
+
 
 def flash_errors(form):
     for field, errors in form.errors.items():
@@ -12,53 +113,15 @@ def flash_errors(form):
             flash(u"Error in the %s field - %s" % (
                 getattr(form, field).label.text,error), 'error')
 
-def login_required(test):
-    @wraps(test)
-    def wrap(*args, **kwargs):
-        if 'logged_in' in session:
-            return test(*args, **kwargs)
-        else:
-            flash('You need to login first.')
-            return redirect(url_for('login'))
-    return wrap
-
-@app.route('/logout/')
-def logout():
-    session.pop('logged_in', None)
-    session.pop('user_id', None)
-    flash('You are logged out. Bye. :(')
-    return redirect (url_for('login'))
-
-@app.route('/')
-@app.route('/', methods=['GET', 'POST'])
-def login():
-    error = None
-    if request.method=='POST':
-        u = User.query.filter_by(name=request.form['name']).first()
-        if u is not None:
-            passwordCheck = check_password_hash( u.password, request.form['password'] )
-
-        if u is None or passwordCheck is False:
-            error = 'Invalid username or password.'
-        else:
-            session['logged_in'] = True
-            session['user_id'] = u.id
-            flash('You are logged in. Go Crazy.')
-            return redirect(url_for('members'))
-
-    return render_template("login.html",
-                           form = LoginForm(request.form),
-                           error = error)
 
 @app.route('/members/')
 @login_required
 def members():
     return render_template('members.html')
 
-@app.route('/mypage/', methods=['GET'])
-###@login_required
-def myPage():
-    return render_template('my_page.html')
+@app.route('/mockup', methods = ['GET', 'POST'])
+def test():
+    return 'register'
 
 @app.route('/join/', methods=['GET'])
 ###@login_required
@@ -89,28 +152,6 @@ def comparableList():
 ###@login_required
 def comparableDetailList():
     return render_template('comparable_detail_list.html')
-
-
-@app.route('/register/', methods=['GET','POST'])
-def register():
-    error = None
-    form = RegisterForm(request.form, csrf_enabled=False)
-    if form.validate_on_submit():
-        new_user = User(
-                    form.name.data,
-                    form.email.data,
-                    generate_password_hash(form.password.data),
-                    )
-        try:
-            db.session.add(new_user)
-            db.session.commit()
-            flash('Thanks for registering. Please login.')
-            return redirect(url_for('login'))
-        except IntegrityError:
-            error = 'Oh no! That username and/or email already exist. Please try again.'
-    else:
-        flash_errors(form)
-    return render_template('register.html', form=form, error=error)
 
 @app.route('/loginbyfacebook/')
 def loginbyfacebook():
