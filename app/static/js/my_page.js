@@ -11,6 +11,7 @@ $(function(){
         var width = $('#interestGrid').width();
 
 		imagesLoaded(container, function(){	//when all images are loaded, it is triggered
+
             setItemWidth();
 
 			msnry = new Masonry( container, {	// api for displaying images as a grid
