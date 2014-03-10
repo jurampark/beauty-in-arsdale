@@ -54,7 +54,8 @@ def login():
                 session['user_id'] = user.id
                 return redirect( url_for('home' ) )
 
-    flash( error )
+    if error is not None:
+        flash( error )
     return render_template( 'login.html' )
 
 @app.route('/logout')
