@@ -2,18 +2,13 @@
 {% block content %}
 
     <div class="login-wrapper">
-<<<<<<< HEAD
         <form method="post" action="{{url_for('login')}}" data-ajax="false">
-=======
-        <form class="userform" method="post" action="{{url_for('login')}}" data-ajax="false">
->>>>>>> 44fef19f0c3437489b928388bdecbacb19a00d13
             <h2>로그인</h2>
             <label for="name">Email:</label>
             <input type="text" name="email" id="name" value="" data-clear-btn="true" data-mini="true">
             <label for="password">Password:</label>
             <input type="password" name="password" id="password" value="" data-clear-btn="true" autocomplete="off" data-mini="true">
             <div class="ui-grid-solo">
-<<<<<<< HEAD
                 <div class="ui-block-a">
                     <input type="submit" data-mini="true" value="로그인"/>
                 </div>
@@ -26,17 +21,6 @@
         <div class="ui-grid-solo">
             <div class="ui-block-a"><a href="#" data-ajax="false" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">페이스북 로그인</a></div>
         </div>
-=======
-                <div class="ui-block-a"><input type="submit" data-mini="true" value="로그인"/></div>
-            </div>
-            <div class="ui-grid-solo">
-                <div class="ui-block-a"><a href="{{ url_for('register')}} " data-ajax="false" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">회원가입</a></div>
-            </div>
-			<div class="ui-grid-solo">
-                <div class="ui-block-a"><a href="#" data-ajax="false" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">페이스북 로그인</a></div>
-            </div>
-        </form>
->>>>>>> 44fef19f0c3437489b928388bdecbacb19a00d13
     </div>
 
 {% endblock %}
