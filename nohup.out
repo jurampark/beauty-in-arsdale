@@ -20,3 +20,58 @@
 112.218.90.122 - - [13/Mar/2014 12:18:16] "GET /static/img/menu_bar4.png HTTP/1.1" 304 -
 112.218.90.122 - - [13/Mar/2014 12:18:16] "GET /static/img/menu_bg6.png HTTP/1.1" 304 -
 112.218.90.122 - - [13/Mar/2014 12:18:16] "GET /favicon.ico HTTP/1.1" 404 -
+ * Detected change in '/root/flask/src/beauty-alpha/app/views.py', reloading
+ * Restarting with reloader
+1.240.233.10 - - [13/Mar/2014 12:30:55] "GET /cart HTTP/1.1" 200 -
+1.240.233.10 - - [13/Mar/2014 12:30:55] "GET /static/css/cart.css HTTP/1.1" 200 -
+1.240.233.10 - - [13/Mar/2014 12:30:55] "GET /static/css/common_style.css HTTP/1.1" 200 -
+1.240.233.10 - - [13/Mar/2014 12:30:55] "GET /static/js/cart.js HTTP/1.1" 200 -
+1.240.233.10 - - [13/Mar/2014 12:30:55] "GET /static/img/comment-1.jpg HTTP/1.1" 200 -
+1.240.233.10 - - [13/Mar/2014 12:30:55] "GET /static/img/bg2.png HTTP/1.1" 200 -
+1.240.233.10 - - [13/Mar/2014 12:30:55] "GET /static/img/menu_bar4.png HTTP/1.1" 200 -
+1.240.233.10 - - [13/Mar/2014 12:30:55] "GET /static/img/menu_bg6.png HTTP/1.1" 200 -
+1.240.233.10 - - [13/Mar/2014 12:30:55] "GET /favicon.ico HTTP/1.1" 404 -
+66.220.152.115 - - [13/Mar/2014 12:31:12] "GET /cart HTTP/1.1" 200 -
+66.220.152.114 - - [13/Mar/2014 12:31:13] "GET /static/img/comment-1.jpg HTTP/1.1" 200 -
+66.220.152.119 - - [13/Mar/2014 12:31:14] "GET /static/img/comment-1.jpg HTTP/1.1" 200 -
+66.220.152.118 - - [13/Mar/2014 12:31:14] "GET /static/img/comment-1.jpg HTTP/1.1" 200 -
+173.252.114.118 - - [13/Mar/2014 12:31:15] "GET /static/img/comment-1.jpg HTTP/1.1" 200 -
+1.240.233.10 - - [13/Mar/2014 12:31:15] "GET /cart HTTP/1.1" 200 -
+173.252.114.119 - - [13/Mar/2014 12:31:16] "GET /static/img/comment-1.jpg HTTP/1.1" 200 -
+173.252.80.113 - - [13/Mar/2014 12:31:17] "GET /static/img/comment-1.jpg HTTP/1.1" 200 -
+39.7.57.185 - - [13/Mar/2014 12:31:20] "GET /cart HTTP/1.1" 200 -
+39.7.57.185 - - [13/Mar/2014 12:31:20] "GET /static/css/common_style.css HTTP/1.1" 200 -
+39.7.57.185 - - [13/Mar/2014 12:31:20] "GET /static/css/cart.css HTTP/1.1" 200 -
+39.7.57.185 - - [13/Mar/2014 12:31:21] "GET /static/img/comment-1.jpg HTTP/1.1" 200 -
+39.7.57.185 - - [13/Mar/2014 12:31:21] "GET /static/js/cart.js HTTP/1.1" 200 -
+112.218.90.122 - - [13/Mar/2014 12:31:21] "GET /cart HTTP/1.1" 200 -
+112.218.90.122 - - [13/Mar/2014 12:31:21] "GET /static/css/cart.css HTTP/1.1" 200 -
+112.218.90.122 - - [13/Mar/2014 12:31:21] "GET /static/js/cart.js HTTP/1.1" 200 -
+112.218.90.122 - - [13/Mar/2014 12:31:21] "GET /static/img/comment-1.jpg HTTP/1.1" 304 -
+39.7.57.185 - - [13/Mar/2014 12:31:22] "GET /static/img/bg2.png HTTP/1.1" 200 -
+39.7.57.185 - - [13/Mar/2014 12:31:22] "GET /static/img/menu_bar4.png HTTP/1.1" 200 -
+39.7.57.185 - - [13/Mar/2014 12:31:22] "GET /static/img/menu_bg6.png HTTP/1.1" 200 -
+39.7.57.185 - - [13/Mar/2014 12:31:42] "GET / HTTP/1.1" 302 -
+39.7.57.185 - - [13/Mar/2014 12:31:42] "GET /mypage HTTP/1.1" 302 -
+39.7.57.185 - - [13/Mar/2014 12:31:42] "GET /login HTTP/1.1" 200 -
+112.218.90.122 - - [13/Mar/2014 12:31:56] "GET /mypage HTTP/1.1" 200 -
+112.218.90.122 - - [13/Mar/2014 12:31:59] "GET / HTTP/1.1" 302 -
+112.218.90.122 - - [13/Mar/2014 12:32:00] "GET /mypage HTTP/1.1" 200 -
+112.218.90.122 - - [13/Mar/2014 12:32:00] "GET / HTTP/1.1" 302 -
+112.218.90.122 - - [13/Mar/2014 12:32:00] "GET /mypage HTTP/1.1" 200 -
+112.218.90.122 - - [13/Mar/2014 12:32:00] "GET /static/js/imagesloaded.pkgd.min.js?_=1394681671902 HTTP/1.1" 200 -
+112.218.90.122 - - [13/Mar/2014 12:32:00] "GET /static/js/masonry.pkgd.min.js?_=1394681671903 HTTP/1.1" 200 -
+112.218.90.122 - - [13/Mar/2014 12:32:00] "GET /static/js/my_page.js?_=1394681671904 HTTP/1.1" 200 -
+112.218.90.122 - - [13/Mar/2014 12:32:04] "GET /mypage HTTP/1.1" 200 -
+112.218.90.122 - - [13/Mar/2014 12:32:18] "GET /cart HTTP/1.1" 200 -
+ * Detected change in '/root/flask/src/beauty-alpha/app/views.py', reloading
+ * Restarting with reloader
+Traceback (most recent call last):
+  File "run.py", line 1, in <module>
+    from app import app
+  File "/root/flask/src/beauty-alpha/app/__init__.py", line 8, in <module>
+    from app import views, models
+  File "/root/flask/src/beauty-alpha/app/views.py", line 183
+    <<<<<<< HEAD
+     ^
+IndentationError: expected an indented block

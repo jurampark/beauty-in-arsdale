@@ -181,3 +181,8 @@ def internal_error(error):
 @app.route('/cart', methods = ['GET'])
 def cart():
     return render_template('cart.html')
+
+
+@app.route('/index', methods = ['GET'])
+def index():
+    return render_template('index.html')
