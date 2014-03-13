@@ -2,15 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="04790955-34ad-4062-a5b1-db9c2b30590d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/static/img/post-img-6.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/static/img/post-img-7.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/static/css/bootstrap.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/static/js/bootstrap.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/static/css/index.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/templates/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/static/js/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/error.log" afterPath="$PROJECT_DIR$/error.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views.py" afterPath="$PROJECT_DIR$/app/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="beauty-in-arsdale.iws" />
@@ -817,7 +808,11 @@
       <created>1394681484764</created>
       <updated>1394681484764</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="from KB!">
+      <created>1394688289958</created>
+      <updated>1394688289958</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
