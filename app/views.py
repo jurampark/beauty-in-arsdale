@@ -99,7 +99,22 @@ def myPage():
     return render_template('my_page.html')
 
 
+@app.route('/update_user_profile', methods=['GET', 'POST'])
+@login_required
+def updateUserProfile():
 
+    if request.method == 'POST':
+        # get post params
+        g.user.user_age = request.form.get('user_age')
+        g.user.sex = request.form.get('sex')
+        g.user.skin_type = request.form.get('skin_type')
+        g.user.skin_color = request.form.get('skin_color')
+
+        g.db.session.commit()
+
+        return redirect( url_for('home') )
+
+    return render_template('update_user_profile.html')
 
 
 
@@ -137,11 +152,6 @@ def productDetail():
 ###@login_required
 def blogDetail():
     return render_template('blog_detail.html')
-
-@app.route('/convertprofile/', methods=['GET'])
-###@login_required
-def convertProfile():
-    return render_template('insert_profile_info.html')
 
 @app.route('/comparablelist/', methods=['GET'])
 ###@login_required

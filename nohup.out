@@ -1,0 +1,22 @@
+ * Running on http://0.0.0.0:5001/
+ * Restarting with reloader
+39.7.57.185 - - [13/Mar/2014 12:15:24] "GET / HTTP/1.1" 302 -
+39.7.57.185 - - [13/Mar/2014 12:15:24] "GET /mypage HTTP/1.1" 302 -
+39.7.57.185 - - [13/Mar/2014 12:15:24] "GET /login HTTP/1.1" 200 -
+39.7.57.185 - - [13/Mar/2014 12:15:25] "GET /static/css/common_style.css HTTP/1.1" 200 -
+39.7.57.185 - - [13/Mar/2014 12:15:26] "GET /static/img/bg2.png HTTP/1.1" 200 -
+39.7.57.185 - - [13/Mar/2014 12:15:26] "GET /static/img/menu_bg6.png HTTP/1.1" 200 -
+39.7.57.185 - - [13/Mar/2014 12:15:26] "GET /static/img/menu_bar4.png HTTP/1.1" 200 -
+39.7.57.185 - - [13/Mar/2014 12:15:27] "GET /favicon.ico HTTP/1.1" 404 -
+112.218.90.122 - - [13/Mar/2014 12:18:15] "GET / HTTP/1.1" 302 -
+112.218.90.122 - - [13/Mar/2014 12:18:15] "GET /mypage HTTP/1.1" 200 -
+112.218.90.122 - - [13/Mar/2014 12:18:16] "GET /static/css/common_style.css HTTP/1.1" 304 -
+112.218.90.122 - - [13/Mar/2014 12:18:16] "GET /static/css/my_page.css HTTP/1.1" 304 -
+112.218.90.122 - - [13/Mar/2014 12:18:16] "GET /static/js/imagesloaded.pkgd.min.js HTTP/1.1" 304 -
+112.218.90.122 - - [13/Mar/2014 12:18:16] "GET /static/js/masonry.pkgd.min.js HTTP/1.1" 304 -
+112.218.90.122 - - [13/Mar/2014 12:18:16] "GET /static/js/my_page.js HTTP/1.1" 304 -
+112.218.90.122 - - [13/Mar/2014 12:18:16] "GET /static/img/service-img-1.jpg HTTP/1.1" 304 -
+112.218.90.122 - - [13/Mar/2014 12:18:16] "GET /static/img/bg2.png HTTP/1.1" 304 -
+112.218.90.122 - - [13/Mar/2014 12:18:16] "GET /static/img/menu_bar4.png HTTP/1.1" 304 -
+112.218.90.122 - - [13/Mar/2014 12:18:16] "GET /static/img/menu_bg6.png HTTP/1.1" 304 -
+112.218.90.122 - - [13/Mar/2014 12:18:16] "GET /favicon.ico HTTP/1.1" 404 -
