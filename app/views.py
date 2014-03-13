@@ -175,3 +175,9 @@ def internal_error(error):
 @app.errorhandler(404)
 def internal_error(error):
     return render_template('404.html'), 404
+
+
+
+@app.route('/cart', methods = ['GET'])
+def cart():
+    return render_template('cart.html')
