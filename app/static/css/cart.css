@@ -1,0 +1,132 @@
+.cart-list{
+    margin:0;
+    padding : 10px 4px;
+    width : 100%;
+    overflow: hidden;
+    list-style: none;
+    -webkit-box-shadow : 0 1px 3px rgba(0,0,0,.15);
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,.15);
+    box-shadow: 0 1px 3px rgba(0,0,0,.15);
+    -webkit-border-radius: .3125em;
+    border-radius: .3125em;
+    background-color: #f6f6f6;
+}
+
+.compare-list-item{
+    /*
+     border-top-left-radius: inherit;
+     border-top-right-radius: inherit;
+     -webkit-border-top-left-radius: inherit;
+     -webkit-border-top-right-radius: inherit;
+     */
+    position: relative;
+    border:1px solid rgb(221, 221, 221);
+    white-space: nowrap;
+    cursor: pointer;
+    margin-top: -1px;
+}
+
+.compare-list-item h4{
+    margin : 8px 0px;
+    padding : 0;
+}
+
+.product-img{
+    width : 80px;
+    height : 80px;
+    float:left;
+    margin-right: 8px;
+}
+
+.product-contents{
+    min-width : 50%;
+    overflow: hidden;
+}
+
+.product-info{
+    width : 80%;
+    display: block;
+    overflow: hidden;
+    float: left;
+}
+
+.product-info h4{
+    word-break: break-all;
+    white-space: pre-line;
+    margin : 10px 0 2px 0;
+}
+
+.product-desc{
+    font-size: 12px;
+    margin-top : 4px;
+    margin-bottom: 4px;
+}
+
+.select-box-name{
+    width : 37%;
+    float:left;
+    text-align: right;
+    padding-top : 16px;
+    font-size: 14px !important;
+    padding-right: 3%;
+}
+
+.ui-select{
+    width : 60%;
+    float: left;
+}
+
+.product-cost{
+    width : 86%;
+    float: left;
+    padding-top: 12px;
+    padding-right : 14%;
+    padding-bottom : 14px;
+    text-align: right;
+}
+
+.price{
+    font-weight:bold;
+}
+
+
+
+.product-delete{
+    position: absolute;
+    bottom: 0;
+    left : 6px;
+}
+
+.total-cost-box{
+    padding : 14px;
+}
+
+#total-cost{
+    width : 70%;
+    float:left;
+}
+
+.total-cost{
+    color:red;
+    font-weight: bold;
+}
+
+.purchase-btn{
+    width : 30%;
+    float:left;
+    margin: 0;
+    margin-top:-4px;
+}
+
+
+.purchase-btn > .ui-btn{
+    margin : 0;
+    padding-top : 6px;
+    padding-bottom: 6px;
+}
+
+
+
+
+
+

@@ -2,7 +2,7 @@
 $(function(){
         var setItemWidth = function(){
             var width = $('#interestGrid').width();
-            $('.service-list').css({width : parseInt((width - 14)/2)});
+            $('.service-list').css({width : parseInt((width - 16)/2)});
         };
 
 		var container = document.querySelector('#interestGrid');
@@ -17,7 +17,7 @@ $(function(){
 			msnry = new Masonry( container, {	// api for displaying images as a grid
 			  // options
 			  columnWidth: parseInt(width / 2),
-			  gutter : 1,
+			  gutter : 0,
 			  itemSelector: '.service-list'
 			});
 		});
