@@ -1,0 +1,135 @@
+{% extends "mobile_base.html" %}
+{% block header %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/common_style.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}"/>
+
+<script src="{{ url_for('static', filename='js/imagesloaded.pkgd.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/masonry.pkgd.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+{% endblock %}
+{% block content %}
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    <div class="item active">
+      <img src="{{ url_for('static', filename='img/post-img-6.jpg') }}" alt="" />
+      <div class="carousel-caption">
+        이니스프리
+      </div>
+    </div>
+    <div class="item">
+      <img src="{{ url_for('static', filename='img/post-img-7.jpg') }}" alt="" />
+      <div class="carousel-caption">
+        꽃을 든 남자
+      </div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+    <span style="color:white; position: absolute; top : 40%;"><</span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+    <span style="color:white; position: absolute; top : 40%;">></span>
+  </a>
+</div>
+
+
+<div id="productList">
+  <div id="productGrid">
+        <div class="service-list team">
+            <div class="service-item boxed bg-image-star2">
+                <div class="service-content">
+                    <div class="service-image ">
+                        <a href="/productdetail" data-ajax="false"><img src="{{ url_for('static', filename='img/service-img-1.jpg') }}" alt="" /></a>
+                    </div>
+                    <div class="service-title profile-interesting-title">
+                        꽃을 든 남자 밝은 피부 하나하나 두울 테스트 하자 ㅋㅋㅋㅋㅋㅋㅋㅋ
+                        <div class="product-price-box">
+                            Price : <b>$33,300</b><br/>
+                            Category : <b>BB크림</b>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-meta-bot">
+                    <ul class="service-links clearfix">
+                         <li class="service-social"><a href="#" class="nanum-font-tab">구매</a></li>
+                        <li class="service-social"><a href="#" class="nanum-font-tab">삭제</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="service-list team">
+            <div class="service-item boxed bg-image-star2">
+                <div class="service-content">
+                    <div class="service-image ">
+                        <a href="/productdetail" data-ajax="false"><img src="{{ url_for('static', filename='img/service-img-1.jpg') }}" alt="" /></a>
+                    </div>
+                    <div class="service-title profile-interesting-title">
+                        꽃을 든 남자 밝은 피부
+                        <div class="product-price-box">
+                            Price : <b>$33,300</b><br/>
+                            Category : <b>BB크림</b>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-meta-bot">
+                    <ul class="service-links clearfix">
+                        <li class="service-social"><a href="#" class="nanum-font-tab">구매</a></li>
+                        <li class="service-social"><a href="#" class="nanum-font-tab">삭제</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="service-list team">
+            <div class="service-item boxed bg-image-star2">
+                <div class="service-content">
+                    <div class="service-image ">
+                        <a href="/productdetail" data-ajax="false"><img src="{{ url_for('static', filename='img/service-img-1.jpg') }}" alt="" /></a>
+                    </div>
+                    <div class="service-title profile-interesting-title">
+                        꽃을 든 남자 밝은 피부
+                        <div class="product-price-box">
+                            Price : <b>$33,300</b><br/>
+                            Category : <b>BB크림</b>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-meta-bot">
+                    <ul class="service-links clearfix">
+                        <li class="service-social"><a href="#" class="nanum-font-tab">구매</a></li>
+                        <li class="service-social"><a href="#" class="nanum-font-tab">삭제</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="service-list team">
+            <div class="service-item boxed bg-image-star2">
+                <div class="service-content">
+                    <div class="service-image ">
+                        <a href="/productdetail" data-ajax="false"><img src="{{ url_for('static', filename='img/service-img-1.jpg') }}" alt="" /></a>
+                    </div>
+                    <div class="service-title profile-interesting-title">
+                        꽃을 든 남자 밝은 피부
+                        <div class="product-price-box">
+                            Price : <b>$33,300</b><br/>
+                            Category : <b>BB크림</b>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-meta-bot">
+                    <ul class="service-links clearfix">
+                        <li class="service-social"><a href="#" class="nanum-font-tab">구매</a></li>
+                        <li class="service-social"><a href="#" class="nanum-font-tab">삭제</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+  </div>
+</div>
+{% endblock %}
