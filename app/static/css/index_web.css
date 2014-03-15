@@ -116,12 +116,13 @@
 
 .service-list{
     width :132px;
+
 }
 
 
 .service-list.team{
 	padding : 0;
-    margin-top: 8px;
+    margin-top: 14px;
 }
 
 .service-list .service-item{
@@ -132,6 +133,7 @@
     */
     border: 1px solid #e7e7e7;
     padding: 14px 12px 0px 12px;
+    height : 360px;
     overflow: hidden;
 }
 
