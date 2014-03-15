@@ -1,0 +1,10 @@
+{% extends "mobile_base.html" %}
+{% block content %}
+
+    <div>
+        {% for product in products %}
+            <div> {{ product.product_name }} </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

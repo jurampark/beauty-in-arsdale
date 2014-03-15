@@ -1,5 +1,5 @@
 from app import app, db
-from app.models import User
+from app.models import User, Product
 from flask import flash, redirect, render_template, request, session, url_for, g
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
@@ -88,6 +88,18 @@ def register():
                 error = 'fail_register'
 
     return render_template( 'register.html' )
+
+
+@app.route('/product_sample')
+def product_sample():
+    products = g.db.session.query(Product).all()
+
+    return render_template( 'product_sample.html', products = products )
+
+
+
+
+
 
 # should return error if exist
 def validate_register( name, email, password, sex ):
