@@ -1,0 +1,40 @@
+
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+
+
+body{
+	font-family: 'Nanum Gothic';
+	font-size : 12px;
+}
+
+.clearfix{
+	clear:both;
+}
+
+ol, ul {
+	list-style: none;
+	padding:0;
+	margin:0;
+}
+
+.boxed {
+    background-color: #fff;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
+	position: relative;
+}
+.boxed-transparent {
+    background-color: #a9728e;
+    background-color: rgba(255,255,255,0.1);
+}
+
+/* flash message style */
+.flash          { background: #CEE5F5; padding: 0.5em; }
+
+.navbar-brand{
+    color : white !important;
+    margin-right : 24px;
+    font-weight: bold;
+    font-size: 22px;
+}
