@@ -198,3 +198,7 @@ def cart():
 @app.route('/index', methods = ['GET'])
 def index():
     return render_template('index.html')
+
+@app.route('/indexweb', methods = ['GET'])
+def indexweb():
+    return render_template('index_web.html')
