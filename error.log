@@ -159,3 +159,5 @@
 >>>>>>> e69312e4f5280415cfc51d8dad921f5d903b553d
 2014-03-15 12:39:36,498 INFO: errors [in /root/flask/src/beauty-alpha/app/__init__.py:25]
 2014-03-15 12:39:37,275 INFO: errors [in /root/flask/src/beauty-alpha/app/__init__.py:25]
+2014-03-16 18:27:04,409 INFO: errors [in /root/flask/src/beauty-alpha/app/__init__.py:25]
+2014-03-16 18:27:05,489 INFO: errors [in /root/flask/src/beauty-alpha/app/__init__.py:25]
