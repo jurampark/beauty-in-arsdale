@@ -197,8 +197,24 @@ def cart():
 
 @app.route('/index', methods = ['GET'])
 def index():
-    return render_template('index.html')
+    products = g.db.session.query(Product).all()
+    return render_template('index.html', products = products)
 
 @app.route('/indexweb', methods = ['GET'])
 def indexweb():
-    return render_template('index_web.html')
+    products = g.db.session.query(Product).all()
+    return render_template('index_web.html', products = products)
+
+
+@app.route('/mypageweb', methods = ['GET'])
+@login_required
+def mypageweb():
+    products = g.db.session.query(Product).all()
+    return render_template('mypage_interesting_web.html', tabName='interesting', products=products[0:7])
+
+
+@app.route('/purchaselist', methods = ['GET'])
+@login_required
+def purchaselist():
+    products = g.db.session.query(Product).all()
+    return render_template('mypage_purchase_web.html', tabName='purchase', products = products[0:4])

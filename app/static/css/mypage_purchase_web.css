@@ -1,0 +1,30 @@
+
+.product-info{
+    padding: 6px 12px;
+}
+
+.product-contents{
+    width : 378px;
+    float:left;
+}
+
+.product-img{
+    width : 100px;
+    float:right;
+}
+
+.list-btn-wrapper{
+    width : 100px;
+    float:left;
+    margin : 4px 6px;
+}
+
+.product-img img{
+    width : 100px;
+    height : 80px;
+}
+
+
+hr{
+    margin : 6px inherit;
+}

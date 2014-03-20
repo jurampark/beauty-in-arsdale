@@ -1,0 +1,77 @@
+{% extends "web_base.html" %}
+{% block header %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/common_style_web.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/mypage_web.css') }}"/>
+{% block subHeader %}
+{% endblock %}
+{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-xs-10 col-xs-offset-1">
+        <div class="row">
+            <div class="col-xs-8">
+                <div class="box-css">
+                    <div class="tab-list">
+                        <ul class="tabs">
+                            {% if tabName == "interesting"%}
+                                <li class="active">관심 상품</li>
+                                <li><a href="{{ url_for('purchaselist') }}">구매 목록</a></li>
+                            {% elif tabName == "purchase" %}
+                                <li><a href="{{ url_for('mypageweb') }}">관심 상품</a></li>
+                                <li class="active">구매 목록</li>
+                            {% endif%}
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div id="productGrid">
+                        {% block productGrid %}
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="box-css user-profile">
+                    <h3>{{ g.user.name }}</h3>
+                    <div>
+                        pgenius2@gmail.com
+                    </div>
+                    <hr/>
+                    <p class="user-sex">
+                         {%if g.user.sex == 'M' %}
+						남자
+                        {% else %}
+                        여자
+                        {% endif %}
+                    </p>
+                    <p class="user-age">
+                         {% if g.user.user_age != none %}
+                            {{ g.user.user_age }} ~ {{ g.user.user_age + 4}}세
+                        {% else %}
+                            나이를 입력해주세요.
+                        {% endif %}
+                    </p>
+                    <p class="user-skin-type">
+                         {% if g.user.skin_type == 'O' %}
+                                지성 피부
+                            {% elif g.user.skin_type =='D' %}
+                                건성 피부
+                            {% elif g.user.skin_type == 'C' %}
+                                복합성 피부
+                            {% else %}
+                                미등록
+                            {% endif %}
+
+                    </p>
+                    <hr/>
+                    <p>
+                        <a href="{{ url_for('updateUserProfile') }}" class="btn btn-default">프로필 수정</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}
