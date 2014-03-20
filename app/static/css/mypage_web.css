@@ -11,6 +11,10 @@ a:visited{
     color :black;
 }
 
+.product-info a:hover{
+    text-decoration: underline;
+}
+
 h2{
     font-family: 'Nanum Gothic';
     margin : 5px 0;

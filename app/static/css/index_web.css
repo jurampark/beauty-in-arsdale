@@ -112,7 +112,7 @@
     line-height: 20px;
     margin-bottom: 16px;
 }
-.service-image img {display: block; width: 100%;}
+.service-image img {display: block; width: 100%; height : 250px;}
 
 .service-list{
     width :132px;
@@ -168,3 +168,4 @@
 .service-links.green a:hover {background: #989f01; box-shadow: inset 0 16px 10px -10px rgba(77, 83, 14, 0.8);}
 .service-links.green [class*="icon-small-"] {color: #fff;}
 .service-links.green a:hover [class*="icon-small-"] {color: #b8c901;}
+

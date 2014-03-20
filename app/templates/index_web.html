@@ -48,13 +48,15 @@
                     <div class="service-item">
                         <div class="service-content">
                             <div class="service-image ">
-                                <a href="/productdetail" data-ajax="false"><img src="{{ url_for('static', filename='img/service-img-1.jpg') }}" alt="" /></a>
+                                <a href="/productdetail" data-ajax="false"><img src="{{ product.product_big_img}}" alt="" /></a>
                             </div>
-                            <div class="service-title profile-interesting-title">
-                                {{ product.product_name }}
+                            <div class="service-title product-contents">
+                                [{{product.product_brand  }}] {{ product.product_name }}
                                 <div class="product-price-box">
-                                    <b>\33,300</b>
-                                    &nbsp;<b class="product-type">BB크림</b>
+                                    <b>\{{ product.product_price }}</b>
+                                    <br/>
+                                    <b class="product-type">{{ product.product_type }}</b>
+                                    ({{ product.product_capacity }}ml)
                                 </div>
                             </div>
                         </div>

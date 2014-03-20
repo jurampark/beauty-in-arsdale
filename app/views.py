@@ -209,10 +209,12 @@ def indexweb():
 @app.route('/mypageweb', methods = ['GET'])
 @login_required
 def mypageweb():
-    return render_template('mypage_interesting_web.html', tabName='interesting')
+    products = g.db.session.query(Product).all()
+    return render_template('mypage_interesting_web.html', tabName='interesting', products=products[0:7])
 
 
 @app.route('/purchaselist', methods = ['GET'])
 @login_required
 def purchaselist():
-    return render_template('mypage_purchase_web.html', tabName='purchase')
+    products = g.db.session.query(Product).all()
+    return render_template('mypage_purchase_web.html', tabName='purchase', products = products[0:4])

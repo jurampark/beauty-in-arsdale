@@ -24,66 +24,27 @@
     </div>
 </div>
 
-<div class="product-item" id="item-1" data-attr="1">
+{% for product in products %}
+
+<div class="product-item" id="item-{{ product.product_id }}" data-attr="{{ product.product_id }}">
     <div class="product-img">
-        <img src="{{ url_for('static', filename='img/service-img-1.jpg') }}" alt="" />
+        <img src="{{ product.product_big_img}}" alt="" />
     </div>
     <div class="product-info">
-        꽃을 든 남자 밝은 피부...
+        [{{ product.product_brand }}]<br/>
+        {% if (product.product_name|length) > 17 %}
+            <a href="{{ url_for('productDetail') }}">{{product.product_name[:17] }}..</a>
+        {% else %}
+            <a href="{{ url_for('productDetail') }}">{{product.product_name  }}</a>
+        {% endif %}
+
         <div class="product-price-box">
-            Price : <b>$33,300</b><br/>
-            Category : <b>BB크림</b>
-        </div>
-    </div>
-</div>
-<div class="product-item" id="item-2" data-attr="2">
-    <div class="product-img">
-        <img src="{{ url_for('static', filename='img/service-img-1.jpg') }}" alt="" />
-    </div>
-    <div class="product-info">
-        꽃을 든 남자 밝은 피부...
-        <div class="product-price-box">
-            Price : <b>$33,300</b><br/>
-            Category : <b>BB크림</b>
-        </div>
-    </div>
-</div>
-<div class="product-item" id="item-3" data-attr="3">
-    <div class="product-img">
-        <img src="{{ url_for('static', filename='img/service-img-1.jpg') }}" alt="" />
-    </div>
-    <div class="product-info">
-        꽃을 든 남자 밝은 피부...
-        <div class="product-price-box">
-            Price : <b>$33,300</b><br/>
-            Category : <b>BB크림</b>
-        </div>
-    </div>
-</div>
- <div class="product-item" id="item-4" data-attr="4">
-    <div class="product-img">
-        <img src="{{ url_for('static', filename='img/service-img-1.jpg') }}" alt="" />
-    </div>
-    <div class="product-info">
-        꽃을 든 남자 밝은 피부...
-        <div class="product-price-box">
-            Price : <b>$33,300</b><br/>
-            Category : <b>BB크림</b>
-        </div>
-    </div>
-</div>
- <div class="product-item" id="item-5" data-attr="5">
-    <div class="product-img">
-        <img src="{{ url_for('static', filename='img/service-img-1.jpg') }}" alt="" />
-    </div>
-    <div class="product-info">
-        꽃을 든 남자 밝은 피부...
-        <div class="product-price-box">
-            Price : <b>$33,300</b><br/>
-            Category : <b>BB크림</b>
+            Price : <b>\{{ product.product_price }} ({{product.product_capacity }}ml)</b><br/>
+            Category : <b>{{ product.product_type }}</b>
         </div>
     </div>
 </div>
 
+{% endfor %}
 
 {% endblock %}

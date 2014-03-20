@@ -44,7 +44,6 @@ class Product(db.Model):
     product_fit_for = db.Column(db.String(1), nullable=True) # like User's skin type
     product_color = db.Column(db.String(10) ) # 19ho || 18ho || ...
     product_color_rgb = db.Column(db.String(10), nullable=True) # ex. #FF080AAC
-    product_get_it_beauty_rank = db.Column(db.Integer)
 
     def __init__(self, product_name = None,product_id = None,product_type = None,product_desc = None,product_big_img = None,product_small_img = None,video_review_url = None, blog_review_list_id = None, product_brand = None,product_capacity = None,product_price = None,product_fit_for = None,product_color = None,product_color_rgb = None,product_get_it_beauty_rank = None ):
         self.product_name = product_name
@@ -61,7 +60,6 @@ class Product(db.Model):
         self.product_fit_for = product_fit_for
         self.product_color = product_color
         self.product_color_rgb = product_color_rgb
-        self.product_get_it_beauty_rank = product_get_it_beauty_rank
 
     def __repr__(self):
         return '<Product %r>' % (self.product_name)
