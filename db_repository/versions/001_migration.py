@@ -86,22 +86,46 @@ polls_poll = Table('polls_poll', pre_meta,
     Column('pub_date', DateTime, nullable=False),
 )
 
-products = Table('products', post_meta,
+blog_reviews = Table('blog_reviews', post_meta,
+    Column('key', Integer, primary_key=True, nullable=False),
+    Column('blog_product_key', Integer),
+    Column('blog_review_writer', String(length=10)),
+    Column('blog_review_date', DateTime),
+    Column('blog_url', String(length=255)),
+    Column('blog_summary', String),
+    Column('blog_review_big_img', String(length=255)),
+    Column('blog_review_small_img', String(length=255)),
+)
+
+product_sets = Table('product_sets', post_meta,
+    Column('key', Integer, primary_key=True, nullable=False),
+    Column('set_name', String(length=255)),
+    Column('set_category', String(length=255)),
+    Column('set_product_count', Integer),
+    Column('set_product_id_1', Integer),
+    Column('set_product_id_2', Integer),
+    Column('set_product_id_3', Integer),
+    Column('set_product_id_4', Integer),
+    Column('set_product_id_5', Integer),
+    Column('set_desc', String),
+)
+
+products = Table('products', pre_meta,
     Column('key', Integer, primary_key=True, nullable=False),
     Column('product_name', String, nullable=False),
     Column('product_id', Integer, nullable=False),
-    Column('product_type', String(length=2)),
+    Column('product_type', String),
     Column('product_desc', String),
-    Column('product_big_img', String(length=255)),
-    Column('product_small_img', String(length=255)),
-    Column('video_review_url', String(length=255)),
+    Column('product_big_img', String),
+    Column('product_small_img', String),
+    Column('video_review_url', String),
     Column('blog_review_list_id', Integer),
-    Column('product_brand', String(length=255)),
+    Column('product_brand', String),
     Column('product_capacity', Integer),
     Column('product_price', Integer),
-    Column('product_fit_for', String(length=1)),
-    Column('product_color', String(length=10)),
-    Column('product_color_rgb', String(length=10)),
+    Column('product_fit_for', String),
+    Column('product_color', String),
+    Column('product_color_rgb', String),
     Column('product_get_it_beauty_rank', Integer),
 )
 
@@ -122,7 +146,9 @@ def upgrade(migrate_engine):
     pre_meta.tables['django_session'].drop()
     pre_meta.tables['polls_choice'].drop()
     pre_meta.tables['polls_poll'].drop()
-    post_meta.tables['products'].create()
+    post_meta.tables['blog_reviews'].create()
+    post_meta.tables['product_sets'].create()
+    pre_meta.tables['products'].columns['product_get_it_beauty_rank'].drop()
 
 
 def downgrade(migrate_engine):
@@ -140,4 +166,6 @@ def downgrade(migrate_engine):
     pre_meta.tables['django_session'].create()
     pre_meta.tables['polls_choice'].create()
     pre_meta.tables['polls_poll'].create()
-    post_meta.tables['products'].drop()
+    post_meta.tables['blog_reviews'].drop()
+    post_meta.tables['product_sets'].drop()
+    pre_meta.tables['products'].columns['product_get_it_beauty_rank'].create()
