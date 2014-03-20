@@ -32,22 +32,32 @@
 		</ul>
 	</div><!-- /panel -->
 	<div data-role="panel" data-position="right" data-position-fixed="true" data-display="overlay" data-theme="a" id="loginForm">
-        <form class="userform">
-            <h2>로그인</h2>
-            <label for="name">Email:</label>
-            <input type="text" name="email" id="name" value="" data-clear-btn="true" data-mini="true">
-            <label for="password">Password:</label>
-            <input type="password" name="password" id="password" value="" data-clear-btn="true" autocomplete="off" data-mini="true">
+        {% if g.user %}
             <div class="ui-grid-solo">
-                <div class="ui-block-a"><a href="#" data-ajax="false" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">로그인</a></div>
+                <div class="ui-block-a">
+                    <a href="{{url_for('logout')}}" data-ajax="false" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">로그아웃</a>
+                </div>
             </div>
-            <div class="ui-grid-solo">
-                <div class="ui-block-a"><a href="/join" data-ajax="false" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">회원가입</a></div>
-            </div>
-			<div class="ui-grid-solo">
-                <div class="ui-block-a"><a href="#" data-ajax="false" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">페이스북 로그인</a></div>
-            </div>
-        </form>
+        {% else %}
+            <form method="post" action="{{url_for('login')}}" data-ajax="false">
+                <h2>로그인</h2>
+                <label for="name">Email:</label>
+                <input type="text" name="email" id="name" value="" data-clear-btn="true" data-mini="true">
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" value="" data-clear-btn="true" autocomplete="off" data-mini="true">
+                <div class="ui-grid-solo">
+                    <div class="ui-block-a">
+                        <input type="submit" data-mini="true" value="로그인"/>
+                    </div>
+                </div>
+                <div class="ui-grid-solo">
+                    <div class="ui-block-a"><a href="/join" data-ajax="false" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">회원가입</a></div>
+                </div>
+                <div class="ui-grid-solo">
+                    <div class="ui-block-a"><a href="#" data-ajax="false" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">페이스북 로그인</a></div>
+                </div>
+            </form>
+        {% endif %}
     </div><!-- /panel -->
 	<div data-role="header" data-position="fixed">
 		<a href="#menuPanel" class="ui-btn-left ui-btn ui-btn-inline ui-btn-icon-notext ui-corner-all ui-icon-grid">Menu</a>
@@ -55,7 +65,7 @@
     	<h2 class="ui-title">Motion9</h2>
         {% endblock %}
     	<div  class="ui-btn-right">
-	    	<a href="#" class="ui-btn ui-btn-inline ui-icon-shop ui-btn-icon-notext ui-corner-all">No text</a>
+	    	<a href="{{ url_for('cart') }}" data-ajax="false" class="ui-btn ui-btn-inline ui-icon-shop ui-btn-icon-notext ui-corner-all">No text</a>
 	    	<a href="#loginForm" class="ui-btn ui-btn-inline ui-icon-user ui-btn-icon-notext ui-corner-all">No text</a>
     	</div>
         {% block special_header %}

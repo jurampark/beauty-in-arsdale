@@ -1,0 +1,70 @@
+{% extends "mypage_web.html" %}
+{% block subHeader %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/mypage_purchase_web.css') }}"/>
+
+{% endblock %}
+{% block productGrid %}
+    <div class="product-info product-item">
+        <div class="product-contents">
+            <h4>꽃을 든 남자 밝은 피부 남자용 BB</h4>
+            <div class="product-price-box">
+                Price : <b>$33,300</b><br/>
+            </div>
+        </div>
+        <div class="list-btn-wrapper btn-group-vertical">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default">다시 구매</button>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default">반품 신청</button>
+            </div>
+        </div>
+        <div class="product-img">
+            <img src="{{ url_for('static', filename='img/service-img-1.jpg') }}" alt="" />
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <hr/>
+    <div class="product-info product-item">
+        <div class="product-contents">
+            <h4>꽃을 든 남자 밝은 피부 남자용 BB</h4>
+            <div class="product-price-box">
+                Price : <b>$33,300</b><br/>
+            </div>
+        </div>
+        <div class="list-btn-wrapper btn-group-vertical">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default">다시 구매</button>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default">반품 신청</button>
+            </div>
+        </div>
+        <div class="product-img">
+            <img src="{{ url_for('static', filename='img/service-img-1.jpg') }}" alt="" />
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <hr/>
+    <div class="product-info product-item">
+        <div class="product-contents">
+            <h4>꽃을 든 남자 밝은 피부 남자용 BB</h4>
+            <div class="product-price-box">
+                Price : <b>$33,300</b><br/>
+            </div>
+        </div>
+        <div class="list-btn-wrapper btn-group-vertical">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default">다시 구매</button>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default">반품 신청</button>
+            </div>
+        </div>
+        <div class="product-img">
+            <img src="{{ url_for('static', filename='img/service-img-1.jpg') }}" alt="" />
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <hr/>
+{% endblock %}

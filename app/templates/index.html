@@ -39,97 +39,30 @@
 
 <div id="productList">
   <div id="productGrid">
-        <div class="service-list team">
-            <div class="service-item boxed bg-image-star2">
-                <div class="service-content">
-                    <div class="service-image ">
-                        <a href="/productdetail" data-ajax="false"><img src="{{ url_for('static', filename='img/service-img-1.jpg') }}" alt="" /></a>
-                    </div>
-                    <div class="service-title profile-interesting-title">
-                        꽃을 든 남자 밝은 피부 하나하나 두울 테스트 하자 ㅋㅋㅋㅋㅋㅋㅋㅋ
-                        <div class="product-price-box">
-                            Price : <b>$33,300</b><br/>
-                            Category : <b>BB크림</b>
+        {% for product in products %}
+            <div class="service-list team">
+                <div class="service-item boxed bg-image-star2">
+                    <div class="service-content">
+                        <div class="service-image ">
+                            <a href="/productdetail" data-ajax="false"><img src="{{ url_for('static', filename='img/service-img-1.jpg') }}" alt="" /></a>
+                        </div>
+                        <div class="service-title profile-interesting-title">
+                             {{ product.product_name }}
+                            <div class="product-price-box">
+                                Price : <b>$33,300</b><br/>
+                                Category : <b>BB크림</b>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="service-meta-bot">
-                    <ul class="service-links clearfix">
-                         <li class="service-social"><a href="#" class="nanum-font-tab">구매</a></li>
-                        <li class="service-social"><a href="#" class="nanum-font-tab">삭제</a></li>
-                    </ul>
+                    <div class="service-meta-bot">
+                        <ul class="service-links clearfix">
+                             <li class="service-social"><a href="#" class="nanum-font-tab">구매</a></li>
+                            <li class="service-social"><a href="#" class="nanum-font-tab">삭제</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="service-list team">
-            <div class="service-item boxed bg-image-star2">
-                <div class="service-content">
-                    <div class="service-image ">
-                        <a href="/productdetail" data-ajax="false"><img src="{{ url_for('static', filename='img/service-img-1.jpg') }}" alt="" /></a>
-                    </div>
-                    <div class="service-title profile-interesting-title">
-                        꽃을 든 남자 밝은 피부
-                        <div class="product-price-box">
-                            Price : <b>$33,300</b><br/>
-                            Category : <b>BB크림</b>
-                        </div>
-                    </div>
-                </div>
-                <div class="service-meta-bot">
-                    <ul class="service-links clearfix">
-                        <li class="service-social"><a href="#" class="nanum-font-tab">구매</a></li>
-                        <li class="service-social"><a href="#" class="nanum-font-tab">삭제</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="service-list team">
-            <div class="service-item boxed bg-image-star2">
-                <div class="service-content">
-                    <div class="service-image ">
-                        <a href="/productdetail" data-ajax="false"><img src="{{ url_for('static', filename='img/service-img-1.jpg') }}" alt="" /></a>
-                    </div>
-                    <div class="service-title profile-interesting-title">
-                        꽃을 든 남자 밝은 피부
-                        <div class="product-price-box">
-                            Price : <b>$33,300</b><br/>
-                            Category : <b>BB크림</b>
-                        </div>
-                    </div>
-                </div>
-                <div class="service-meta-bot">
-                    <ul class="service-links clearfix">
-                        <li class="service-social"><a href="#" class="nanum-font-tab">구매</a></li>
-                        <li class="service-social"><a href="#" class="nanum-font-tab">삭제</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="service-list team">
-            <div class="service-item boxed bg-image-star2">
-                <div class="service-content">
-                    <div class="service-image ">
-                        <a href="/productdetail" data-ajax="false"><img src="{{ url_for('static', filename='img/service-img-1.jpg') }}" alt="" /></a>
-                    </div>
-                    <div class="service-title profile-interesting-title">
-                        꽃을 든 남자 밝은 피부
-                        <div class="product-price-box">
-                            Price : <b>$33,300</b><br/>
-                            Category : <b>BB크림</b>
-                        </div>
-                    </div>
-                </div>
-                <div class="service-meta-bot">
-                    <ul class="service-links clearfix">
-                        <li class="service-social"><a href="#" class="nanum-font-tab">구매</a></li>
-                        <li class="service-social"><a href="#" class="nanum-font-tab">삭제</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
   </div>
 </div>
 {% endblock %}
