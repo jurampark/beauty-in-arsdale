@@ -60,17 +60,18 @@
 				  </div>
 				  <div id="interest">
                       <div id="interestGrid">
-				    		<div class="service-list team">
+				    		{% for product in products %}
+                            <div class="service-list team">
 				    			<div class="service-item boxed bg-image-star2">
 						            <div class="service-content">
 						                <div class="service-image ">
-						                    <a href="/productdetail" data-ajax="false"><img src="{{ url_for('static', filename='img/service-img-1.jpg') }}" alt="" /></a>
+						                    <a href="/productdetail" data-ajax="false"><img src="{{ product.product_big_img }}" alt="" /></a>
 						                </div>
 						                <div class="service-title profile-interesting-title">
-						                	꽃을 든 남자 밝은 피부 하나하나 두울 테스트 하자 ㅋㅋㅋㅋㅋㅋㅋㅋ
+						                	{{ product.product_name }}
 						                	<div class="product-price-box">
-						                		Price : <b>$33,300</b><br/>
-                                                Category : <b>BB크림</b>
+						                		Price : <b>{{ product.product_price }}원</b><br/>
+                                                Category : <b>{{ product.product_type }}</b>
 						                	</div>
 						                </div>
 						            </div>
@@ -82,87 +83,20 @@
 						            </div>
 						        </div>
 				    		</div>
-
-                            <div class="service-list team">
-				    			<div class="service-item boxed bg-image-star2">
-						            <div class="service-content">
-						                <div class="service-image ">
-						                    <a href="/productdetail" data-ajax="false"><img src="{{ url_for('static', filename='img/service-img-1.jpg') }}" alt="" /></a>
-						                </div>
-						                <div class="service-title profile-interesting-title">
-						                	꽃을 든 남자 밝은 피부
-						                	<div class="product-price-box">
-						                		Price : <b>$33,300</b><br/>
-                                                Category : <b>BB크림</b>
-						                	</div>
-						                </div>
-						            </div>
-						            <div class="service-meta-bot">
-						                <ul class="service-links clearfix">
-						                    <li class="service-social"><a href="#" class="nanum-font-tab">구매</a></li>
-						                    <li class="service-social"><a href="#" class="nanum-font-tab">삭제</a></li>
-						                </ul>
-						            </div>
-						        </div>
-				    		</div>
-
-                            <div class="service-list team">
-				    			<div class="service-item boxed bg-image-star2">
-						            <div class="service-content">
-						                <div class="service-image ">
-						                    <a href="/productdetail" data-ajax="false"><img src="{{ url_for('static', filename='img/service-img-1.jpg') }}" alt="" /></a>
-						                </div>
-						                <div class="service-title profile-interesting-title">
-						                	꽃을 든 남자 밝은 피부
-						                	<div class="product-price-box">
-						                		Price : <b>$33,300</b><br/>
-                                                Category : <b>BB크림</b>
-						                	</div>
-						                </div>
-						            </div>
-						            <div class="service-meta-bot">
-						                <ul class="service-links clearfix">
-						                    <li class="service-social"><a href="#" class="nanum-font-tab">구매</a></li>
-						                    <li class="service-social"><a href="#" class="nanum-font-tab">삭제</a></li>
-						                </ul>
-						            </div>
-						        </div>
-				    		</div>
-
-                            <div class="service-list team">
-				    			<div class="service-item boxed bg-image-star2">
-						            <div class="service-content">
-						                <div class="service-image ">
-						                    <a href="/productdetail" data-ajax="false"><img src="{{ url_for('static', filename='img/service-img-1.jpg') }}" alt="" /></a>
-						                </div>
-						                <div class="service-title profile-interesting-title">
-						                	꽃을 든 남자 밝은 피부
-						                	<div class="product-price-box">
-						                		Price : <b>$33,300</b><br/>
-                                                Category : <b>BB크림</b>
-						                	</div>
-						                </div>
-						            </div>
-						            <div class="service-meta-bot">
-						                <ul class="service-links clearfix">
-						                    <li class="service-social"><a href="#" class="nanum-font-tab">구매</a></li>
-						                    <li class="service-social"><a href="#" class="nanum-font-tab">삭제</a></li>
-						                </ul>
-						            </div>
-						        </div>
-				    		</div>
+                            {% endfor %}
                       </div>
 				  </div>
 				  <div id="purchaseList">
 				    <div class="ui-grid-solo">
-				    	<div class="ui-block-a purchase-row">
+				    	{% for product in products %}
+                        <div class="ui-block-a purchase-row">
 				    		<div class="comment-body boxed">
 				    			<div class="comment-avatar">
-                                  <div class="avatar"><img src="{{ url_for('static', filename='img/service-img-1.jpg') }}" alt=""></div>
+                                  <div class="avatar"><img src="{{ product.product_big_img }}" alt="" /></div>
 	                            </div>
                                 <div class="comment-text ">
                                     <div class="comment-author clearfix">
-                                        <a href="/productdetail" data-ajax="false" class="link-author">꽃을 든 남자 BB 크림</a>
+                                        <a href="/productdetail" data-ajax="false" class="link-author">{{ product.product_name }}</a>
                                         <span class="comment-meta"><span class="comment-date">2014-02-14</span></span>
                                     </div>
                                     <div class="comment-entry">
@@ -174,43 +108,7 @@
                                 </div>
 				    		</div>
 				    	</div>
-				    	<div class="ui-block-a purchase-row">
-				    		<div class="comment-body boxed">
-				    			<div class="comment-avatar">
-                                  <div class="avatar"><img src="{{ url_for('static', filename='img/service-img-1.jpg') }}" alt=""></div>
-	                            </div>
-                                <div class="comment-text ">
-                                    <div class="comment-author clearfix">
-                                        <a href="/productdetail" data-ajax="false" class="link-author">꽃을 든 남자 BB 크림</a>
-                                        <span class="comment-meta"><span class="comment-date">2014-02-14</span></span>
-                                    </div>
-                                    <div class="comment-entry">
-                                    	<div data-role="controlgroup" data-mini="true" data-type="horizontal">
-                                    		<a href="#" class="ui-btn ui-corner-all purchased-list-btn">반품 신청</a>
-                                    		<a href="#" class="ui-btn ui-corner-all purchased-list-btn">배송 조회</a>
-                                    	</div>
-                                    </div>
-                                </div>
-				    		</div>
-				    	</div>
-				    	<div class="ui-block-a purchase-row">
-				    		<div class="comment-body boxed">
-				    			<div class="comment-avatar">
-                                  <div class="avatar"><img src="{{ url_for('static', filename='img/service-img-1.jpg') }}" alt=""></div>
-	                            </div>
-                                <div class="comment-text ">
-                                    <div class="comment-author clearfix">
-                                        <a href="/productdetail" data-ajax="false" class="link-author">꽃을 든 남자 BB 크림</a>
-                                        <span class="comment-meta"><span class="comment-date">2014-02-14</span></span>
-                                    </div>
-                                    <div class="comment-entry">
-                                    	<div data-role="controlgroup" data-mini="true" data-type="horizontal">
-                                    		<a href="#" class="ui-btn ui-corner-all purchased-list-btn">반품 신청</a>
-                                    		<a href="#" class="ui-btn ui-corner-all purchased-list-btn">배송 조회</a>
-                                    	</div>
-                                    </div>
-                                </div>
-				    		</div>
+                        {% endfor %}
 				    	</div>
 				    </div>
 				  </div>

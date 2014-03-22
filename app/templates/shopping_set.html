@@ -1,0 +1,46 @@
+{% extends "mobile_base.html" %}
+{% block header %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/common_style.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/shopping_set.css') }}"/>
+
+<script src="{{ url_for('static', filename='js/imagesloaded.pkgd.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/masonry.pkgd.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/shopping_set.js') }}"></script>
+{% endblock %}
+
+{% block title %}
+    <h2 class="ui-title">세트 구성 쇼핑</h2>
+{% endblock %}
+
+{% block content %}
+<div>
+    {% for product in products %}
+    <div class="product-item" id="item-{{ product.product_id }}" data-attr="{{ product.product_id }}">
+        <div class="product-img">
+            <img src="{{ product.product_big_img}}" alt="" />
+        </div>
+        <div class="product-contents">
+            <div class="product-info">
+                [{{ product.product_brand }}]<br/>
+                <a href="{{ url_for('productDetail') }}">{{product.product_name  }}</a>
+                <div class="product-price-box">
+                    Price : <b>￦{{ product.product_price }} ({{product.product_capacity }}ml)</b><br/>
+                    Category : <b>{{ product.product_type }}</b>
+                </div>
+            </div>
+        </div>
+        <div class="product-bottom-menu">
+            <ul class="menu-links clearfix">
+                <li class=""><a href="#">관심</a></li>
+                <li class=""><a href="#">장바구니</a></li>
+            </ul>
+        </div>
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}
