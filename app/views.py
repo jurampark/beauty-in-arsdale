@@ -96,7 +96,9 @@ def product_sample():
 
     return render_template( 'product_sample.html', products = products )
 
-
+@app.route('/product/<int:product_id>')
+def show_post(product_id):
+    return 'test'
 
 
 
