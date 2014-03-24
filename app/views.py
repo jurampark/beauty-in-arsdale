@@ -108,7 +108,8 @@ def validate_register( name, email, password, sex ):
 @app.route('/mypage')
 @login_required
 def myPage():
-    return render_template('my_page.html')
+    products = g.db.session.query(Product).all()
+    return render_template('my_page.html', products = products)
 
 
 @app.route('/update_user_profile', methods=['GET', 'POST'])
@@ -218,3 +219,30 @@ def mypageweb():
 def purchaselist():
     products = g.db.session.query(Product).all()
     return render_template('mypage_purchase_web.html', tabName='purchase', products = products[0:4])
+
+
+@app.route('/shopping1', methods = ['GET'])
+def shoppingSet():
+    products = g.db.session.query(Product).all()
+    return render_template('shopping_set_web.html', products = products)
+
+@app.route('/mshopping1', methods = ['GET'])
+def mshoppingSet():
+    products = g.db.session.query(Product).all()
+    return render_template('shopping_set.html', products = products)
+
+@app.route('/shopping2', methods = ['GET'])
+def shoppingProduct():
+    products = g.db.session.query(Product).all()
+    return render_template('shopping_product_web.html', products = products)
+
+@app.route('/mshopping2', methods = ['GET'])
+def mshoppingProduct():
+    products = g.db.session.query(Product).all()
+    return render_template('shopping_product.html', products = products)
+
+
+
+
+
+
