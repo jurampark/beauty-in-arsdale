@@ -57,7 +57,11 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> 장바구니</a></li>
         <li class="dropdown">
-          <a href="#">한도건 님</a>
+          {% if g.user %}
+            <a href="/mypageweb">{{ g.user.name }} 님</a>
+          {% else %}
+            <a href="/login">로그인</a>
+          {% endif %}
         </li>
       </ul>
   </div><!-- /.container-fluid -->
