@@ -1,5 +1,5 @@
 from app import app, db
-from app.models import User, Product
+from app.models import Users, Product
 from flask import flash, redirect, render_template, request, session, url_for, g
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
@@ -14,6 +14,12 @@ def before_request():
         g.user = g.db.session.query(User).filter(User.id == session['user_id']).first()
         if g.user is None:
             session.pop('user_id', None )
+
+@app.route('/productdetailweb', methods = ['GET'])
+def productDetailWeb():
+    products =g.db.session.query(Product).all()[0:5]
+    product = products[0]
+    return render_template('product_detail_web.html', products=products, product = product)
 
 @app.teardown_request
 def teardown_request( exception ):
@@ -96,11 +102,10 @@ def product_sample():
 
     return render_template( 'product_sample.html', products = products )
 
-@app.route('/product/<int:product_id>')
-def show_post(product_id):
-    return 'test'
-
-
+@app.route('/product/<int:product_key>')
+def product_detail(product_key):
+    product = g.db.session.query(Product).filter(Product.key == product_key ).first()
+    return product.product_name
 
 
 # should return error if exist
