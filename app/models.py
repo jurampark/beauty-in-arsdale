@@ -110,8 +110,8 @@ class Product(db.Model):
         self.color_rgb = color_rgb
 
     def __repr__(self):
-        return type(self.name)
-        # return '<Product %s>' % self.name
+        return '<Product %s>' % self.name.encode("utf-8")
+        
 
 class ProductTag(db.Model):
     key = db.Column(db.Integer, primary_key=True)
