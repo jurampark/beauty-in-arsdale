@@ -10,10 +10,10 @@ from functools import wraps
 def before_request():
     g.db = db
     g.user = None
-    if 'user_id' in session:
-        g.user = g.db.session.query(User).filter(User.id == session['user_id']).first()
+    if 'user_key' in session:
+        g.user = g.db.session.query(Users).filter(Users.key == session['user_key']).first()
         if g.user is None:
-            session.pop('user_id', None )
+            session.pop('user_key', None )
 
 @app.route('/productdetailweb', methods = ['GET'])
 def productDetailWeb():
@@ -50,14 +50,14 @@ def login():
         email = request.form.get('email')
         password = request.form.get('password')
 
-        user = g.db.session.query( User ).filter(User.email == email ).first()
+        user = g.db.session.query( Users ).filter(Users.email == email ).first()
         if user is None:
             error = 'fail_invalid_email'
         else:
             if not check_password_hash( user.password, password ):
                 error = 'fail_invalid_password'
             else:
-                session['user_id'] = user.id
+                session['user_key'] = user.key
                 return redirect( url_for('home' ) )
 
     if error is not None:
@@ -66,7 +66,7 @@ def login():
 
 @app.route('/logout')
 def logout():
-    session.pop('user_id', None )
+    session.pop('user_key', None )
     return redirect( url_for('home') )
 
 @app.route('/register', methods=['GET', 'POST'] )
@@ -85,7 +85,7 @@ def register():
 
         error = validate_register( name, email, password, sex )
         if error is None:
-            new_user = User( name, email, generate_password_hash(password), sex, )
+            new_user = Users( name, email, generate_password_hash(password), sex, )
             try:
                 g.db.session.add( new_user )
                 g.db.session.commit()
