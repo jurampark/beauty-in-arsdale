@@ -1,0 +1,152 @@
+body{
+    font-size: 14px;
+}
+
+.set-title{
+    margin-bottom: 0;
+    background-color: #333;
+    color : #fff;
+}
+.set-title h4{
+    padding : 8px;
+    font-size : 16px;
+    margin : 0;
+    text-shadow: none;
+}
+
+.set-img{
+    padding : 0;
+
+}
+
+.set-img img{
+    width : 100%;
+    margin:0;
+    padding :0;
+    line-height: 0;
+    box-shadow: 0 2px 2px #777;
+}
+
+.set-tab-area{
+    padding : 0;
+}
+
+#purchaseArea .price-area{
+    width : 140px;
+    float : right;
+    color : white;
+    text-align: left;
+    margin-right : 4px;
+    margin-top : 14px;
+    font-size: 16px;
+    text-shadow: none;
+}
+
+#purchaseArea .button-area{
+    width : 160px;
+    float : right;
+}
+
+#purchaseArea{
+    padding : 0;
+    background-color: #333;
+    overflow: hidden;
+}
+
+.purchase-footer{
+    border:0;
+}
+
+.set-main-description{
+    font-size: 14px;
+}
+
+#convertSet {
+    position : relative;
+}
+
+#convertSet .set-product{
+    position: relative;
+}
+
+.convert-set-price{
+    font-size: 14px;
+    padding: 12px 0;
+}
+
+.convert-set-price span{
+    font-weight: bold;
+}
+
+#convertSet .set-product-img{
+    width :28%;
+    float: left;
+}
+
+#convertSet .set-product-img img{
+    width : 100%;
+}
+
+#convertSet .set-product-contents{
+    width : 65%;
+    padding: 8px 6px 8px 8px;
+    float:left;
+}
+
+#convertSet .set-product-title{
+    text-decoration: none;
+    font-size: 14px;
+}
+
+#convertSet .set-product-desc{
+    margin-top: 8px;
+    font-size: 10px;
+}
+
+#convertSet .set-product-menu{
+    width : 30px;
+    position: absolute;
+    top : -8px;
+    right : -8px;
+}
+
+#convertSet .set-product-menu a{
+    margin: 0;
+}
+
+
+.hideArea{
+    display: none;
+}
+
+
+.change-product-img{
+    width :100%;
+}
+
+.change-product-img img{
+    width : 100%;
+}
+
+.change-product-contents{
+    width : 100%;
+    padding: 8px 6px 8px 8px;
+}
+
+.change-product-title{
+    text-decoration: none;
+    font-size: 14px;
+    color : black;
+    text-shadow: none;
+}
+
+.change-product-desc{
+    margin-top: 8px;
+    font-size: 10px;
+    color : black;
+    text-shadow: none;
+}
+
+.change-product-selected{
+    border : 3px solid red;
+}

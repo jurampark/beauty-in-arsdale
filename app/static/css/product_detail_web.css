@@ -1,0 +1,109 @@
+
+.price-area{
+    padding : 18px;
+}
+
+.product-name{
+    font-weight: bold;
+    font-size : 18px;
+    margin-bottom: 16px;
+}
+
+.product-price{
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+
+.product-price span{
+    /*color : red;*/
+}
+
+.product-how-many{
+    margin-bottom: 16px;
+}
+
+.product-how-many select{
+    width: 180px;
+}
+
+.product-btn-area{
+    margin-top : 16px;
+}
+
+.product-contents{
+    padding : 18px;
+}
+
+.product-sub-contents{
+    padding : 0 18px 18px 18px;
+    margin-top : 18px;
+}
+
+.product-img img{
+    width : 100%;
+}
+
+.product-description{
+   font-size: 12px;
+}
+
+.video-review{
+    margin-top : 24px;
+}
+
+.contents-header{
+    font-weight: bold;
+    color : #333;
+    padding : 10px;
+    margin:0;
+}
+
+.blog-img img{
+    width : 100px;
+    height : 80px;
+}
+
+.blog-info{
+    padding: 6px 12px;
+}
+
+.blog-contents{
+    width : 270px;
+    float:left;
+}
+
+.blog-img{
+    width : 80px;
+    float:left;
+    overflow: hidden;
+    margin-right : 6px;
+}
+
+.blog-img img{
+    width : 100%;
+}
+
+#blogger-review{
+    font-size: 14px;
+    padding : 14px 0;
+    margin-top : 0;
+}
+
+#blogger-review h5{
+    font-size: 16px;
+}
+
+#blogger-review hr{
+    margin : 6px inherit;
+}
+
+.blog-referer{
+    font-size: 12px;
+    text-align: right;
+    margin-top: 8px;
+}
+
+.box-css{
+    margin-bottom: 20px;
+}

@@ -1,0 +1,97 @@
+{% extends "web_base.html" %}
+{% block header %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/common_style_web.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/product_detail_web.css') }}"/>
+{% block subHeader %}
+{% endblock %}
+{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-xs-10 col-xs-offset-1">
+        <div class="row">
+            <div class="col-xs-8">
+                <div class="box-css">
+                    <div class="box-header">
+                        <h4 class="contents-header">제품 상세 설명</h4>
+                    </div>
+                    <div class="product-contents">
+                        <div class="product-img">
+                            <img src="{{ product.product_big_img}}" alt="" />
+                        </div>
+                        <div class="product-description">
+                            <h4  class="contents-header" style="padding-left:0px;">상세 설명 <a href="#" class="btn btn-info"><span class="glyphicon glyphicon-star"></span> 관심하기</a></h4>
+                            {{ product.product_desc }}
+                        </div>
+                    </div>
+                </div>
+                <div class="box-css">
+                    <div class="box-header">
+                        <h4 class="contents-header">비포 애프터 동영상</h4>
+                    </div>
+                    <div class="product-sub-contents">
+                        <div class="video-review">
+                            <iframe width="100%" height="325" src="//www.youtube.com/embed/PxSXrJ0ircg" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-xs-4">
+                <div class="box-css">
+                    <div class="box-header">
+                        <h4 class="contents-header">구매</h4>
+                    </div>
+                    <div class="price-area">
+                        <div class="product-price"><span>{{ product.product_price }}</span>원</div>
+                        <div class="product-name">{{product.product_name  }}</div>
+                        <div class="product-how-many">
+                            구매수량 :
+                            <select>
+                                {% for number in range(1, 11) %}
+                                <option value="{{ number }}">
+                                    {{ number }}개
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="product-btn-area">
+                            <a href="#" class="btn btn-success "><span class="glyphicon glyphicon-heart"></span> 구매하기</a>
+                            <a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-shopping-cart"></span> 장바구니</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-css">
+                    <div class="box-header">
+                        <h4 class="contents-header">블로거 리뷰</h4>
+                    </div>
+                    <div id="blogger-review" class="product-sub-contents">
+                        <div>
+                            {% for product in products %}
+                            <div class="blog-info blog-item">
+                                <div class="blog-contents">
+                                    <h5><a href="{{ url_for('productDetail') }}">{{product.product_name  }}</a></h5>
+                                    <div class="blog-desc">
+                                        <div class="blog-img">
+                                            <img src="{{product.product_big_img }}" alt="" />
+                                        </div>
+                                        존나 조쿤? 하악하악? 이거 꼭 사세요!!ㅋㅋ 자 나는 파워블로거입니다!! 다 덤벼봐 ㅋㅋㅋ하하하하 세트가 참 어렵구만.. 시부럴 하하하 서울대 병신
+                                    </div>
+                                    <div class="blog-referer">
+                                        test@test.com
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <hr/>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}

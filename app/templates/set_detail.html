@@ -1,0 +1,188 @@
+{% extends "mobile_base.html" %}
+{% block header %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/set_detail.css') }}"/>
+<script src="{{ url_for('static', filename='js/set_detail.js') }}"></script>
+{% endblock %}
+{% block title %}
+    <h2 class="ui-title">세트 정보</h2>
+{% endblock %}
+{% block content %}
+<div class="ui-grid-solo">
+    <div class="ui-block-a">
+        <div class="set-title boxed">
+            <!--
+
+            -->
+            <h4>감성적인 남자를 위한 세트</h4>
+        </div>
+    </div>
+    <div class="ui-block-a">
+        <div class="set-img">
+            <img src="{{ url_for('static', filename='img/post-img-5.jpg') }}" alt="" />
+        </div>
+    </div>
+    <div class="ui-block-a">
+        <div data-role="tabs" class="set-tab-area boxed">
+            <div data-role="navbar">
+                <ul>
+                  <li><a href="#setDesc" class="ui-btn-active" data-theme="b" data-ajax="false">세트 설명</a></li>
+                  <li><a href="#convertSet" data-theme="b" data-ajax="false">세트 수정</a></li>
+                  <li><a href="#purchaseInfo" data-theme="b" data-ajax="false">구매정보</a></li>
+                </ul>
+            </div>
+            <div id="setDesc" class="ui-content">
+                <h3>세트 설명</h3>
+                <div class="set-main-description">
+                    뭐라도 들어가겠지 하하하하 테스트 데이타 ㅋㅋㅋ 뭐라도 들어가겠지 하하하하 테스트 데이타 ㅋㅋㅋ 뭐라도 들어가겠지 하하하하 테스트 데이타 ㅋㅋㅋ 뭐라도 들어가겠지 하하하하 테스트 데이타 ㅋㅋㅋ
+                </div>
+            </div>
+            <div id="convertSet" class="ui-content">
+                <div data-role="popup" id="productPopup" data-theme="none">
+                    <ul data-role="listview" data-theme="b">
+                        <li  data-icon="false"><a href="#changeProductPopup" class="change-product-btn" data-rel="popup" >다른 상품으로 교체</a></li>
+                        <li  data-icon="false"><a href="#">기본 상품으로 복원</a></li>
+                    </ul>
+                </div>
+                <div data-role="popup" id="changeProductPopup" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width:400px;">
+                    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                    <div data-role="header" data-theme="a">
+                        <h1>커스텀 세트 메뉴</h1>
+                    </div>
+                    <div role="main" class="ui-content" >
+                        <div id="askArea">
+                            <h3 class="ui-title">자신만의 세트를 구성하고 싶으세요?</h3>
+                            <p>저희 The Motion9은 고객님이 직접 세트 메뉴를 구성할 수 있게 커스텀 제공합니다.</p>
+                            <a href="#" id="newProductBtn" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b ui-mini" >새로운 상품 교체</a>
+                            <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b ui-mini" >원래 상품으로 교체</a>
+                        </div>
+                        <div id="changeProductArea" class="hideArea">
+                            <div>카테고리 : BB 크림</div>
+                            <div>
+                                정렬
+                                <select data-mini="true">
+                                    <option>가격</option>
+                                    <option>제품명</option>
+                                </select>
+                            </div>
+                            <div>
+                                <div class="change-product boxed">
+                                    <div class="change-product-img">
+                                        <img src="{{ url_for('static', filename='img/post-img-5.jpg') }}" alt="" />
+                                    </div>
+                                    <div class="change-product-contents">
+                                        <span class="change-product-title">신기하게 잘맞는 BB</span>
+                                        <div class="change-product-desc">
+                                            강자이너가 알아보는 남자에게 딱 맞는 BB 크림!
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="change-product boxed">
+                                    <div class="change-product-img">
+                                        <img src="{{ url_for('static', filename='img/post-img-5.jpg') }}" alt="" />
+                                    </div>
+                                    <div class="change-product-contents">
+                                        <span class="change-product-title">신기하게 잘맞는 BB</span>
+                                        <div class="change-product-desc">
+                                            강자이너가 알아보는 남자에게 딱 맞는 BB 크림!
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="change-product boxed">
+                                    <div class="change-product-img">
+                                        <img src="{{ url_for('static', filename='img/post-img-5.jpg') }}" alt="" />
+                                    </div>
+                                    <div class="change-product-contents">
+                                        <span class="change-product-title">신기하게 잘맞는 BB</span>
+                                        <div class="change-product-desc">
+                                            강자이너가 알아보는 남자에게 딱 맞는 BB 크림!
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <a href="#" id="selectNewBtn" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b ui-mini" >확인</a>
+                                <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b ui-mini" data-rel="back">취소</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="convert-set-price">
+                    가격: <span>97000원</span> (전체 할인율 2.7%)
+                </div>
+                <div>
+                    <div class="set-product boxed">
+                        <div class="set-product-menu">
+                            <a href="#productPopup" data-rel="popup" data-position-to="origin" class="product-menu-btn ui-nodisc-icon ui-btn ui-shadow ui-mini ui-corner-all ui-icon-bars ui-btn-icon-notext ui-btn-b">Menu</a>
+                        </div>
+                        <div class="set-product-img">
+                            <img src="{{ url_for('static', filename='img/post-img-5.jpg') }}" alt="" />
+                        </div>
+                        <div class="set-product-contents">
+                            <a href="#" class="set-product-title">신기하게 잘맞는 BB zzz 하하</a>
+                            <div class="set-product-desc">
+                                강자이너가 알아보는 남자에게 딱 맞는 BB 크림!
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="set-product boxed">
+                        <div class="set-product-menu">
+                            <a href="#productPopup"class="product-menu-btn ui-nodisc-icon ui-btn ui-shadow ui-mini ui-corner-all ui-icon-bars ui-btn-icon-notext ui-btn-b">Menu</a>
+                        </div>
+                        <div class="set-product-img">
+                            <img src="{{ url_for('static', filename='img/post-img-5.jpg') }}" alt="" />
+                        </div>
+                        <div class="set-product-contents">
+                            <a href="#" class="set-product-title">신기하게 잘맞는 BB</a>
+                            <div class="set-product-desc">
+                                강자이너가 알아보는 남자에게 딱 맞는 BB 크림!
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="set-product boxed">
+                        <div class="set-product-menu">
+                            <a href="#productPopup" class="product-menu-btn ui-nodisc-icon ui-btn ui-shadow ui-mini ui-corner-all ui-icon-bars ui-btn-icon-notext ui-btn-b">Menu</a>
+                        </div>
+                        <div class="set-product-img">
+                            <img src="{{ url_for('static', filename='img/post-img-5.jpg') }}" alt="" />
+                        </div>
+                        <div class="set-product-contents">
+                            <a href="#" class="set-product-title">신기하게 잘맞는 BB</a>
+                            <div class="set-product-desc">
+                                강자이너가 알아보는 남자에게 딱 맞는 BB 크림!
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="purchaseInfo" class="ui-content">
+                <h1>구매 정보</h1>
+                <div>
+                    구매정보 ㅋㅋ 가격이 어쩌구 ㅋㅋ
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+    <div data-role="footer" data-position="fixed" class="purchase-footer">
+		<div id="purchaseArea">
+            <div class="button-area">
+                <div data-role="controlgroup" data-type="horizontal">
+                    <a href="#" class="ui-btn ui-corner-all">장바구니</a>
+                    <a href="#" class="ui-btn ui-corner-all">구매하기</a>
+                </div>
+            </div>
+            <div class="price-area">가격: 12만 3000원</div>
+		</div>
+        <div class="clearfix"></div>
+	</div>
+{% endblock %}
