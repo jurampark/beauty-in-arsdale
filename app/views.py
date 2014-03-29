@@ -58,6 +58,7 @@ def getProductList():
     str = ""
     for product in products:
         interest = product.interests.all()
+        print interest.size
         if interest.count is not 0:
             str += repr(product).replace("<", "[").replace(">","]") + " interest <br/>"
         else:
