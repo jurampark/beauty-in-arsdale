@@ -248,7 +248,16 @@ def mshoppingProduct():
     products = g.db.session.query(Product).all()
     return render_template('shopping_product.html', products = products)
 
+@app.route('/productdetailweb', methods = ['GET'])
+def productDetailWeb():
+    products =g.db.session.query(Product).all()[0:5]
+    product = products[0]
+    return render_template('product_detail_web.html', products=products, product = product)
 
+@app.route('/setdetail', methods = ['GET'])
+def setDetail():
+     ##product =g.db.session.query(Product).all()[0]
+     return render_template('set_detail.html')
 
 
 
