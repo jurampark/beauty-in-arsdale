@@ -5,16 +5,13 @@ from migrate import *
 from migrate.changeset import schema
 pre_meta = MetaData()
 post_meta = MetaData()
-user = Table('user', pre_meta,
+interest = Table('interest', post_meta,
     Column('key', Integer, primary_key=True, nullable=False),
-    Column('name', String, nullable=False),
-    Column('email', String, nullable=False),
-    Column('password', String, nullable=False),
-    Column('sex', String),
-    Column('age', Integer),
-    Column('skin_type', String),
-    Column('skin_color', String),
-    Column('created_time', DateTime),
+    Column('user_key', Integer),
+    Column('product_key', Integer),
+    Column('set_key', Integer),
+    Column('is_set', Boolean, default=ColumnDefault(False)),
+    Column('created_time', DateTime, default=ColumnDefault(<sqlalchemy.sql.functions.now at 0x3614fd0; now>)),
 )
 
 
@@ -23,11 +20,11 @@ def upgrade(migrate_engine):
     # migrate_engine to your metadata
     pre_meta.bind = migrate_engine
     post_meta.bind = migrate_engine
-    pre_meta.tables['user'].drop()
+    post_meta.tables['interest'].create()
 
 
 def downgrade(migrate_engine):
     # Operations to reverse the above upgrade go here.
     pre_meta.bind = migrate_engine
     post_meta.bind = migrate_engine
-    pre_meta.tables['user'].create()
+    post_meta.tables['interest'].drop()

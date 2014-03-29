@@ -1,5 +1,6 @@
+# -*- coding: utf-8 -*-
 from app import app, db
-from app.models import Users, Product
+from app.models import Users, Product, Interest
 from flask import flash, redirect, render_template, request, session, url_for, g
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
@@ -15,12 +16,6 @@ def before_request():
         if g.user is None:
             session.pop('user_key', None )
 
-@app.route('/productdetailweb', methods = ['GET'])
-def productDetailWeb():
-    products =g.db.session.query(Product).all()[0:5]
-    product = products[0]
-    return render_template('product_detail_web.html', products=products, product = product)
-
 @app.teardown_request
 def teardown_request( exception ):
     pass
@@ -33,6 +28,47 @@ def login_required( func ):
         else:
             return redirect( url_for('login') )
     return wrap
+
+@app.route('/add_product_to_interest/<int:product_key>')
+@login_required
+def addProductToInterest( product_key ):
+    interest = Interest( g.user.key, product_key, None, False )
+    try:
+        g.db.session.add( interest )
+        g.db.session.commit()
+        return 'success'
+    except IntegrityError:
+        return 'fail'
+
+@app.route('/add_set_to_interest/<int:set_key>')
+@login_required
+def addSetToInterest( set_key ):
+    interest = Interest( g.user.key, None, set_key, True )
+    try:
+        g.db.session.add( interest )
+        g.db.session.commit()
+        return 'success'
+    except IntegrityError:
+        return 'fail'
+
+@app.route('/get_product_list')
+@login_required
+def getProductList():
+    products = g.db.session.query( Product ).all()
+    str = ""
+    for product in products:
+        print repr(product)
+        # str += repr(product) + " / "
+
+    return str
+
+
+
+@app.route('/productdetailweb', methods = ['GET'])
+def productDetailWeb():
+    products =g.db.session.query(Product).all()[0:5]
+    product = products[0]
+    return render_template('product_detail_web.html', products=products, product = product)
 
 @app.route('/')
 def home():
@@ -125,7 +161,7 @@ def updateUserProfile():
 
     if request.method == 'POST':
         # get post params
-        g.user.user_age = request.form.get('user_age')
+        g.user.age = request.form.get('age')
         g.user.sex = request.form.get('sex')
         g.user.skin_type = request.form.get('skin_type')
         g.user.skin_color = request.form.get('skin_color')

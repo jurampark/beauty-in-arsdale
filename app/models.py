@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from app import db
 import datetime
 
@@ -40,6 +41,8 @@ class Interest(db.Model):
     set_key = db.Column(db.Integer, db.ForeignKey('set.key'))
     is_set = db.Column(db.Boolean, default=False)
     created_time = db.Column(db.DateTime, default=db.func.now())
+
+    __table_args__ = ( db.UniqueConstraint('user_key', 'product_key'), { } )
 
     def __init__(self, user_key, product_key, set_key, is_set ):
         self.user_key = user_key
@@ -107,7 +110,8 @@ class Product(db.Model):
         self.color_rgb = color_rgb
 
     def __repr__(self):
-        return '<Product %r>' % self.name
+        return type(self.name)
+        # return '<Product %s>' % self.name
 
 class ProductTag(db.Model):
     key = db.Column(db.Integer, primary_key=True)
