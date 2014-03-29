@@ -57,11 +57,10 @@ def getProductList():
     products = g.db.session.query( Product ).all()
     str = ""
     for product in products:
-        print product
-        str += repr(product) + " / "
+        print product.interests
+        str += repr(product).replace("<", "[").replace(">","]") + "<br/>"
 
-    str2 = "\"" + str + "\""
-    return str2
+    return str;
 
 
 
