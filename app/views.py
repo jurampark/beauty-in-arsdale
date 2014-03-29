@@ -29,6 +29,9 @@ def login_required( func ):
             return redirect( url_for('login') )
     return wrap
 
+
+# sample code ----------------------------------------------------------------
+
 @app.route('/add_product_to_interest/<int:product_key>')
 @login_required
 def addProductToInterest( product_key ):
@@ -58,14 +61,23 @@ def getProductList():
     str = ""
     for product in products:
         interest = product.interests.all()
-        if len( interest ) is not 0:
-            intttt = interest[0]
-            print intttt
+        if len( interest ) != 0 and interest[0].user_key == g.user.key:
             str += repr(product).replace("<", "[").replace(">","]") + " --------------------------------- interest <br/>"
         else:
             str += repr(product).replace("<", "[").replace(">","]") + "<br/>"
 
     return str;
+
+@app.route('/get_interest_product_list')
+@login_required
+def getInterestProductList():
+    interests = g.user.interests.all()
+    for interest in interests:
+        print interest.product
+
+    return 'success'
+
+# --------------------------------------------------------------------------------
 
 
 
