@@ -253,6 +253,9 @@ def setDetail():
      ##product =g.db.session.query(Product).all()[0]
      return render_template('set_detail.html')
 
-
+@app.route('/changeproductinset', methods = ['GET'])
+def changeProductInSet():
+     ##product =g.db.session.query(Product).all()[0]
+     return render_template('change_product_in_set.html')
 
 
