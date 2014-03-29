@@ -57,8 +57,11 @@ def getProductList():
     products = g.db.session.query( Product ).all()
     str = ""
     for product in products:
-        print product.interests
-        str += repr(product).replace("<", "[").replace(">","]") + "<br/>"
+        interest = product.interests.all()
+        if interest.count is not 0:
+            str += repr(product).replace("<", "[").replace(">","]") + " interest <br/>"
+        else:
+            str += repr(product).replace("<", "[").replace(">","]") + "<br/>"
 
     return str;
 

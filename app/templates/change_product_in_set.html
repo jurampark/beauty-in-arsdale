@@ -1,0 +1,91 @@
+{% extends "mobile_base.html" %}
+{% block header %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/change_product_in_set.css') }}"/>
+<script src="{{ url_for('static', filename='js/change_product_in_set.js') }}"></script>
+{% endblock %}
+{% block title %}
+    <h2 class="ui-title">세트 커스터 마이징</h2>
+{% endblock %}
+{% block content %}
+<div class="ui-grid-solo">
+    <div class="ui-block-a">
+        <div id="changeProductArea">
+            <div>카테고리 : BB 크림</div>
+            <div style="text-align: right;">
+                <select data-mini="true" data-inline="true" data-theme="b" class="sort-selection">
+                    <option>정렬 방식</option>
+                    <option>높은 가격 순으로</option>
+                    <option>낮은 가격 순으로</option>
+                    <option>제품명 순으로</option>
+                </select>
+            </div>
+            <div>
+                <div class="change-product boxed">
+                    <div class="change-product-img">
+                        <img src="{{ url_for('static', filename='img/post-img-5.jpg') }}" alt="" />
+                    </div>
+                    <div class="change-product-contents">
+                        <span class="change-product-title">신기하게 잘맞는 BB</span>
+                        <div class="change-product-price">
+                            2만 9000원
+                        </div>
+                        <div class="change-product-desc">
+                            강자이너가 알아보는 남자에게 딱 맞는 BB 크림!<br/>
+                            졸라좋아용 ㅋㅋ
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="change-product boxed">
+                    <div class="change-product-img">
+                        <img src="{{ url_for('static', filename='img/post-img-5.jpg') }}" alt="" />
+                    </div>
+                    <div class="change-product-contents">
+                        <span class="change-product-title">신기하게 잘맞는 BB</span>
+                        <div class="change-product-price">
+                            2만 9000원
+                        </div>
+                        <div class="change-product-desc">
+                            강자이너가 알아보는 남자에게 딱 맞는 BB 크림!<br/>
+                            졸라좋아용 ㅋㅋ
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="change-product boxed">
+                    <div class="change-product-img">
+                        <img src="{{ url_for('static', filename='img/post-img-5.jpg') }}" alt="" />
+                    </div>
+                    <div class="change-product-contents">
+                        <span class="change-product-title">신기하게 잘맞는 BB</span>
+                        <div class="change-product-price">
+                            2만 9000원
+                        </div>
+                        <div class="change-product-desc">
+                            강자이너가 알아보는 남자에게 딱 맞는 BB 크림!<br/>
+                            졸라좋아용 ㅋㅋ
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false" id="change-product-footer">
+        <div class="footer-left">
+            <div class="current-set-price footer-contents">
+                현재 가격 : <span id="currentSetPrice">12만 8000원</span>
+            </div>
+            <div class="current-set-name footer-contents">
+                세트 : 감성적인 남자를 위한 세트
+            </div>
+        </div>
+        <div class="footer-right">
+            <input type="button" value="선택 완료" data-theme="b" id="completeChangeBtn"/>
+        </div>
+	</div>
+{% endblock %}
