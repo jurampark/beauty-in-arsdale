@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from app import app, db
-from app.models import Users, Product, Interest
+from app.models import Users, Product, Interest, Cart
 from flask import flash, redirect, render_template, request, session, url_for, g
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
@@ -74,6 +74,37 @@ def getInterestProductList():
     interests = g.user.interests.all()
     for interest in interests:
         print interest.product
+
+    return 'success'
+
+@app.route('/add_product_to_cart/<int:product_key>')
+@login_required
+def addProductToCart( product_key ):
+    cart = Cart( g.user.key, product_key, None, False )
+    try:
+        g.db.session.add( cart )
+        g.db.session.commit()
+        return 'success'
+    except IntegrityError:
+        return 'fail'
+
+@app.route('/add_set_to_cart/<int:set_key>')
+@login_required
+def addSetToCart( set_key ):
+    cart = Cart( g.user.key, None, set_key, True )
+    try:
+        g.db.session.add( cart )
+        g.db.session.commit()
+        return 'success'
+    except IntegrityError:
+        return 'fail'
+
+@app.route('/get_cart_product_list')
+@login_required
+def getCartProductList():
+    carts = g.user.carts.all()
+    for cart in carts:
+        print cart.product
 
     return 'success'
 
