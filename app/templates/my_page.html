@@ -60,18 +60,18 @@
 				  </div>
 				  <div id="interest">
                       <div id="interestGrid">
-				    		{% for product in products %}
+				    		{% for interest in interests%}
                             <div class="service-list team">
 				    			<div class="service-item boxed bg-image-star2">
 						            <div class="service-content">
 						                <div class="service-image ">
-						                    <a href="/productdetail" data-ajax="false"><img src="{{ product.product_big_img }}" alt="" /></a>
+						                    <a href="/productdetail/{{ interest.product.key }}" data-ajax="false"><img src="{{ interest.product.big_img_url }}" alt="" /></a>
 						                </div>
 						                <div class="service-title profile-interesting-title">
-						                	{{ product.product_name }}
+						                	{{ interest.product.name }}
 						                	<div class="product-price-box">
-						                		Price : <b>{{ product.product_price }}원</b><br/>
-                                                Category : <b>{{ product.product_type }}</b>
+						                		Price : <b>{{ interest.product.price }}원</b><br/>
+                                                Category : <b>{{ interest.product.category_name}}</b>
 						                	</div>
 						                </div>
 						            </div>
@@ -88,16 +88,16 @@
 				  </div>
 				  <div id="purchaseList">
 				    <div class="ui-grid-solo">
-				    	{% for product in products %}
+				    	{% for cart in carts %}
                         <div class="ui-block-a purchase-row">
 				    		<div class="comment-body boxed">
 				    			<div class="comment-avatar">
-                                  <div class="avatar"><img src="{{ product.product_big_img }}" alt="" /></div>
+                                  <div class="avatar"><img src="{{ cart.product.big_img_url }}" alt="" /></div>
 	                            </div>
                                 <div class="comment-text ">
                                     <div class="comment-author clearfix">
-                                        <a href="/productdetail" data-ajax="false" class="link-author">{{ product.product_name }}</a>
-                                        <span class="comment-meta"><span class="comment-date">2014-02-14</span></span>
+                                        <a href="/productdetail/{{ interest.product.key }}" data-ajax="false" class="link-author">{{ cart.product.name }}</a>
+                                        <span class="comment-meta"><span class="comment-date">{{ cart.created_time }}</span></span>
                                     </div>
                                     <div class="comment-entry">
                                     	<div data-role="controlgroup" data-mini="true" data-type="horizontal">

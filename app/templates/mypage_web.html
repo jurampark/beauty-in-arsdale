@@ -33,7 +33,7 @@
                 <div class="box-css user-profile">
                     <h3>{{ g.user.name }}</h3>
                     <div>
-                        pgenius2@gmail.com
+                        {{ g.user.email }}
                     </div>
                     <hr/>
                     <p class="user-sex">
@@ -44,8 +44,8 @@
                         {% endif %}
                     </p>
                     <p class="user-age">
-                         {% if g.user.user_age != none %}
-                            {{ g.user.user_age }} ~ {{ g.user.user_age + 4}}세
+                         {% if g.user.age != none %}
+                            {{ g.user.age }} ~ {{ g.user.age + 4}}세
                         {% else %}
                             나이를 입력해주세요.
                         {% endif %}

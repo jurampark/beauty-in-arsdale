@@ -16,11 +16,11 @@
                     </div>
                     <div class="product-contents">
                         <div class="product-img">
-                            <img src="{{ product.product_big_img}}" alt="" />
+                            <img src="{{ product.big_img_url}}" alt="" />
                         </div>
                         <div class="product-description">
-                            <h4  class="contents-header" style="padding-left:0px;">상세 설명 <a href="#" class="btn btn-info"><span class="glyphicon glyphicon-star"></span> 관심하기</a></h4>
-                            {{ product.product_desc }}
+                            <h4  class="contents-header" style="padding-left:0px;">상세 설명 <a href="#" class="btn btn-info btn-for-interest"><span class="glyphicon glyphicon-star"></span> 관심</a></h4>
+                            {{ product.description }}
                         </div>
                     </div>
                 </div>
@@ -42,8 +42,8 @@
                         <h4 class="contents-header">구매</h4>
                     </div>
                     <div class="price-area">
-                        <div class="product-price"><span>{{ product.product_price }}</span>원</div>
-                        <div class="product-name">{{product.product_name  }}</div>
+                        <div class="product-price"><span>{{ product.price }}</span>원</div>
+                        <div class="product-name">{{product.name  }}</div>
                         <div class="product-how-many">
                             구매수량 :
                             <select>
@@ -56,7 +56,7 @@
                         </div>
                         <div class="product-btn-area">
                             <a href="#" class="btn btn-success "><span class="glyphicon glyphicon-heart"></span> 구매하기</a>
-                            <a href="#" class="btn btn-danger"><span class="glyphicon glyphicon-shopping-cart"></span> 장바구니</a>
+                            <a href="#" class="btn btn-danger btn-for-cart"><span class="glyphicon glyphicon-shopping-cart"></span> 장바구니</a>
                         </div>
                     </div>
                 </div>
@@ -69,10 +69,10 @@
                             {% for product in products %}
                             <div class="blog-info blog-item">
                                 <div class="blog-contents">
-                                    <h5><a href="{{ url_for('productDetail') }}">{{product.product_name  }}</a></h5>
+                                    <h5><a href="{{ url_for('productDetail',product_key=product.key) }}">{{product.name  }}</a></h5>
                                     <div class="blog-desc">
                                         <div class="blog-img">
-                                            <img src="{{product.product_big_img }}" alt="" />
+                                            <img src="{{product.big_img_url }}" alt="" />
                                         </div>
                                         존나 조쿤? 하악하악? 이거 꼭 사세요!!ㅋㅋ 자 나는 파워블로거입니다!! 다 덤벼봐 ㅋㅋㅋ하하하하 세트가 참 어렵구만.. 시부럴 하하하 서울대 병신
                                     </div>

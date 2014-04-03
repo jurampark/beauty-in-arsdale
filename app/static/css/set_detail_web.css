@@ -1,0 +1,181 @@
+
+.price-area{
+    padding : 18px;
+}
+
+.product-name{
+    font-weight: bold;
+    font-size : 18px;
+    margin-bottom: 16px;
+}
+
+.product-price{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.price-origin{
+    font-size: 14px;
+    color : darkgrey;
+    margin-bottom : 6px;
+}
+
+.price-origin span{
+    text-decoration: line-through;
+}
+
+.price-saled{
+    margin-bottom: 6px;
+}
+
+.price-discount{
+    font-size: 14px;
+    color : red;
+    margin-bottom : 12px;
+}
+
+.product-price span{
+    /*color : red;*/
+}
+
+.product-how-many{
+    margin-bottom: 16px;
+}
+
+.product-how-many select{
+    width: 180px;
+}
+
+.product-btn-area{
+    margin-top : 16px;
+}
+
+.product-contents{
+    padding : 18px;
+}
+
+.product-sub-contents{
+    padding : 0 18px 18px 18px;
+    margin-top : 18px;
+}
+
+.product-img img{
+    width : 100%;
+}
+
+.product-description{
+   font-size: 12px;
+}
+
+.video-review{
+    margin-top : 24px;
+}
+
+.contents-header{
+    font-weight: bold;
+    color : #333;
+    padding : 10px;
+    margin:0;
+}
+
+.set-info-tab a{
+    font-size: 14px;
+    color : black;
+    font-weight: bold;
+}
+
+#setComposition .product-img img{
+    width : 186px;
+    height : 186px;
+}
+
+#setComposition .product-info{
+    font-size: 12px;
+}
+
+.blog-img img{
+    width : 100px;
+    height : 80px;
+}
+
+.blog-info{
+    padding: 6px 12px;
+}
+
+.blog-contents{
+    width : 270px;
+    float:left;
+}
+
+.blog-img{
+    width : 80px;
+    float:left;
+    overflow: hidden;
+    margin-right : 6px;
+}
+
+.blog-img img{
+    width : 100%;
+}
+
+#blogger-review{
+    font-size: 14px;
+    padding : 14px 0;
+    margin-top : 0;
+}
+
+#blogger-review h5{
+    font-size: 16px;
+}
+
+#blogger-review hr{
+    margin : 6px inherit;
+}
+
+.blog-referer{
+    font-size: 12px;
+    text-align: right;
+    margin-top: 8px;
+}
+
+.box-css{
+    margin-bottom: 20px;
+}
+
+.product-gallery{
+    padding : 4px 6px;
+}
+
+.product-gallery img{
+    width : 67px;
+    height : 67px;
+}
+
+
+
+
+
+#product-detail-modal{
+    border-radius: 0;
+}
+
+#product-detail-modal .product-price{
+    margin-bottom: 8px;
+}
+
+#product-detail-modal .product-img{
+    text-align: center;
+}
+
+#product-detail-modal .product-img img{
+    height: 100%;
+
+}
+
+#product-detail-modal .product-description{
+    overflow-y: auto;
+}
+
+#modalProductInfo{
+   padding : 10px;
+}

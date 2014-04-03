@@ -10,31 +10,23 @@
     <div class="ui-block-a">
         <div class="product-detail boxed">
             <div class="product-detail-img">
-                <img src="{{ url_for('static', filename='img/post-img-1.jpg') }}"/>
+                <img src="{{ product.big_img_url}}"/>
             </div>
             <div class="product-detail-title">
-                <h2>꽃을 든 남자 </h2>
-                <h5>남자 BB 크림</h5>
+                <h2>{{ product.name }} </h2>
+                <h5>{{ product.category_name }}</h5>
             </div>
             <div class="product-detail-contents">
-                Praesent magna nunc, tincidunt pretium consequat d apibus, mollis nec odi. Nunc feugiat molestie orci, eu rutrum velit dignissim. Donec vel semper elit. Nunc dapibus tincidunt arcu, ac congue turpis semper vitae molestie orcifeugia ac congue turpi. Sed aliquam ac tellus sed aliquam. Aenean eget nulla nec felis
+                {{ product.description }}
             </div>
             <div class="product-detail-link-box">
                 <ul class="product-detail-link">
                     <li><a href="#">블로거</a></li>
                     <li><a href="#">겟잇뷰티</a></li>
-                    <li><a href="#">관심</a></li>
+                    <li><a href="#" class="btn-for-interest">관심</a></li>
                 </ul>
             </div>
         </div>
-    </div>
-</div>
-<div class="ui-grid-a">
-    <div class="ui-block-a">
-        <a href="#" class="ui-btn ui-btn-b ui-shadow try-on-btn">Virtual Try on</a>
-    </div>
-    <div class="ui-block-b">
-        <a href="#" class="ui-btn ui-btn-b ui-shadow try-on-btn">Home Try on</a>
     </div>
 </div>
 <div class="ui-grid-solo">

@@ -1,0 +1,218 @@
+{% extends "web_base.html" %}
+{% block header %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/common_style_web.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/set_detail_web.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='magnific_popup/magnific-popup.css') }}"/>
+<script src="{{ url_for('static', filename='magnific_popup/jquery.magnific-popup.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/set_detail_web.js') }}"></script>
+{% block subHeader %}
+{% endblock %}
+{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-xs-10 col-xs-offset-1">
+        <div class="row">
+            <div class="col-xs-8">
+                <div class="box-css">
+                    <div class="box-header">
+                        <h4 class="contents-header">제품 상세 설명</h4>
+                    </div>
+                    <div class="product-contents">
+                        <div class="product-img">
+                            <img src="{{ product.big_img_url}}" alt="" />
+                        </div>
+                        <div class="product-description">
+                            <h4  class="contents-header" style="padding-left:0px;">상세 설명 <a href="#" class="btn btn-info btn-for-interest"><span class="glyphicon glyphicon-star"></span> 관심</a></h4>
+                            {{ product.description }}
+                        </div>
+                    </div>
+                    <div>
+                        <ul class="nav nav-tabs nav-justified set-info-tab" style="margin-left:-1px;">
+                           <li class="active"><a href="#setComposition" data-toggle="tab">세트 구성</a></li>
+                           <li><a href="#productReview" data-toggle="tab">제품 리뷰</a></li>
+                           <li><a href="#productInfo" data-toggle="tab">상품 정보</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="setComposition">
+                               <div class="row">
+                               {% for number in range(1, 4)  %}
+                                   <div class="col-xs-4">
+                                       <div class="product-img">
+                                             <a class="product-info-btn" href="#"><img src="{{ product.big_img_url}}" alt="" /></a>
+                                        </div>
+                                        <div class="product-contents">
+                                            <div class="product-info">
+                                                [{{ product.brandname }}]<br/>
+                                                {% if (product.name|length) > 16 %}
+                                                    <a class="product-info-btn" href="{{ url_for('productDetail', product_key=product.key) }}">{{product.name[:16] }}..</a>
+                                                {% else %}
+                                                    <a class="product-info-btn" href="{{ url_for('productDetail', product_key=product.key) }}">{{product.name }}</a>
+                                                {% endif %}
+
+                                                <div class="product-price-box">
+                                                    Price : <b>￦{{ product.price }} ({{product.capacity }})</b><br/>
+                                                    Category : <b>{{ product.category_name}}</b>
+                                                </div>
+                                            </div>
+                                        </div>
+                                   </div>
+                               {% endfor %}
+                               </div>
+                            </div>
+                            <div class="tab-pane" id="productReview">
+                                 <div class="video-review">
+                                    <iframe width="96%" height="325" src="//www.youtube.com/embed/PxSXrJ0ircg" frameborder="0" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="productInfo">
+                                 상품 정보가 어쩌구 저쩌구 <button class="btn btn-primary" data-toggle="modal" data-target=".product-detail-modal">Large modal</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="box-css">
+                    <div class="box-header">
+                        <h4 class="contents-header">구매</h4>
+                    </div>
+                    <div class="product-gallery">
+                        <a href="http://farm9.staticflickr.com/8242/8558295633_f34a55c1c6_b.jpg"><img src="http://farm9.staticflickr.com/8242/8558295633_f34a55c1c6_s.jpg" ></a>
+                        <a href="http://farm9.staticflickr.com/8382/8558295631_0f56c1284f_b.jpg"><img src="http://farm9.staticflickr.com/8382/8558295631_0f56c1284f_s.jpg" ></a>
+                        <a href="http://farm9.staticflickr.com/8225/8558295635_b1c5ce2794_b.jpg"><img src="http://farm9.staticflickr.com/8225/8558295635_b1c5ce2794_s.jpg" ></a>
+                        <a href="http://farm9.staticflickr.com/8383/8563475581_df05e9906d_b.jpg"><img src="http://farm9.staticflickr.com/8383/8563475581_df05e9906d_s.jpg" ></a>
+                    </div>
+                    <div class="price-area">
+                        <div class="product-name">감성적인 남자를 위한 세트</div>
+                        <div class="product-price price-origin">원래 가격 : <span>34000</span>원</div>
+                        <div class="product-price price-saled">할인 가격 : <span>29000</span>원</div>
+                        <div class="product-price price-discount">할인율 : <span>15</span>%</div>
+                        <div class="product-how-many">
+                            구매수량 :
+                            <select>
+                                {% for number in range(1, 11) %}
+                                <option value="{{ number }}">
+                                    {{ number }}개
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="product-btn-area">
+                            <a href="#" class="btn btn-success "><span class="glyphicon glyphicon-heart"></span> 구매하기</a>
+                            <a href="#" class="btn btn-danger btn-for-cart"><span class="glyphicon glyphicon-shopping-cart"></span> 장바구니</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-css">
+                    <div class="box-header">
+                        <h4 class="contents-header">블로거 리뷰</h4>
+                    </div>
+                    <div id="blogger-review" class="product-sub-contents">
+                        <div>
+                            {% for product in products %}
+                            <div class="blog-info blog-item">
+                                <div class="blog-contents">
+                                    <h5><a href="{{ url_for('productDetail',product_key=product.key) }}">{{product.name  }}</a></h5>
+                                    <div class="blog-desc">
+                                        <div class="blog-img">
+                                            <img src="{{product.big_img_url }}" alt="" />
+                                        </div>
+                                        존나 조쿤? 하악하악? 이거 꼭 사세요!!ㅋㅋ 자 나는 파워블로거입니다!! 다 덤벼봐 ㅋㅋㅋ하하하하 세트가 참 어렵구만.. 시부럴 하하하 서울대 병신
+                                    </div>
+                                    <div class="blog-referer">
+                                        test@test.com
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <hr/>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="modal fade" id="product-detail-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="padding : 12px;">
+      <div class="row">
+        <div class="col-xs-12">
+            <div class="row">
+                <div class="col-xs-7">
+                    <div class="box-css">
+                        <div class="box-header">
+                            <h4 class="contents-header">제품 상세 설명</h4>
+                        </div>
+                        <div class="product-contents">
+                            <div class="product-img">
+                                <img src="{{ product.big_img_url}}" alt="" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-5">
+                    <div class="box-css">
+                        <div class="box-header">
+                            <h4 class="contents-header">구매</h4>
+                        </div>
+                        <div class="price-area">
+                            <div class="product-name"><a href="#">{{product.name  }}</a></div>
+                            <div class="product-price"><span>{{ product.price }}</span>원</div>
+                            <div class="product-how-many">
+                                구매수량 :
+                                <select>
+                                    {% for number in range(1, 11) %}
+                                    <option value="{{ number }}">
+                                        {{ number }}개
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="product-btn-area">
+                                <a href="#" class="btn btn-danger btn-for-cart"><span class="glyphicon glyphicon-shopping-cart"></span> 장바구니</a>
+                                <a href="#" class="btn btn-info btn-for-interest"><span class="glyphicon glyphicon-star"></span> 관심</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-css">
+                        <div class="box-header">
+                            <h4 class="contents-header">상품 정보</h4>
+                        </div>
+                        <div>
+                            <ul class="nav nav-tabs nav-justified set-info-tab" style="margin-left:-1px;">
+                               <li class="active"><a href="#modalProductInfo" data-toggle="tab">상품 정보</a></li>
+                               <li><a href="#modalProductReview" data-toggle="tab">제품 리뷰</a></li>
+                               <li><a href="#modalProductEtc" data-toggle="tab">기타</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="modalProductInfo">
+                                   <div class="product-description">
+                                        <h4  class="contents-header" style="padding-left:0px;">상세 설명</h4>
+                                        {{ product.description }}
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="modalProductReview">
+                                     <div class="video-review">
+                                        <iframe width="96%" height="225" src="//www.youtube.com/embed/PxSXrJ0ircg" frameborder="0" allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="modalProductEtc">
+                                     상품 정보가 어쩌구 저쩌구 <button class="btn btn-primary" data-toggle="modal" data-target=".product-detail-modal">Large modal</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+       </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

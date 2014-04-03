@@ -48,16 +48,22 @@
                     <div class="service-item">
                         <div class="service-content">
                             <div class="service-image ">
-                                <a href="/productdetail" data-ajax="false"><img src="{{ product.product_big_img}}" alt="" /></a>
+                                <a href="/productdetail/{{product.key  }}" data-ajax="false"><img src="{{ product.big_img_url}}" alt="" /></a>
                             </div>
                             <div class="service-title product-contents">
-                                [{{product.product_brand  }}] {{ product.product_name }}
+                                [{{product.brandname}}] {{ product.name }}
                                 <div class="product-price-box">
-                                    <b>\{{ product.product_price }}</b>
+                                    <b>\{{ product.price }}</b>
                                     <br/>
-                                    <b class="product-type">{{ product.product_type }}</b>
-                                    ({{ product.product_capacity }}ml)
+                                    <b class="product-type">{{ product.category_name }}</b>
+                                    ({{ product.capacity }}ml)
                                 </div>
+                            </div>
+                             <div class="product-bottom-menu">
+                                <ul class="menu-links clearfix">
+                                    <li class=""><a href="#" class="btn-for-interest">관심</a></li>
+                                    <li class=""><a href="#" class="btn-for-cart">장바구니</a></li>
+                                </ul>
                             </div>
                         </div>
                     </div>

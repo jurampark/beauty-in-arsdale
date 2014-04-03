@@ -37,6 +37,10 @@
     border-left: 1px solid #eee;
 }
 
+.btn-for-interest, .disable{
+    background-color: red;
+}
+
 .product-bottom-menu{
     background-color: #fbfbfb;
     padding: 8px 0;
