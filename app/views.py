@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from app import app, db
-from app.models import Users, Product, Interest, Cart, Set
+from app.models import Users, Product, Interest, Cart
 from flask import flash, redirect, render_template, request, session, url_for, g
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
@@ -112,10 +112,11 @@ def getCartProductList():
 
 
 
-@app.route('/productdetailweb/<int:product_key>', methods = ['GET'])
-def productDetailWeb(product_key):
-    product = db.session.query( Product ).filter( Product.key == product_key ).first()
-    return render_template('product_detail_web.html', product = product)
+@app.route('/productdetailweb', methods = ['GET'])
+def productDetailWeb():
+    products =g.db.session.query(Product).all()[0:5]
+    product = products[0]
+    return render_template('product_detail_web.html', products=products, product = product)
 
 @app.route('/')
 def home():
@@ -198,9 +199,8 @@ def validate_register( name, email, password, sex ):
 @app.route('/mypage')
 @login_required
 def myPage():
-    interests = g.user.interests.all()
-    carts = g.user.carts.all()
-    return render_template('my_page.html', interests = interests, carts = carts)
+    products = g.db.session.query(Product).all()
+    return render_template('my_page.html', products = products)
 
 
 @app.route('/update_user_profile', methods=['GET', 'POST'])
@@ -247,16 +247,25 @@ def test():
 def join():
     return render_template('join.html')
 
-@app.route('/productdetail/<int:product_key>', methods=['GET'])
-def productDetail(product_key):
-    product = db.session.query( Product ).filter( Product.key == product_key ).first()
+@app.route('/productdetail/', methods=['GET'])
+###@login_required
+def productDetail():
     return render_template('product_detail.html')
-
 
 @app.route('/blogdetail/', methods=['GET'])
 ###@login_required
 def blogDetail():
     return render_template('blog_detail.html')
+
+@app.route('/comparablelist/', methods=['GET'])
+###@login_required
+def comparableList():
+    return render_template('comparable_list.html')
+
+@app.route('/comparabledetaillist/', methods=['GET'])
+###@login_required
+def comparableDetailList():
+    return render_template('comparable_detail_list.html')
 
 @app.route('/loginbyfacebook/')
 def loginbyfacebook():
@@ -275,8 +284,7 @@ def internal_error(error):
 
 @app.route('/cart', methods = ['GET'])
 def cart():
-    carts = g.user.carts.all()
-    return render_template('cart.html', carts = carts)
+    return render_template('cart.html')
 
 
 @app.route('/index', methods = ['GET'])
@@ -293,27 +301,26 @@ def indexweb():
 @app.route('/mypageweb', methods = ['GET'])
 @login_required
 def mypageweb():
-    interests = g.user.interests.all()
-
-    return render_template('mypage_interesting_web.html', tabName='interesting', interests=interests)
+    products = g.db.session.query(Product).all()
+    return render_template('mypage_interesting_web.html', tabName='interesting', products=products[0:7])
 
 
 @app.route('/purchaselist', methods = ['GET'])
 @login_required
 def purchaselist():
-    carts = g.user.carts.all()
-    return render_template('mypage_purchase_web.html', tabName='purchase', carts=carts)
+    products = g.db.session.query(Product).all()
+    return render_template('mypage_purchase_web.html', tabName='purchase', products = products[0:4])
 
 
 @app.route('/shopping1', methods = ['GET'])
 def shoppingSet():
-    sets = g.db.session.query(Set).all()
-    return render_template('shopping_set_web.html', sets = sets)
+    products = g.db.session.query(Product).all()
+    return render_template('shopping_set_web.html', products = products)
 
 @app.route('/mshopping1', methods = ['GET'])
 def mshoppingSet():
-    sets = g.db.session.query(Set).all()
-    return render_template('shopping_set.html', sets = sets)
+    products = g.db.session.query(Product).all()
+    return render_template('shopping_set.html', products = products)
 
 @app.route('/shopping2', methods = ['GET'])
 def shoppingProduct():
@@ -331,23 +338,5 @@ def setDetail():
      return render_template('set_detail.html')
 
 
-@app.route('/setdetailweb', methods = ['GET'])
-def setDetailWeb():
-     product =g.db.session.query(Product).all()[0]
-     return render_template('set_detail_web.html', product=product)
 
-
-
-
-
-
-@app.route('/comparablelist/', methods=['GET'])
-###@login_required
-def comparableList():
-    return render_template('comparable_list.html')
-
-@app.route('/comparabledetaillist/', methods=['GET'])
-###@login_required
-def comparableDetailList():
-    return render_template('comparable_detail_list.html')
 
