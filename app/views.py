@@ -1,11 +1,43 @@
 # -*- coding: utf-8 -*-
 from app import app, db
-from app.models import Users, Product, Interest, Cart
+from app.models import Users, Product, Interest, Cart, Category
 from flask import flash, redirect, render_template, request, session, url_for, g
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy.sql import func
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 from werkzeug import generate_password_hash, check_password_hash
 from functools import wraps
+
+
+def getProductListWhetherInterest( category_key ):
+    stmt = g.db.session.query( Interest ).filter( Interest.user_key == g.user.key ).subquery()
+    query = g.db.session.query( Product, stmt.c.key ).outerjoin( stmt, Product.key == stmt.c.product_key )
+    if category_key is not None:
+        query = query.filter( Product.category_key == category_key )
+    interestedProducts = query.all()
+    products = []
+    for product, isInterested in interestedProducts:
+        if isInterested == None:
+            product.isInterested = False
+        else:
+            product.isInterested = True
+        products.append( product )
+
+    return products
+
+def getProductListInCart():
+    products = g.db.session.query( Product, Category.name ).\
+    filter( Cart.product_key == Product.key ).\
+    filter( Cart.user_key == g.user.key ).\
+    filter( Category.key == Product.category_key ).all()
+    return products
+
+def getProductListInInterest():
+    products = g.db.session.query( Product, Category.name ).\
+    filter( Interest.product_key == Product.key ).\
+    filter( Interest.user_key == g.user.key).\
+    filter( Category.key == Product.category_key ).all()
+    return products;
 
 @app.before_request
 def before_request():
@@ -32,6 +64,14 @@ def login_required( func ):
 
 # sample code ----------------------------------------------------------------
 
+@app.route('/ttt')
+@login_required
+def ttt():
+    products = getProductListInInterest()
+    print products
+
+    return 'success'
+
 @app.route('/add_product_to_interest/<int:product_key>')
 @login_required
 def addProductToInterest( product_key ):
@@ -55,18 +95,16 @@ def addSetToInterest( set_key ):
         return 'fail'
 
 @app.route('/get_product_list')
+@app.route('/get_product_list/<int:category_key>')
 @login_required
-def getProductList():
-    products = g.db.session.query( Product ).all()
-    str = ""
-    for product in products:
-        interest = product.interests.all()
-        if len( interest ) != 0 and interest[0].user_key == g.user.key:
-            str += repr(product).replace("<", "[").replace(">","]") + " --------------------------------- interest <br/>"
-        else:
-            str += repr(product).replace("<", "[").replace(">","]") + "<br/>"
+def getProductList(category_key = None):
 
-    return str;
+    products = getProductListWithInterest( category_key )
+
+    for product in products:
+        print product, product.isInterested
+
+    return 'success'
 
 @app.route('/get_interest_product_list')
 @login_required
@@ -102,9 +140,21 @@ def addSetToCart( set_key ):
 @app.route('/get_cart_product_list')
 @login_required
 def getCartProductList():
-    carts = g.user.carts.all()
-    for cart in carts:
-        print cart.product
+    products = getProductListInCart()
+    print products
+
+    return 'success'
+
+@app.route('/get_category_list')
+@app.route('/get_category_list/<isSet>')
+def getCategoryList( isSet = False ):
+    if isSet is not False:
+        isSet = True
+
+    categorys = g.db.session.query( Category ).filter( Category.is_set == isSet ).all()
+
+    for category in categorys:
+        print category
 
     return 'success'
 
@@ -301,7 +351,7 @@ def indexweb():
 @app.route('/mypageweb', methods = ['GET'])
 @login_required
 def mypageweb():
-    products = g.db.session.query(Product).all()
+    products = g.db.session.query(Product, Category.name).filter( Product.category_key == Category.key ).all()
     return render_template('mypage_interesting_web.html', tabName='interesting', products=products[0:7])
 
 

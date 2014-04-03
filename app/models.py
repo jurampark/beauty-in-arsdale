@@ -82,6 +82,7 @@ class Product(db.Model):
     maker = db.Column(db.String(100))
     capacity = db.Column(db.String(100))
     price = db.Column(db.Integer)
+    discount_rate = db.Column(db.Float, default=1, nullable=False)
     fit_skin_type = db.Column(db.String(100))
     color_description = db.Column(db.Text)
     color_rgb = db.Column(db.String(10))
@@ -94,7 +95,7 @@ class Product(db.Model):
     set_products = db.relationship('SetProduct', backref='product', lazy='dynamic')
 
     def __init__(self, name, category_key, description, big_img_url, small_img_url, video_review_url,
-        brandname, maker, capacity, price, fit_skin_type, color_description, color_rgb ):
+        brandname, maker, capacity, price, discount_rate, fit_skin_type, color_description, color_rgb ):
         self.name = name
         self.category_key = category_key
         self.description = description
@@ -105,6 +106,7 @@ class Product(db.Model):
         self.maker = maker
         self.capacity = capacity
         self.price = price
+        self.discount_rate = discount_rate
         self.fit_skin_type = fit_skin_type
         self.color_description = color_description
         self.color_rgb = color_rgb
@@ -130,15 +132,21 @@ class Set(db.Model):
     key = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text)
+    big_img_url = db.Column(db.String(255))
+    small_img_url = db.Column(db.String(255))
+    discount_rate = db.Column(db.Float, default=1, nullable=False)
     category_key = db.Column(db.Integer, db.ForeignKey('category.key'))
     created_time = db.Column(db.DateTime, default=db.func.now())
 
     interests = db.relationship('Interest', backref='set', lazy='dynamic')
     set_products = db.relationship('SetProduct', backref='set', lazy='dynamic')
 
-    def __init__(self, name, description, category_key):
+    def __init__(self, name, description, big_img_url, small_img_url, discount_rate, category_key):
         self.name = name
         self.description = description
+        self.big_img_url = big_img_url
+        self.small_img_url = small_img_url
+        self.discount_rate = discount_rate
         self.category_key = category_key
 
     def __repr__(self):
@@ -158,7 +166,7 @@ class Category(db.Model):
         self.is_set = is_set
 
     def __repr__(self):
-        return '<Category %r>' % self.name
+        return '<Category %s>' % self.name.encode("utf-8")
 
 class SetProduct(db.Model):
     key = db.Column(db.Integer, primary_key=True)
