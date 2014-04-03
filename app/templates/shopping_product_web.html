@@ -14,29 +14,29 @@
     <div class="col-xs-10 col-xs-offset-1">
         <div id="productGrid">
             {% for product in products %}
-            <div class="product-item" id="item-{{ product.product_id }}" data-attr="{{ product.product_id }}">
+            <div class="product-item" id="item-{{ product.key}}" data-attr="{{ product.key}}">
                 <div class="product-img">
-                    <img src="{{ product.product_big_img}}" alt="" />
+                    <img src="{{ product.big_img_url}}" alt="" />
                 </div>
                 <div class="product-contents">
                     <div class="product-info">
-                        [{{ product.product_brand }}]<br/>
-                        {% if (product.product_name|length) > 24 %}
-                            <a href="{{ url_for('productDetail') }}">{{product.product_name[:24] }}..</a>
+                        [{{ product.brandname }}]<br/>
+                        {% if (product.name|length) > 24 %}
+                            <a href="{{ url_for('productDetail', product_key=product.key) }}">{{product.name[:24] }}..</a>
                         {% else %}
-                            <a href="{{ url_for('productDetail') }}">{{product.product_name  }}</a>
+                            <a href="{{ url_for('productDetail', product_key=product.key) }}">{{product.name }}</a>
                         {% endif %}
 
                         <div class="product-price-box">
-                            Price : <b>￦{{ product.product_price }} ({{product.product_capacity }}ml)</b><br/>
-                            Category : <b>{{ product.product_type }}</b>
+                            Price : <b>￦{{ product.price }} ({{product.capacity }}ml)</b><br/>
+                            Category : <b>{{ product.category_name}}</b>
                         </div>
                     </div>
                 </div>
                 <div class="product-bottom-menu">
                     <ul class="menu-links clearfix">
-                        <li class=""><a href="#">관심</a></li>
-                        <li class=""><a href="#">장바구니</a></li>
+                        <li class=""><a href="#" class="btn-for-interest">관심</a></li>
+                        <li class=""><a href="#" class="btn-for-cart">장바구니</a></li>
                     </ul>
                 </div>
             </div>

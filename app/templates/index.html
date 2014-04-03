@@ -44,20 +44,20 @@
                 <div class="service-item boxed bg-image-star2">
                     <div class="service-content">
                         <div class="service-image ">
-                            <a href="/productdetail" data-ajax="false"><img src="{{ product.product_big_img }}" alt="" /></a>
+                            <a href="/productdetail/{{ product.key }}" data-ajax="false"><img src="{{ product.big_img_url }}" alt="" /></a>
                         </div>
                         <div class="service-title profile-interesting-title">
-                             {{ product.product_name }}
+                             {{ product.name}}
                             <div class="product-price-box">
-                                Price : <b>{{ product.product_price }}원</b><br/>
-                                Category : <b>{{ product.product_type }}</b>
+                                Price : <b>{{ product.price }}원</b><br/>
+                                Category : <b>{{ product.category_name}}</b>
                             </div>
                         </div>
                     </div>
                     <div class="service-meta-bot">
                         <ul class="service-links clearfix">
-                             <li class="service-social"><a href="#" class="nanum-font-tab">구매</a></li>
-                            <li class="service-social"><a href="#" class="nanum-font-tab">삭제</a></li>
+                            <li class="service-social"><a href="#" data-product="{{ product.key }}" class="btn-for-interest">관심</a></li>
+                            <li class="service-social"><a href="#" data-product="{{ product.key }}" class="btn-for-cart">장바구니</a></li>
                         </ul>
                     </div>
                 </div>

@@ -21,19 +21,21 @@
 {% block content %}
 
 <div class="ui-grid-solo cart-list">
+
+    {% for cart in carts %}
     <div class="ui-block-a" id="is123">
         <div class="cart-list-item boxed">
-           <img class="product-img" src="{{ url_for('static', filename='img/comment-1.jpg') }}"/>
+           <img class="product-img"  src="{{ cart.product.big_img_url }}"/>
            <div class="product-contents">
                <div class="product-info">
-                   <h4>IOPE 남자 white skin </h4>
+                   <h4>{{ cart.product.name }}</h4>
                    <p class="product-desc">
-                       남자 BB 크림
+                       {{ cart.product.category_name }}
                    </p>
                    <div>
                        <div class="buy-cnt">
-                           <label for="is123-cnt" class="select-box-name">수량: </label>
-                           <select data-mini="true" class="product-cnt-selectbox" data-id="is123">
+                           <label for="{{ cart.product.key }}-cnt" class="select-box-name">수량: </label>
+                           <select data-mini="true" class="product-cnt-selectbox" data-id="{{ cart.product.key }}">
                                 <option value="0">0</option>
                                 <option value="1" selected="selected">1</option>
                                 <option value="2">2</option>
@@ -49,86 +51,16 @@
                </div>
            </div>
            <div class="product-cost">
-               금액 : <span class="price" id="is123-price">11220</span>원
+               금액 : <span class="price" id="{{ cart.product.key }}-price">{{ cart.product.price }}</span>원
            </div>
            <div class="product-delete">
-               <input type="button" class="product-del-btn" data-mini="true" data-shadow="false" data-id="is123" value="삭제하기">
+               <input type="button" class="product-del-btn" data-mini="true" data-shadow="false" data-id="{{ cart.product.key }}" value="삭제하기">
            </div>
            <div class="clearfix"></div>
         </div>
     </div>
-    <div class="ui-block-a" id="is124">
-        <div class="cart-list-item boxed">
-           <img class="product-img" src="{{ url_for('static', filename='img/comment-1.jpg') }}"/>
-           <div class="product-contents">
-               <div class="product-info">
-                   <h4>IOPE 남자 white skin </h4>
-                   <p class="product-desc">
-                       남자 BB 크림
-                   </p>
-                   <div>
-                       <div class="buy-cnt">
-                           <label for="is124-cnt" class="select-box-name">수량: </label>
-                           <select data-mini="true" class="product-cnt-selectbox" data-id="is124">
-                                <option value="0">0</option>
-                                <option value="1" selected="selected">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                           </select>
-                       </div>
-                       <div  class="clearfix"></div>
-                   </div>
-               </div>
-           </div>
-           <div class="product-cost">
-               금액 : <span class="price" id="is124-price">21220</span>원
-           </div>
-           <div class="product-delete">
-               <input type="button" class="product-del-btn" data-mini="true" data-shadow="false" data-id="is124" value="삭제하기">
-           </div>
-           <div class="clearfix"></div>
-        </div>
-    </div>
-    <div class="ui-block-a" id="is125">
-        <div class="cart-list-item boxed">
-           <img class="product-img" src="{{ url_for('static', filename='img/comment-1.jpg') }}"/>
-           <div class="product-contents">
-               <div class="product-info">
-                   <h4>IOPE 남자 white skin </h4>
-                   <p class="product-desc">
-                       남자 BB 크림
-                   </p>
-                   <div>
-                       <div class="buy-cnt">
-                           <label for="is125-cnt" class="select-box-name">수량: </label>
-                           <select data-mini="true" class="product-cnt-selectbox" data-id="is125">
-                                <option value="0">0</option>
-                                <option value="1" selected="selected">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                           </select>
-                       </div>
-                       <div  class="clearfix"></div>
-                   </div>
-               </div>
-           </div>
-           <div class="product-cost">
-               금액 : <span class="price" id="is125-price">31450</span>원
-           </div>
-           <div class="product-delete">
-               <input type="button" class="product-del-btn" data-mini="true" data-shadow="false" data-id="is125" value="삭제하기">
-           </div>
-           <div class="clearfix"></div>
-        </div>
-    </div>
+
+{% endfor %}
 </div>
 
 {% endblock %}

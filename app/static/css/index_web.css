@@ -169,3 +169,19 @@
 .service-links.green [class*="icon-small-"] {color: #fff;}
 .service-links.green a:hover [class*="icon-small-"] {color: #b8c901;}
 
+
+
+.product-bottom-menu li {
+    float: left;
+    width: 50%;
+    border-left: 1px solid #eee;
+}
+
+.product-bottom-menu{
+    background-color: #fbfbfb;
+    padding: 8px 0;
+    text-align: center;
+    border-top: 1px solid #eee;
+    font-size: 12px;
+    color: #777777;
+}
