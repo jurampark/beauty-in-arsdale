@@ -48,23 +48,26 @@
                     <div class="service-item">
                         <div class="service-content">
                             <div class="service-image ">
-                                <a href="/productdetail/{{product.key  }}" data-ajax="false"><img src="{{ product.big_img_url}}" alt="" /></a>
+                                <a href="/productdetailWeb/{{product.key  }}" data-ajax="false"><img src="{{ product.big_img_url}}" alt="" /></a>
                             </div>
                             <div class="service-title product-contents">
-                                [{{product.brandname}}] {{ product.name }}
+                                {% if (product.name|length) > 40 %}
+                                    <a href="{{ url_for('productDetailWeb', product_key=product.key) }}">{{product.name[:40] }}..</a>
+                                {% else %}
+                                    <a href="{{ url_for('productDetailWeb', product_key=product.key) }}">{{product.name }}</a>
+                                {% endif %}
                                 <div class="product-price-box">
                                     <b>\{{ product.price }}</b>
-                                    <br/>
+                                    ({{ product.capacity }})<br/>
                                     <b class="product-type">{{ product.category_name }}</b>
-                                    ({{ product.capacity }}ml)
                                 </div>
                             </div>
-                             <div class="product-bottom-menu">
-                                <ul class="menu-links clearfix">
-                                    <li class=""><a href="#" class="btn-for-interest">관심</a></li>
-                                    <li class=""><a href="#" class="btn-for-cart">장바구니</a></li>
-                                </ul>
-                            </div>
+                        </div>
+                        <div class="product-bottom-menu">
+                            <ul class="menu-links clearfix">
+                                <li class=""><a href="#" data-product="{{ product.key }}" class="btn-for-interest">관심</a></li>
+                                <li class=""><a href="#" data-product="{{ product.key }}" class="btn-for-cart">장바구니</a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>

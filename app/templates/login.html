@@ -2,7 +2,7 @@
 {% block content %}
 
     <div class="login-wrapper">
-        <form method="post" action="{{url_for('login')}}" data-ajax="false">
+        <form method="post" action="{{url_for('login', next = url_for_login_next )}}" data-ajax="false">
             <h2>로그인</h2>
             <label for="name">Email:</label>
             <input type="text" name="email" id="name" value="" data-clear-btn="true" data-mini="true">

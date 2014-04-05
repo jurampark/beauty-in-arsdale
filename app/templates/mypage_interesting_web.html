@@ -24,23 +24,23 @@
     </div>
 </div>
 
-{% for interest in interests %}
+{% for product in interests %}
 
-<div class="product-item" id="item-{{ interest.product.key}}" data-attr="{{ interest.product.key }}">
+<div class="product-item" id="item-{{ product.key}}" data-attr="{{ product.key }}">
     <div class="product-img">
-        <img src="{{ interest.product.big_img_url}}" alt="" />
+        <img src="{{ product.big_img_url}}" alt="" />
     </div>
     <div class="product-info">
-        [{{ interest.product.brandname }}]<br/>
-        {% if (interest.product.name|length) > 17 %}
-            <a href="{{ url_for('productDetail',product_key=interest.product.key) }}">{{interest.product.name[:17] }}..</a>
+        [{{ product.brandname }}]<br/>
+        {% if (product.name|length) > 17 %}
+            <a href="{{ url_for('productDetailWeb',product_key=product.key) }}">{{product.name[:17] }}..</a>
         {% else %}
-            <a href="{{ url_for('productDetail', product_key=interest.product.key) }}">{{interest.product.name  }}</a>
+            <a href="{{ url_for('productDetailWeb', product_key=product.key) }}">{{product.name  }}</a>
         {% endif %}
 
         <div class="product-price-box">
-            Price : <b>￦{{ interest.product.price }} ({{interest.product.capacity }}ml)</b><br/>
-            Category : <b>{{ interest.product.category_name }}</b>
+            Price : <b>￦{{ product.price }} ({{product.capacity }}ml)</b><br/>
+            Category : <b>{{ product.category_name }}</b>
         </div>
     </div>
 </div>

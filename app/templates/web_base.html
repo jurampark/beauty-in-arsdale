@@ -7,8 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/common_style_web.css') }}"/>
+    <script type="text/javascript">
+        var url_for_login_next = "{{ url_for('login', next=request.url ) }}";
+    </script>
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/common_js.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/common_js_web.js') }}"></script>
     <style>
         body{
             min-width: 970px;
@@ -55,7 +60,7 @@
         </div>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> 장바구니</a></li>
+        <li><a href="/cart"><span class="glyphicon glyphicon-shopping-cart"></span> 장바구니</a></li>
         <li class="dropdown">
           {% if g.user %}
             <a href="/mypageweb">{{ g.user.name }} 님</a>
