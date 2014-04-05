@@ -65,7 +65,7 @@ def getProductListInCart():
     return_products = []
     query = g.db.session.query( Product, Category.name.label('category_name') ).\
     filter( Cart.product_key == Product.key ).\
-    filter( Category.key == Product.category_key ).all()
+    filter( Category.key == Product.category_key )
     if g.user:
         query = query.filter( Cart.user_key == g.user.key )
 
