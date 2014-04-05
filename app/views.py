@@ -1,15 +1,39 @@
 # -*- coding: utf-8 -*-
 from app import app, db
-from app.models import Users, Product, Interest, Cart, Category
+from app.models import Users, Product, Interest, Cart, Category, Tag, BlogReview, SetProduct
 from flask import flash, redirect, render_template, request, session, url_for, g
+from sqlalchemy import and_
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.sql import func
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 from werkzeug import generate_password_hash, check_password_hash
 from functools import wraps
 
+@app.route('/print_sample_module')
+def printSampleModule():
+    # tags = getTagList( '수분')
+    # print tags
 
-def getProductListWhetherInterest( category_key ):
+    blogReviews = getBlogReviewList( 2, True )
+    print blogReviews
+
+    return 'good'
+
+def getProductListInInterest():
+    products = g.db.session.query( Product, Category.name ).\
+    filter( Interest.product_key == Product.key ).\
+    filter( Interest.user_key == g.user.key).\
+    filter( Category.key == Product.category_key ).all()
+    return products;
+
+def getProductListInCart():
+    products = g.db.session.query( Product, Category.name ).\
+    filter( Cart.product_key == Product.key ).\
+    filter( Cart.user_key == g.user.key ).\
+    filter( Category.key == Product.category_key ).all()
+    return products
+
+def getProductList( category_key = None ):
     stmt = g.db.session.query( Interest ).filter( Interest.user_key == g.user.key ).subquery()
     query = g.db.session.query( Product, stmt.c.key ).outerjoin( stmt, Product.key == stmt.c.product_key )
     if category_key is not None:
@@ -25,19 +49,23 @@ def getProductListWhetherInterest( category_key ):
 
     return products
 
-def getProductListInCart():
-    products = g.db.session.query( Product, Category.name ).\
-    filter( Cart.product_key == Product.key ).\
-    filter( Cart.user_key == g.user.key ).\
-    filter( Category.key == Product.category_key ).all()
-    return products
+def getCategoryList( is_set ):
+    categorys = g.db.session.query( Category ).filter( Category.is_set == isSet ).all()
+    return categorys
 
-def getProductListInInterest():
-    products = g.db.session.query( Product, Category.name ).\
-    filter( Interest.product_key == Product.key ).\
-    filter( Interest.user_key == g.user.key).\
-    filter( Category.key == Product.category_key ).all()
-    return products;
+def getTagList( start_with_str = "" ):
+    tags = g.db.session.query( Tag ).filter( Tag.name.like( start_with_str + '%' ) ).all()
+    return tags
+
+def getBlogReviewList( product_or_set_key, is_set = False ):
+    if is_set is False:
+        product_key = product_or_set_key
+        blogReviews = g.db.session.query( BlogReview ).filter( BlogReview.product_key == product_key).all()
+    else:
+        set_key = product_or_set_key
+        blogReviews = g.db.session.query( BlogReview ).filter( and_( SetProduct.set_key == set_key, BlogReview.product_key == SetProduct.product_key) ).all()
+
+    return blogReviews
 
 @app.before_request
 def before_request():
@@ -64,99 +92,113 @@ def login_required( func ):
 
 # sample code ----------------------------------------------------------------
 
-@app.route('/ttt')
-@login_required
-def ttt():
-    products = getProductListInInterest()
-    print products
+def addProductOrSetToInterest( product_or_set_key, is_set ):
+    if is_set:
+        interest = Interest( g.user.key, None, product_or_set_key, True )
+    else:
+        interest = Interest( g.user.key, product_or_set_key, None, False )
 
-    return 'success'
-
-@app.route('/add_product_to_interest/<int:product_key>')
-@login_required
-def addProductToInterest( product_key ):
-    interest = Interest( g.user.key, product_key, None, False )
     try:
         g.db.session.add( interest )
         g.db.session.commit()
-        return 'success'
+        return True
     except IntegrityError:
-        return 'fail'
+        return False
 
-@app.route('/add_set_to_interest/<int:set_key>')
-@login_required
-def addSetToInterest( set_key ):
-    interest = Interest( g.user.key, None, set_key, True )
-    try:
-        g.db.session.add( interest )
-        g.db.session.commit()
-        return 'success'
-    except IntegrityError:
-        return 'fail'
+def deleteProductOrSetInInterest( product_or_set_key, is_set ):
+    if is_set:
+        interest = g.db.session.query( Interest ).filter( Interest.set_key == product_or_set_key )
+    else:
+        interest = g.db.session.query( Interest ).filter( Interest.product_key == product_or_set_key )
 
-@app.route('/get_product_list')
-@app.route('/get_product_list/<int:category_key>')
-@login_required
-def getProductList(category_key = None):
+    g.db.session.delete( interest )
+    g.db.session.commit()
 
-    products = getProductListWithInterest( category_key )
+def addProductOrSetToCart( product_or_set_key, is_set ):
+    if is_set:
+        cart = Cart( g.user.key, None, product_or_set_key, True )
+    else:
+        cart = Cart( g.user.key, product_or_set_key, None, False )
 
-    for product in products:
-        print product, product.isInterested
-
-    return 'success'
-
-@app.route('/get_interest_product_list')
-@login_required
-def getInterestProductList():
-    interests = g.user.interests.all()
-    for interest in interests:
-        print interest.product
-
-    return 'success'
-
-@app.route('/add_product_to_cart/<int:product_key>')
-@login_required
-def addProductToCart( product_key ):
-    cart = Cart( g.user.key, product_key, None, False )
     try:
         g.db.session.add( cart )
         g.db.session.commit()
-        return 'success'
+        return True
     except IntegrityError:
-        return 'fail'
+        return False
 
-@app.route('/add_set_to_cart/<int:set_key>')
-@login_required
-def addSetToCart( set_key ):
-    cart = Cart( g.user.key, None, set_key, True )
-    try:
-        g.db.session.add( cart )
-        g.db.session.commit()
-        return 'success'
-    except IntegrityError:
-        return 'fail'
+def deleteProductOrSetInCart( product_or_set_key, is_set ):
+    if is_set:
+        cart = g.db.session.query( Cart ).filter( Cart.set_key == product_or_set_key )
+    else:
+        cart = g.db.session.query( Cart ).filter( Cart.product_key == product_or_set_key )
 
-@app.route('/get_cart_product_list')
-@login_required
-def getCartProductList():
-    products = getProductListInCart()
-    print products
+    g.db.session.delete( cart )
+    g.db.session.commit()
 
-    return 'success'
+# @app.route('/add_product_to_interest/<int:product_key>')
+# @login_required
+# def addProductToInterest( product_key ):
+#     interest = Interest( g.user.key, product_key, None, False )
+#     try:
+#         g.db.session.add( interest )
+#         g.db.session.commit()
+#         return 'success'
+#     except IntegrityError:
+#         return 'fail'
 
-@app.route('/get_category_list')
-@app.route('/get_category_list/<isSet>')
-def getCategoryList( isSet = False ):
-    if isSet is not False:
-        isSet = True
+# @app.route('/add_set_to_interest/<int:set_key>')
+# @login_required
+# def addSetToInterest( set_key ):
+#     interest = Interest( g.user.key, None, set_key, True )
+#     try:
+#         g.db.session.add( interest )
+#         g.db.session.commit()
+#         return 'success'
+#     except IntegrityError:
+#         return 'fail'
 
-    categorys = g.db.session.query( Category ).filter( Category.is_set == isSet ).all()
+# @app.route('/get_product_list')
+# @app.route('/get_product_list/<int:category_key>')
+# @login_required
+# def sample_getProductList(category_key = None):
 
-    for category in categorys:
-        print category
+#     products = getProductListWithInterest( category_key )
 
-    return 'success'
+#     for product in products:
+#         print product, product.isInterested
+
+#     return 'success'
+
+# @app.route('/add_product_to_cart/<int:product_key>')
+# @login_required
+# def addProductToCart( product_key ):
+#     cart = Cart( g.user.key, product_key, None, False )
+#     try:
+#         g.db.session.add( cart )
+#         g.db.session.commit()
+#         return 'success'
+#     except IntegrityError:
+#         return 'fail'
+
+# @app.route('/add_set_to_cart/<int:set_key>')
+# @login_required
+# def addSetToCart( set_key ):
+#     cart = Cart( g.user.key, None, set_key, True )
+#     try:
+#         g.db.session.add( cart )
+#         g.db.session.commit()
+#         return 'success'
+#     except IntegrityError:
+#         return 'fail'
+
+# @app.route('/get_cart_product_list')
+# @login_required
+# def getCartProductList():
+#     products = getProductListInCart()
+#     print products
+
+#     return 'success'
 
 # --------------------------------------------------------------------------------
 
@@ -387,6 +429,10 @@ def setDetail():
      ##product =g.db.session.query(Product).all()[0]
      return render_template('set_detail.html')
 
+@app.route('/setdetailweb', methods = ['GET'])
+def setDetailWeb():
+     product =g.db.session.query(Product).all()[0]
+     return render_template('set_detail_web.html', product= product)
 
 
 

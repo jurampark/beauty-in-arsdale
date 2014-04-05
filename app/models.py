@@ -204,7 +204,10 @@ class BlogReview(db.Model):
         self.small_img_url = small_img_url
 
     def __repr__(self):
-        return '<BlogReview %r>' % self.title
+        if self.title:
+            return '<BlogReview %s>' % self.title.encode("utf-8")
+        else:
+            return '<BlogReview %s>' % self.writer.encode("utf-8")
 
 class Tag(db.Model):
     key = db.Column(db.Integer, primary_key=True)
@@ -217,7 +220,7 @@ class Tag(db.Model):
         self.name = name
 
     def __repr__(self):
-        return '<Tag %r>' % self.name
+        return '<Tag %s>' % self.name.encode("utf-8")
 
 
 
