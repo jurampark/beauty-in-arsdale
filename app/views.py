@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from app import app, db
-from app.models import Users, Product, Interest, Cart, Category, Tag, BlogReview, SetProduct
+from app.models import Users, Product, Interest, Cart, Category, Tag, BlogReview, SetProduct, Set
 from flask import flash, redirect, render_template, request, session, url_for, g
 from sqlalchemy import and_
 from sqlalchemy.exc import IntegrityError
@@ -11,18 +11,24 @@ from functools import wraps
 
 @app.route('/print_sample_module')
 def printSampleModule():
+
+    products = getProductList( None, 2)
+    print products
+
     # tags = getTagList( '수분')
     # print tags
 
-    product = getProduct( 1 )
-    print product.Product
-    print product.category_name
+    # sets = getSetList()
+    # print sets
 
     return 'good'
 
 def getProduct( product_key ):
     # print g.db.session.query( Product, Category.name ).filter( Product.key == product_key ).filter( Product.category_key == Category.key )
     product = g.db.session.query( Product, Category.name.label('category_name') ).filter( Product.key == product_key ).filter( Product.category_key == Category.key ).first()
+    for product, category_name in products:
+        product.category_name = category_name
+
     return product
 
 def getProductListInInterest():
@@ -30,6 +36,9 @@ def getProductListInInterest():
     filter( Interest.product_key == Product.key ).\
     filter( Interest.user_key == g.user.key).\
     filter( Category.key == Product.category_key ).all()
+    for product, category_name in products:
+        product.category_name = category_name
+
     return products;
 
 def getProductListInCart():
@@ -37,16 +46,25 @@ def getProductListInCart():
     filter( Cart.product_key == Product.key ).\
     filter( Cart.user_key == g.user.key ).\
     filter( Category.key == Product.category_key ).all()
+
+    for product, category_name in products:
+        product.category_name = category_name
+
     return products
 
-def getProductList( category_key = None ):
+def getProductList( category_key = None, set_key = None ):
     stmt = g.db.session.query( Interest ).filter( Interest.user_key == g.user.key ).subquery()
-    query = g.db.session.query( Product, stmt.c.key ).outerjoin( stmt, Product.key == stmt.c.product_key )
+    if set_key is not None:
+        query = g.db.session.query( Product, Category.name.label('category_name'), stmt.c.key ).outerjoin( stmt, Product.key == stmt.c.product_key ).filter( and_( SetProduct.set_key == set_key, Product.key == SetProduct.product_key )).filter( Category.key == Product.category_key )
+    else:
+        query = g.db.session.query( Product, Category.name.label('category_name'), stmt.c.key ).outerjoin( stmt, Product.key == stmt.c.product_key ).filter( Category.key == Product.category_key )
+
     if category_key is not None:
         query = query.filter( Product.category_key == category_key )
     interestedProducts = query.all()
     products = []
-    for product, isInterested in interestedProducts:
+    for product, category_name, isInterested in interestedProducts:
+        product.category_name = category_name
         if isInterested == None:
             product.isInterested = False
         else:
@@ -54,6 +72,23 @@ def getProductList( category_key = None ):
         products.append( product )
 
     return products
+
+def getSetList( category_key = None ):
+    stmt = g.db.session.query( Interest ).filter( Interest.user_key == g.user.key ).subquery()
+    query = g.db.session.query( Set, stmt.c.key ).outerjoin( stmt, Set.key == stmt.c.set_key )
+    if category_key is not None:
+        query = query.filter( Set.category_key == category_key )
+
+    interestedSets = query.all()
+    sets = []
+    for set_, isInterested in interestedSets:
+        if isInterested == None:
+            set_.isInterested = False
+        else:
+            set_.isInterested = True
+        sets.append( set_ )
+
+    return sets
 
 def getCategoryList( is_set ):
     categorys = g.db.session.query( Category ).filter( Category.is_set == isSet ).all()
