@@ -291,11 +291,11 @@ def home():
 
 @app.route('/login', methods=['GET', 'POST'] )
 def login( next = None ):
+    if next is None:
+        next = url_for('home')
+
     if g.user: # already login
-        if next is not None:
-            return redirect( next )
-        else:
-            return redirect( url_for('home') )
+        return redirect( next )
 
     error = None
 
@@ -312,7 +312,7 @@ def login( next = None ):
                 error = 'fail_invalid_password'
             else:
                 session['user_key'] = user.key
-                return redirect( url_for('login' ) )
+                return redirect( next )
 
     if error is not None:
         flash( error )
