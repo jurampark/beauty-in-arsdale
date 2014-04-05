@@ -11,11 +11,12 @@ from functools import wraps
 
 @app.route('/print_sample_module', methods = ['GET', 'POST'])
 def printSampleModule():
+    products = getProductListInInterest()
 
     return jsonify(
         success = True,
         data = {
-            'foo': 'bar',
+            'usl': request.url,
             'baz': 'qux'
         }
     )
@@ -35,24 +36,29 @@ def printSampleModule():
 
 def getProduct( product_key ):
     # print g.db.session.query( Product, Category.name ).filter( Product.key == product_key ).filter( Product.category_key == Category.key )
+    return_products = []
     products = g.db.session.query( Product, Category.name.label('category_name') ).filter( Product.key == product_key ).filter( Product.category_key == Category.key ).all()
 
     for product, category_name in products:
         product.category_name = category_name
+        return_products.append( product )
 
-    return products[0]
+    return return_products[0]
 
 def getProductListInInterest():
+    return_products = []
     products = g.db.session.query( Product, Category.name.label('category_name') ).\
     filter( Interest.product_key == Product.key ).\
     filter( Interest.user_key == g.user.key).\
     filter( Category.key == Product.category_key ).all()
     for product, category_name in products:
         product.category_name = category_name
+        return_products.append( product )
 
-    return products;
+    return return_products;
 
 def getProductListInCart():
+    return_products = []
     products = g.db.session.query( Product, Category.name.label('category_name') ).\
     filter( Cart.product_key == Product.key ).\
     filter( Cart.user_key == g.user.key ).\
@@ -60,8 +66,9 @@ def getProductListInCart():
 
     for product, category_name in products:
         product.category_name = category_name
+        return_products.append( product )
 
-    return products
+    return return_products
 
 def getProductList( category_key = None, set_key = None ):
     stmt = g.db.session.query( Interest ).filter( Interest.user_key == g.user.key ).subquery()
@@ -84,8 +91,21 @@ def getProductList( category_key = None, set_key = None ):
 
     return products
 
-# def getProductListInTag( tag_key ):
+def getProductListInTag( tag_key ):
+    stmt = g.db.session.query( Interest ).filter( Interest.user_key == g.user.key ).subquery()
+    query = g.db.session.query( Product, Category.name.label('category_name'), stmt.c.key ).outerjoin( stmt, Product.key == stmt.c.product_key ).filter( Category.key == Product.category_key )
+    query = query.filter( and_(Product.key == ProductTag.product_key, ProductTag.tag_key == tag_key ) )
+    interestedProducts = query.all()
+    products = []
+    for product, category_name, isInterested in interestedProducts:
+        product.category_name = category_name
+        if isInterested == None:
+            product.isInterested = False
+        else:
+            product.isInterested = True
+        products.append( product )
 
+    return products
 
 def getSetList( category_key = None ):
     stmt = g.db.session.query( Interest ).filter( Interest.user_key == g.user.key ).subquery()
@@ -105,7 +125,7 @@ def getSetList( category_key = None ):
     return sets
 
 def getCategoryList( is_set ):
-    categorys = g.db.session.query( Category ).filter( Category.is_set == isSet ).all()
+    categorys = g.db.session.query( Category ).filter( Category.is_set == is_set ).all()
     return categorys
 
 def getTagList( start_with_str = "" ):
@@ -141,7 +161,7 @@ def login_required( func ):
         if g.user:
             return func( *args, **kwargs )
         else:
-            return redirect( url_for('login') )
+            return redirect( url_for('login', next = request.url) )
     return wrap
 
 
@@ -270,9 +290,12 @@ def home():
     return redirect( url_for('myPage') )
 
 @app.route('/login', methods=['GET', 'POST'] )
-def login():
+def login( next = None ):
     if g.user: # already login
-        return redirect( url_for('home') )
+        if next is not None:
+            return redirect( next )
+        else:
+            return redirect( url_for('home') )
 
     error = None
 
