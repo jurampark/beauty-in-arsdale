@@ -47,10 +47,14 @@ def getProduct( product_key ):
 
 def getProductListInInterest():
     return_products = []
-    products = g.db.session.query( Product, Category.name.label('category_name') ).\
+    query = g.db.session.query( Product, Category.name.label('category_name') ).\
     filter( Interest.product_key == Product.key ).\
-    filter( Interest.user_key == g.user.key).\
-    filter( Category.key == Product.category_key ).all()
+    filter( Category.key == Product.category_key )
+    if g.user:
+        query = query.filter( Interest.user_key == g.user.key)
+
+    products = query.all()
+
     for product, category_name in products:
         product.category_name = category_name
         return_products.append( product )
@@ -59,10 +63,13 @@ def getProductListInInterest():
 
 def getProductListInCart():
     return_products = []
-    products = g.db.session.query( Product, Category.name.label('category_name') ).\
+    query = g.db.session.query( Product, Category.name.label('category_name') ).\
     filter( Cart.product_key == Product.key ).\
-    filter( Cart.user_key == g.user.key ).\
     filter( Category.key == Product.category_key ).all()
+    if g.user:
+        query = query.filter( Cart.user_key == g.user.key )
+
+    products = query.all()
 
     for product, category_name in products:
         product.category_name = category_name
@@ -71,7 +78,11 @@ def getProductListInCart():
     return return_products
 
 def getProductList( category_key = None, set_key = None ):
-    stmt = g.db.session.query( Interest ).filter( Interest.user_key == g.user.key ).subquery()
+    if g.user:
+        stmt = g.db.session.query( Interest ).filter( Interest.user_key == g.user.key ).subquery()
+    else:
+        stmt = g.db.session.query( Interest ).filter( Interest.user_key == -1 ).subquery()
+
     if set_key is not None:
         query = g.db.session.query( Product, Category.name.label('category_name'), stmt.c.key ).outerjoin( stmt, Product.key == stmt.c.product_key ).filter( and_( SetProduct.set_key == set_key, Product.key == SetProduct.product_key )).filter( Category.key == Product.category_key )
     else:
@@ -92,7 +103,11 @@ def getProductList( category_key = None, set_key = None ):
     return products
 
 def getProductListInTag( tag_key ):
-    stmt = g.db.session.query( Interest ).filter( Interest.user_key == g.user.key ).subquery()
+    if g.user:
+        stmt = g.db.session.query( Interest ).filter( Interest.user_key == g.user.key ).subquery()
+    else:
+        stmt = g.db.session.query( Interest ).filter( Interest.user_key == -1 ).subquery()
+
     query = g.db.session.query( Product, Category.name.label('category_name'), stmt.c.key ).outerjoin( stmt, Product.key == stmt.c.product_key ).filter( Category.key == Product.category_key )
     query = query.filter( and_(Product.key == ProductTag.product_key, ProductTag.tag_key == tag_key ) )
     interestedProducts = query.all()
@@ -108,7 +123,11 @@ def getProductListInTag( tag_key ):
     return products
 
 def getSetList( category_key = None ):
-    stmt = g.db.session.query( Interest ).filter( Interest.user_key == g.user.key ).subquery()
+    if g.user:
+        stmt = g.db.session.query( Interest ).filter( Interest.user_key == g.user.key ).subquery()
+    else:
+        stmt = g.db.session.query( Interest ).filter( Interest.user_key == -1 ).subquery()
+
     query = g.db.session.query( Set, stmt.c.key ).outerjoin( stmt, Set.key == stmt.c.set_key )
     if category_key is not None:
         query = query.filter( Set.category_key == category_key )
