@@ -296,19 +296,75 @@ def deleteProductOrSetInCart( product_or_set_key, is_set ):
 
 # --------------------------------------------------------------------------------
 
+@app.route('/addProductToCart', methods = ['POST'])
+def addProductCart():
+    isSuccess = False
+    message = None
+    productKey = request.form['product_key']
 
+    if g.user is None:
+        message = 'login required'
+    elif addProductOrSetToCart(productKey, False):
+        isSuccess = True
+        message = 'success'
+    else :
+        message = 'error'
 
-@app.route('/productdetailweb', methods = ['GET'])
-def productDetailWeb():
-    products =g.db.session.query(Product).all()[0:5]
-    product = products[0]
-    return render_template('product_detail_web.html', products=products, product = product)
+    return jsonify(
+        success = isSuccess,
+        message = message
+    )
+
+@app.route('/addProductToInterest', methods = ['POST'])
+def addProductInterest():
+    isSuccess = False
+    message = None
+    productKey = request.form['product_key']
+
+    if g.user is None:
+        message = 'login required'
+    elif addProductOrSetToInterest(productKey, False):
+        isSuccess = True
+        message = 'success'
+    else :
+        message = 'error'
+
+    return jsonify(
+        success = isSuccess,
+        message = message
+    )
+
+@app.route('/delProductToInterest', methods = ['POST'])
+def delProductCart():
+    isSuccess = False
+    message = None
+    productKey = request.form['product_key']
+
+    if g.user is None:
+        message = 'login required'
+    elif deleteProductOrSetInInterest(productKey, False):
+        isSuccess = True
+        message = 'success'
+    else :
+        message = 'error'
+
+    return jsonify(
+        success = isSuccess,
+        message = message
+    )
+
+@app.route('/productdetailweb/<int:product_key>', methods = ['GET'])
+def productDetailWeb(product_key):
+    product = getProduct(product_key)
+    blogList = getBlogReviewList(product_key, False)
+    return render_template('product_detail_web.html', product=product, blogList=blogList)
 
 @app.route('/')
 def home():
-    return redirect( url_for('myPage') )
+    return redirect( url_for('index') )
 
 @app.route('/login', methods=['GET', 'POST'] )
+@app.route('/login/<path:next>', methods=['GET', 'POST'] )
 def login( next = None ):
     if next is None:
         next = url_for('home')
@@ -335,7 +391,7 @@ def login( next = None ):
 
     if error is not None:
         flash( error )
-    return render_template( 'login.html' )
+    return render_template( 'login.html', url_for_login_next = next )
 
 @app.route('/logout')
 def logout():
@@ -388,8 +444,9 @@ def validate_register( name, email, password, sex ):
 @app.route('/mypage')
 @login_required
 def myPage():
-    products = g.db.session.query(Product).all()
-    return render_template('my_page.html', products = products)
+    interests = getProductListInInterest();
+    carts = getProductListInCart()
+    return render_template('my_page.html', interests = interests, carts = carts)
 
 
 @app.route('/update_user_profile', methods=['GET', 'POST'])
@@ -436,10 +493,12 @@ def test():
 def join():
     return render_template('join.html')
 
-@app.route('/productdetail/', methods=['GET'])
+@app.route('/productdetail/<int:product_key>', methods=['GET'])
 ###@login_required
-def productDetail():
-    return render_template('product_detail.html')
+def productDetail(product_key):
+    product = getProduct(product_key)
+    blogList = getBlogReviewList()
+    return render_template('product_detail.html', product=product, blogList = blogList)
 
 @app.route('/blogdetail/', methods=['GET'])
 ###@login_required
@@ -473,37 +532,38 @@ def internal_error(error):
 
 @app.route('/cart', methods = ['GET'])
 def cart():
-    return render_template('cart.html')
+    carts = getProductListInCart()
+    return render_template('cart.html', carts = carts)
 
 
 @app.route('/index', methods = ['GET'])
 def index():
-    products = g.db.session.query(Product).all()
+    products = getProductList()
     return render_template('index.html', products = products)
 
 @app.route('/indexweb', methods = ['GET'])
 def indexweb():
-    products = g.db.session.query(Product).all()
+    products = getProductList()
     return render_template('index_web.html', products = products)
 
 
 @app.route('/mypageweb', methods = ['GET'])
 @login_required
 def mypageweb():
-    products = g.db.session.query(Product, Category.name.label('category_name') ).filter( Product.category_key == Category.key ).all()
-    return render_template('mypage_interesting_web.html', tabName='interesting', products=products[0:7])
+    interests = getProductListInInterest()
+    return render_template('mypage_interesting_web.html', tabName='interesting', interests = interests)
 
 
 @app.route('/purchaselist', methods = ['GET'])
 @login_required
 def purchaselist():
-    products = g.db.session.query(Product).all()
-    return render_template('mypage_purchase_web.html', tabName='purchase', products = products[0:4])
+    carts = getProductListInCart()
+    return render_template('mypage_purchase_web.html', tabName='purchase', carts = carts)
 
 
 @app.route('/shopping1', methods = ['GET'])
 def shoppingSet():
-    products = g.db.session.query(Product).all()
+    products = None
     return render_template('shopping_set_web.html', products = products)
 
 @app.route('/mshopping1', methods = ['GET'])
@@ -513,12 +573,12 @@ def mshoppingSet():
 
 @app.route('/shopping2', methods = ['GET'])
 def shoppingProduct():
-    products = g.db.session.query(Product).all()
+    products = getProductList()
     return render_template('shopping_product_web.html', products = products)
 
 @app.route('/mshopping2', methods = ['GET'])
 def mshoppingProduct():
-    products = g.db.session.query(Product).all()
+    products = getProductList()
     return render_template('shopping_product.html', products = products)
 
 @app.route('/setdetail', methods = ['GET'])
