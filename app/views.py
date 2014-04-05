@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from app import app, db
 from app.models import Users, Product, Interest, Cart, Category, Tag, BlogReview, SetProduct, Set
-from flask import flash, redirect, render_template, request, session, url_for, g
+from flask import flash, redirect, render_template, request, session, url_for, g, jsonify
 from sqlalchemy import and_
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.sql import func
@@ -9,11 +9,21 @@ from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 from werkzeug import generate_password_hash, check_password_hash
 from functools import wraps
 
-@app.route('/print_sample_module')
+@app.route('/print_sample_module', methods = ['GET', 'POST'])
 def printSampleModule():
 
-    products = getProductList( None, 2)
-    print products
+    return jsonify(
+        success = True,
+        data = {
+            'foo': 'bar',
+            'baz': 'qux'
+        }
+    )
+
+    # return request.form['testparam']
+
+    # products = getProductList( None, 2)
+    # print products
 
     # tags = getTagList( '수분')
     # print tags
@@ -21,15 +31,16 @@ def printSampleModule():
     # sets = getSetList()
     # print sets
 
-    return 'good'
+    # return 'good'
 
 def getProduct( product_key ):
     # print g.db.session.query( Product, Category.name ).filter( Product.key == product_key ).filter( Product.category_key == Category.key )
-    product = g.db.session.query( Product, Category.name.label('category_name') ).filter( Product.key == product_key ).filter( Product.category_key == Category.key ).first()
+    products = g.db.session.query( Product, Category.name.label('category_name') ).filter( Product.key == product_key ).filter( Product.category_key == Category.key ).all()
+
     for product, category_name in products:
         product.category_name = category_name
 
-    return product
+    return products[0]
 
 def getProductListInInterest():
     products = g.db.session.query( Product, Category.name.label('category_name') ).\
@@ -72,6 +83,9 @@ def getProductList( category_key = None, set_key = None ):
         products.append( product )
 
     return products
+
+# def getProductListInTag( tag_key ):
+
 
 def getSetList( category_key = None ):
     stmt = g.db.session.query( Interest ).filter( Interest.user_key == g.user.key ).subquery()
