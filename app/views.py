@@ -14,20 +14,26 @@ def printSampleModule():
     # tags = getTagList( '수분')
     # print tags
 
-    blogReviews = getBlogReviewList( 2, True )
-    print blogReviews
+    product = getProduct( 1 )
+    print product.Product
+    print product.category_name
 
     return 'good'
 
+def getProduct( product_key ):
+    # print g.db.session.query( Product, Category.name ).filter( Product.key == product_key ).filter( Product.category_key == Category.key )
+    product = g.db.session.query( Product, Category.name.label('category_name') ).filter( Product.key == product_key ).filter( Product.category_key == Category.key ).first()
+    return product
+
 def getProductListInInterest():
-    products = g.db.session.query( Product, Category.name ).\
+    products = g.db.session.query( Product, Category.name.label('category_name') ).\
     filter( Interest.product_key == Product.key ).\
     filter( Interest.user_key == g.user.key).\
     filter( Category.key == Product.category_key ).all()
     return products;
 
 def getProductListInCart():
-    products = g.db.session.query( Product, Category.name ).\
+    products = g.db.session.query( Product, Category.name.label('category_name') ).\
     filter( Cart.product_key == Product.key ).\
     filter( Cart.user_key == g.user.key ).\
     filter( Category.key == Product.category_key ).all()
@@ -393,7 +399,7 @@ def indexweb():
 @app.route('/mypageweb', methods = ['GET'])
 @login_required
 def mypageweb():
-    products = g.db.session.query(Product, Category.name).filter( Product.category_key == Category.key ).all()
+    products = g.db.session.query(Product, Category.name.label('category_name') ).filter( Product.category_key == Category.key ).all()
     return render_template('mypage_interesting_web.html', tabName='interesting', products=products[0:7])
 
 
