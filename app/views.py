@@ -312,7 +312,7 @@ def login( next = None ):
                 error = 'fail_invalid_password'
             else:
                 session['user_key'] = user.key
-                return redirect( url_for('home' ) )
+                return redirect( url_for('login' ) )
 
     if error is not None:
         flash( error )
