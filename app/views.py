@@ -66,6 +66,7 @@ def getProductListInCart():
     query = g.db.session.query( Product, Category.name.label('category_name') ).\
     filter( Cart.product_key == Product.key ).\
     filter( Category.key == Product.category_key )
+
     if g.user:
         query = query.filter( Cart.user_key == g.user.key )
 
@@ -201,9 +202,9 @@ def addProductOrSetToInterest( product_or_set_key, is_set ):
 
 def deleteProductOrSetInInterest( product_or_set_key, is_set ):
     if is_set:
-        interest = g.db.session.query( Interest ).filter( Interest.set_key == product_or_set_key )
+        interest = g.db.session.query( Interest ).filter( Interest.set_key == product_or_set_key ).first()
     else:
-        interest = g.db.session.query( Interest ).filter( Interest.product_key == product_or_set_key )
+        interest = g.db.session.query( Interest ).filter( Interest.product_key == product_or_set_key ).first()
 
     g.db.session.delete( interest )
     g.db.session.commit()
@@ -223,9 +224,9 @@ def addProductOrSetToCart( product_or_set_key, is_set ):
 
 def deleteProductOrSetInCart( product_or_set_key, is_set ):
     if is_set:
-        cart = g.db.session.query( Cart ).filter( Cart.set_key == product_or_set_key )
+        cart = g.db.session.query( Cart ).filter( Cart.set_key == product_or_set_key ).first()
     else:
-        cart = g.db.session.query( Cart ).filter( Cart.product_key == product_or_set_key )
+        cart = g.db.session.query( Cart ).filter( Cart.product_key == product_or_set_key ).first()
 
     g.db.session.delete( cart )
     g.db.session.commit()
