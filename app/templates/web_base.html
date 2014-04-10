@@ -7,8 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/common_style_web.css') }}"/>
+    <script type="text/javascript">
+        var url_for_login_next = "{{ url_for('login', next=request.url ) }}";
+    </script>
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/common_js.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/common_js_web.js') }}"></script>
     <style>
         body{
             min-width: 970px;
@@ -23,13 +28,12 @@
 <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
   <div class="container-fluid" style="  min-width: 970px;">
       <div class="navbar-header">
-          <a class="navbar-brand" href="#">The Motion9</a>
+          <a class="navbar-brand" href="/indexweb">The Motion9</a>
       </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
       <ul class="nav navbar-nav">
-          <li class="active"><a href="/shopping1">쇼핑1</a></li>
-          <li><a href="/shopping2">쇼핑2</a></li>
-          <li><a href="#">제품비교</a></li>
+          <li {% if current_page == 'shopping1' %}class="active"{% endif %}><a href="/shopping1">쇼핑1</a></li>
+          <li {% if current_page == 'shopping2' %}class="active"{% endif %}><a href="/shopping2">쇼핑2</a></li>
           <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Help<b class="caret"></b></a>
           <ul class="dropdown-menu">
@@ -55,7 +59,7 @@
         </div>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> 장바구니</a></li>
+        <li><a href="/cart"><span class="glyphicon glyphicon-shopping-cart"></span> 장바구니</a></li>
         <li class="dropdown">
           {% if g.user %}
             <a href="/mypageweb">{{ g.user.name }} 님</a>

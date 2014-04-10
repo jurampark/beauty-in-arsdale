@@ -1,5 +1,12 @@
 $(function(){
-   $('.carousel').carousel();
+
+    $('#categoryList').change(function(e){
+       var key = $(this).val();
+       if(key == 'all')
+           location.href='/mshopping2';
+       else
+           location.href='/mshopping2/'+ key;
+    });
 
     var setItemWidth = function(){
         var width = $('#productGrid').width();

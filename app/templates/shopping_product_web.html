@@ -12,35 +12,51 @@
 {% block content %}
 <div class="row">
     <div class="col-xs-10 col-xs-offset-1">
+        <div class="category-list">
+            <ul>
+            <li {% if current_category == None %}class="current-category"{% endif %}><a href="/shopping2">모든 상품</a></li>
+            {% for category in categories %}
+                <li  {% if current_category == category.key%}class="current-category"{% endif %}><a href="/shopping2/{{ category.key }}">{{ category.name }}</a></li>
+            {% endfor %}
+            </ul>
+            <div class="clearfix"></div>
+        </div>
         <div id="productGrid">
             {% for product in products %}
             <div class="product-item" id="item-{{ product.key}}" data-attr="{{ product.key}}">
-                <div class="product-img">
-                    <img src="{{ product.big_img_url}}" alt="" />
-                </div>
-                <div class="product-contents">
-                    <div class="product-info">
-                        [{{ product.brandname }}]<br/>
-                        {% if (product.name|length) > 24 %}
-                            <a href="{{ url_for('productDetail', product_key=product.key) }}">{{product.name[:24] }}..</a>
-                        {% else %}
-                            <a href="{{ url_for('productDetail', product_key=product.key) }}">{{product.name }}</a>
-                        {% endif %}
+                <div class="product-item-wrapper">
+                    <div class="product-img">
+                        <img src="{{ product.big_img_url}}" alt="" />
+                    </div>
+                    <div class="product-contents">
+                        <div class="product-info">
+                            [{{ product.brandname }}]<br/>
+                            {% if (product.name|length) > 24 %}
+                                <a href="{{ url_for('productDetailWeb', product_key=product.key) }}">{{product.name[:24] }}..</a>
+                            {% else %}
+                                <a href="{{ url_for('productDetailWeb', product_key=product.key) }}">{{product.name }}</a>
+                            {% endif %}
 
-                        <div class="product-price-box">
-                            Price : <b>￦{{ product.price }} ({{product.capacity }}ml)</b><br/>
-                            Category : <b>{{ product.category_name}}</b>
+                            <div class="product-price-box">
+                                Price : <b>￦{{ product.price }} ({{product.capacity }}ml)</b><br/>
+                                Category : <b>{{ product.category_name}}</b>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="product-bottom-menu">
+                <div class="product-bottom-menu product-btn-list">
                     <ul class="menu-links clearfix">
-                        <li class=""><a href="#" class="btn-for-interest">관심</a></li>
-                        <li class=""><a href="#" class="btn-for-cart">장바구니</a></li>
+                          <ul class="menu-links clearfix">
+                                {% if product.isInterested  %}
+                                    <li class=""><a href="#" data-product="{{ product.key }}" class="btn-for-interest btn-motion9 btn-motion9-disable">관심</a></li>
+                                {%  else  %}
+                                    <li class=""><a href="#" data-product="{{ product.key }}" class="btn-for-interest btn-motion9">관심</a></li>
+                                {% endif %}
+                                <li class=""><a href="#" data-product="{{ product.key }}" class="btn-for-cart btn-motion9">장바구니</a></li>
+                            </ul>
                     </ul>
                 </div>
             </div>
-
             {% endfor %}
         </div>
     </div>

@@ -72,6 +72,20 @@ class Cart(db.Model):
 
 class Purchase(db.Model):
     key = db.Column(db.Integer, primary_key=True)
+    user_key = db.Column(db.Integer, db.ForeignKey('users.key'))
+    product_key = db.Column(db.Integer, db.ForeignKey('product.key'))
+    set_key = db.Column(db.Integer, db.ForeignKey('set.key'))
+    is_set = db.Column(db.Boolean, default=False)
+    created_time = db.Column(db.DateTime, default=db.func.now())
+
+    def __init__(self, user_key, product_key, set_key, is_set ):
+        self.user_key = user_key
+        self.product_key = product_key
+        self.set_key = set_key
+        self.is_set = is_set
+
+    def __repr__(self):
+        return '<Cart %r>' % self.key
 
 class Product(db.Model):
     key = db.Column(db.Integer, primary_key=True)

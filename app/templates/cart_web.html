@@ -1,0 +1,157 @@
+{% extends "web_base.html" %}
+{% block header %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/common_style.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/cart_web.css') }}"/>
+
+<script src="{{ url_for('static', filename='js/cart_web.js') }}"></script>
+{% endblock %}
+{% block content %}
+
+<div class="row" id="cartPageWrapper">
+    <div class="col-xs-8">
+        <div >
+            <h4>장바구니 (6개)</h4>
+        </div>
+        <div>
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th class="tb-checkbox">
+                            <input type="checkbox" id="setAllCheck"/>
+                        </th>
+                        <th class="tb-contents">
+                            <div class="table-header">세트</div>
+                        </th>
+                        <th class="tb-cnt">수량</th>
+                        <th class="tb-price">상품금액</th>
+                        <th class="tb-delivery">배송비</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for set in sets %}
+                    <tr>
+                        <td class="tb-checkbox">
+                            <input type="checkbox" class="set-checkbox"/>
+                        </td>
+                        <td class="tb-contents">
+                            <div>
+                                <div class="product-img">
+                                    <img src="{{ set.big_img_url }}"/>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <h5 class="set-name">강인한 남자를 위한 상품</h5>
+                                {% for product in products %}
+                                    [구성품] {{ product.name }}<br/><br/>
+                                {% endfor %}
+                            </div>
+                        </td>
+                        <td class="tb-cnt">
+                            <select class="product-num" data-isSet="true" data-attr="{{ set.key }}">
+                            {% for number in range(1, 10)  %}
+                                 <option value="{{ number }}">{{ number }}</option>
+                            {% endfor %}
+                            </select>
+                        </td>
+                        <td class="tb-price">
+                            <span id="setPrice-{{ set.key }}">{{ set.price }}</span>원
+                        </td>
+                        <td class="tb-delivery">
+                            무료
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div style="margin-top :40px;">
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th class="tb-checkbox">
+                            <input type="checkbox" id="productAllCheck"/>
+                        </th>
+                        <th class="tb-contents">
+                            <div class="table-header">단품</div>
+                        </th>
+                        <th class="tb-cnt">수량</th>
+                        <th class="tb-price">상품금액</th>
+                        <th class="tb-delivery">배송비</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for product in products %}
+                    <tr>
+                        <td class="tb-checkbox">
+                            <input type="checkbox" class="product-checkbox"/>
+                        </td>
+                        <td class="tb-contents">
+                            <div>
+                                <div class="product-img">
+                                    <img src="{{ product.big_img_url }}"/>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                {{ product.name }}<br/>
+                                {{ product.capacity }} [{{ product.category_name }}]
+                            </div>
+                        </td>
+                        <td class="tb-cnt">
+                            <select class="product-num" data-isSet="false" data-attr="{{ product.key }}">
+                            {% for number in range(1, 10)  %}
+                                 <option value="{{ number }}">{{ number }}</option>
+                            {% endfor %}
+                            </select>
+                        </td>
+                        <td class="tb-price">
+                            <span id="productPrice-{{ product.key }}">{{ product.price }}</span>원
+                        </td>
+                        <td class="tb-delivery">
+                            {% if product.price > 10000 %}
+                            무료
+                            {% else %}
+                            2500원
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+
+    <div class="col-xs-4">
+        <div class="box-css" id="puchaseInfoBox">
+            <div class="box-header">
+                <h5 style="margin-top:0; margin-bottom: 0; text-align: center; line-height: 30px;">결제 정보</h5>
+            </div>
+            <div class="price-info-area">
+                <p class="total-product-price">총 상품 금액 : <span id="totalProductPrice">20000</span>원</p>
+                <p class="total-delivery-price">총 배송 금액 : <span id="totalDeliveryPrice">1500</span>원</p>
+                <p class="total-purchase-price">총 결제 금액 : <span id="totalPurchasePrice">21500</span>원</p>
+            </div>
+            <div class="purchase-method">
+                <select class="form-control">
+                    <option class="inner-selectbox">구매 방식</option>
+                    <option class="inner-selectbox">신용카드</option>
+                    <option class="inner-selectbox">무통장 입금</option>
+                    <option class="inner-selectbox">Paypal</option>
+                </select>
+            </div>
+            <div class="purchase-btn-area">
+                <p>
+                    <a href="#" type="button" class="btn btn-lg btn-danger btn-block">바로 구매하기</a>
+                </p>
+                <p>
+                    <a href="#" type="button" class="btn btn-lg btn-info btn-block">계속 쇼핑하기</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

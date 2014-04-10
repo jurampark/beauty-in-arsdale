@@ -1,0 +1,121 @@
+.cart-table{
+    border: 1px solid #e7e7e7;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.cart-table td{
+    border: 1px solid #e7e7e7;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+.cart-table th{
+    background-color: #080808;
+    color : white;
+    text-align: center;
+}
+
+td.tb-checkbox{
+    width : 50px;
+    text-align: center;
+    line-height: 40%;
+}
+
+td.tb-contents{
+    width : 450px;
+    padding : 6px 8px;
+}
+
+td.tb-cnt{
+    width: 50px;
+    text-align: center;
+}
+
+td.tb-price{
+    width : 80px;
+    text-align: center;
+    line-height: 40%;
+    font-weight: bold;
+}
+
+td.tb-delivery{
+    width : 70px;
+    text-align: center;
+    line-height: 40%;
+}
+
+div.table-header{
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-left: auto;
+    margin-right: auto;
+    width : 100px;
+    padding: 8px 0px;
+    font-size: 16px;
+    text-align: center;
+    background-color: #1c588f;
+}
+
+
+.product-img{
+    float:left;
+    width : 80px;
+}
+
+.product-img img{
+    width : 80px;
+    height : 80px;
+}
+
+.product-info{
+    width : 350px;
+    float: right;
+}
+
+.purchase-btn-area{
+    width : 90%;
+    margin: 10px auto 0 auto;
+}
+
+.price-info-area{
+    width : 90%;
+    padding: 5%;
+    font-size: 14px;
+}
+
+.total-product-price span{
+    font-weight: bold;
+}
+
+.total-delivery-price span{
+    font-weight: bold;
+}
+
+.total-purchase-price{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.total-purchase-price span{
+    color :red;
+    font-weight: bold;
+}
+
+.purchase-method{
+    width : 90%;
+    padding: 0 5% 5% 5%;
+}
+
+.set-name{
+    font-weight: bold;
+    margin-bottom: 18px;
+}
+
+#cartPageWrapper{
+    position: relative;
+}
+
+#puchaseInfoBox{
+    width : 360px;
+}

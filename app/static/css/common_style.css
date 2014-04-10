@@ -77,3 +77,7 @@ ol, ul {
 /* flash message style */
 .flash          { background: #CEE5F5; padding: 0.5em; }
 
+
+.btn-motion9-disable{
+    color:#adabad !important;
+}

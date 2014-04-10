@@ -12,35 +12,35 @@
     <div id="hoverButtonList">
         <div class="btn-group-vertical">
           <div class="btn-group">
-            <button type="button" class="btn btn-default btn-for-cart">장바구니 넣기</button>
+            <button type="button" id="addCartBtn" class="btn btn-default btn-for-cart">장바구니 넣기</button>
           </div>
           <div class="btn-group">
             <button type="button" class="btn btn-default">바로 구매</button>
           </div>
           <div class="btn-group">
-            <button type="button" class="btn btn-danger">삭제</button>
+            <a href="#" id="cancelInterestBtn"class="btn btn-danger">삭제</a>
           </div>
         </div>
     </div>
 </div>
 
-{% for interest in interests %}
+{% for product in interests %}
 
-<div class="product-item" id="item-{{ interest.product.key}}" data-attr="{{ interest.product.key }}">
+<div class="product-item" id="item-{{ product.key}}" data-attr="{{ product.key }}">
     <div class="product-img">
-        <img src="{{ interest.product.big_img_url}}" alt="" />
+        <img src="{{ product.big_img_url}}" alt="" />
     </div>
     <div class="product-info">
-        [{{ interest.product.brandname }}]<br/>
-        {% if (interest.product.name|length) > 17 %}
-            <a href="{{ url_for('productDetail',product_key=interest.product.key) }}">{{interest.product.name[:17] }}..</a>
+        [{{ product.brandname }}]<br/>
+        {% if (product.name|length) > 17 %}
+            <a href="{{ url_for('productDetailWeb',product_key=product.key) }}">{{product.name[:17] }}..</a>
         {% else %}
-            <a href="{{ url_for('productDetail', product_key=interest.product.key) }}">{{interest.product.name  }}</a>
+            <a href="{{ url_for('productDetailWeb', product_key=product.key) }}">{{product.name  }}</a>
         {% endif %}
 
         <div class="product-price-box">
-            Price : <b>￦{{ interest.product.price }} ({{interest.product.capacity }}ml)</b><br/>
-            Category : <b>{{ interest.product.category_name }}</b>
+            Price : <b>￦{{ product.price }} ({{product.capacity }})</b><br/>
+            Category : <b>{{ product.category_name }}</b>
         </div>
     </div>
 </div>

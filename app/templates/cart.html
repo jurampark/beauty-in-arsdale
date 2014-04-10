@@ -22,20 +22,20 @@
 
 <div class="ui-grid-solo cart-list">
 
-    {% for cart in carts %}
+    {% for product in carts %}
     <div class="ui-block-a" id="is123">
         <div class="cart-list-item boxed">
-           <img class="product-img"  src="{{ cart.product.big_img_url }}"/>
+           <img class="product-img"  src="{{ product.big_img_url }}"/>
            <div class="product-contents">
                <div class="product-info">
-                   <h4>{{ cart.product.name }}</h4>
+                   <h4>{{ product.name }}</h4>
                    <p class="product-desc">
-                       {{ cart.product.category_name }}
+                       {{ product.category_name }}
                    </p>
                    <div>
                        <div class="buy-cnt">
-                           <label for="{{ cart.product.key }}-cnt" class="select-box-name">수량: </label>
-                           <select data-mini="true" class="product-cnt-selectbox" data-id="{{ cart.product.key }}">
+                           <label for="{{ product.key }}-cnt" class="select-box-name">수량: </label>
+                           <select data-mini="true" class="product-cnt-selectbox" data-id="{{ product.key }}">
                                 <option value="0">0</option>
                                 <option value="1" selected="selected">1</option>
                                 <option value="2">2</option>
@@ -51,10 +51,10 @@
                </div>
            </div>
            <div class="product-cost">
-               금액 : <span class="price" id="{{ cart.product.key }}-price">{{ cart.product.price }}</span>원
+               금액 : <span class="price" id="{{ product.key }}-price">{{ product.price }}</span>원
            </div>
            <div class="product-delete">
-               <input type="button" class="product-del-btn" data-mini="true" data-shadow="false" data-id="{{ cart.product.key }}" value="삭제하기">
+               <input type="button" class="product-del-btn" data-mini="true" data-shadow="false" data-id="{{ product.key }}" value="삭제하기">
            </div>
            <div class="clearfix"></div>
         </div>

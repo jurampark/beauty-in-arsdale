@@ -56,7 +56,11 @@
                     </div>
                     <div class="service-meta-bot">
                         <ul class="service-links clearfix">
-                            <li class="service-social"><a href="#" data-product="{{ product.key }}" class="btn-for-interest">관심</a></li>
+                            {% if product.isInterested  %}
+                                <li class="service-social"><a href="#" data-product="{{ product.key }}" class="btn-for-interest btn-motion9-disable">관심</a></li>
+                            {%  else  %}
+                                <li class="service-social"><a href="#" data-product="{{ product.key }}" class="btn-for-interest">관심</a></li>
+                            {% endif %}
                             <li class="service-social"><a href="#" data-product="{{ product.key }}" class="btn-for-cart">장바구니</a></li>
                         </ul>
                     </div>

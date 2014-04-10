@@ -41,31 +41,46 @@
 
 <div class="row">
     <div class="col-xs-10 col-xs-offset-1">
-        <div id="productList">
-          <div id="productGrid">
-              {% for product in products %}
+        <div class="category-list">
+            <ul>
+            {% for category in setCategories %}
+                <li><a href="/shopping1/{{ category.key }}">{{ category.name }}</a></li>
+            {% endfor %}
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="product-list">
+          <div id="setGrid">
+              {% for set in sets %}
                 <div class="service-list team">
                     <div class="service-item">
                         <div class="service-content">
                             <div class="service-image ">
-                                <a href="/productdetail/{{product.key  }}" data-ajax="false"><img src="{{ product.big_img_url}}" alt="" /></a>
+                                <a href="/productdetailWeb/{{set.key  }}" data-ajax="false"><img src="{{ set.big_img_url}}" alt="" /></a>
                             </div>
                             <div class="service-title product-contents">
-                                [{{product.brandname}}] {{ product.name }}
+                                {% if (set.name|length) > 40 %}
+                                    <a href="{{ url_for('productDetailWeb', product_key=set.key) }}">{{set.name[:40] }}..</a>
+                                {% else %}
+                                    <a href="{{ url_for('productDetailWeb', product_key=set.key) }}">{{set.name }}</a>
+                                {% endif %}
                                 <div class="product-price-box">
-                                    <b>\{{ product.price }}</b>
-                                    <br/>
-                                    <b class="product-type">{{ product.category_name }}</b>
-                                    ({{ product.capacity }}ml)
+                                    <b>\{{ set.price }}</b>
+                                    ({{ set.capacity }})<br/>
+                                    <b class="product-type"><a href="/shopping1/{{ set.category_key }}">{{ set.category_name }}</a></b>
                                 </div>
                             </div>
-                             <div class="product-bottom-menu">
-                                <ul class="menu-links clearfix">
-                                    <li class=""><a href="#" class="btn-for-interest">관심</a></li>
-                                    <li class=""><a href="#" class="btn-for-cart">장바구니</a></li>
-                                </ul>
-                            </div>
                         </div>
+                    </div>
+                     <div class="product-bottom-menu product-btn-list">
+                        <ul class="menu-links clearfix">
+                            {% if set.isInterested  %}
+                                <li class=""><a href="#" data-product="{{ set.key }}" data-set="true" class="btn-for-interest btn-motion9 btn-motion9-disable">관심</a></li>
+                            {%  else  %}
+                                <li class=""><a href="#" data-product="{{ set.key }}" data-set="true" class="btn-for-interest btn-motion9">관심</a></li>
+                            {% endif %}
+                            <li class=""><a href="#" data-product="{{ set.key }}" data-set="true" class="btn-for-cart btn-motion9">장바구니</a></li>
+                        </ul>
                     </div>
                 </div>
               {% endfor %}
@@ -73,6 +88,55 @@
         </div>
     </div>
 </div>
-
-
+<div style="margin-top : 40px;"></div>
+<div class="row">
+    <div class="col-xs-10 col-xs-offset-1">
+        <div class="category-list">
+            <ul>
+            {% for category in categories %}
+                <li><a href="/shopping2/{{ category.key }}">{{ category.name }}</a></li>
+            {% endfor %}
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="product-list">
+          <div id="productGrid">
+              {% for product in products %}
+                <div class="service-list team">
+                    <div class="service-item">
+                        <div class="service-content">
+                            <div class="service-image ">
+                                <a href="/productdetailWeb/{{product.key  }}" data-ajax="false"><img src="{{ product.big_img_url}}" alt="" /></a>
+                            </div>
+                            <div class="service-title product-contents">
+                                {% if (product.name|length) > 40 %}
+                                    <a href="{{ url_for('productDetailWeb', product_key=product.key) }}">{{product.name[:40] }}..</a>
+                                {% else %}
+                                    <a href="{{ url_for('productDetailWeb', product_key=product.key) }}">{{product.name }}</a>
+                                {% endif %}
+                                <div class="product-price-box">
+                                    <b>\{{ product.price }}</b>
+                                    ({{ product.capacity }})<br/>
+                                    <b class="product-type"><a href="/shopping2/{{ product.category_key }}">{{ product.category_name }}</a></b>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-bottom-menu product-btn-list">
+                        <ul class="menu-links clearfix">
+                            {% if product.isInterested  %}
+                                <li class=""><a href="#" data-product="{{ product.key }}" class="btn-for-interest btn-motion9 btn-motion9-disable">관심</a></li>
+                            {%  else  %}
+                                <li class=""><a href="#" data-product="{{ product.key }}" class="btn-for-interest btn-motion9">관심</a></li>
+                            {% endif %}
+                            <li class=""><a href="#" data-product="{{ product.key }}" class="btn-for-cart btn-motion9">장바구니</a></li>
+                        </ul>
+                    </div>
+                </div>
+              {% endfor %}
+          </div>
+        </div>
+    </div>
+</div>    
+    
 {% endblock %}

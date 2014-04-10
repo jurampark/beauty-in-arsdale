@@ -10,7 +10,7 @@
     padding :0;
 }
 
-#productList{
+.product-list{
     margin:0;
     padding : 0;
 }
@@ -85,34 +85,23 @@
 .service-links .icon-small-prev, .service-links .icon-small-next {font-size: 22px;}
 .service-links a:hover [class*="icon-small-"] {color: #d4e729;}
 
-/*Green Links*/
-.service-links.green {background: #b8c901; box-shadow: none;}
-.service-links.green:before {color: #989f01;}
-.service-links.green a {
-    border-left: 1px solid #b4c201;
-    -webkit-transition: all 0.16s ease;
-    -moz-transition: all 0.16s ease;
-    -ms-transition: all 0.16s ease;
-    transition: all 0.16s ease;
-}
-.service-links.green a:hover {background: #989f01; box-shadow: inset 0 16px 10px -10px rgba(77, 83, 14, 0.8);}
-.service-links.green [class*="icon-small-"] {color: #fff;}
-.service-links.green a:hover [class*="icon-small-"] {color: #b8c901;}
-
-/*Red Links*/
-.service-links.red {background: #bf5d90;}
-.service-links.red:before {color: #cc6b9e;}
-.service-links.red a {border-left: 1px solid #ab447a;}
-.service-links.red [class*="icon-small-"] {color: #fff;}
-.service-links.red a:hover [class*="icon-small-"] {color: #FFB3DB;}
-
 .service-desc p {
     font-size: 14px;
     font-weight: 600;
     line-height: 20px;
     margin-bottom: 16px;
 }
-.service-image img {display: block; width: 100%; height : 250px;}
+.service-image{
+
+}
+
+.service-image img {
+    display: block;
+    width: 250px !important;
+    height : 250px;
+    margin-left :auto;
+    margin-right : auto;
+}
 
 .service-list{
     width :132px;
@@ -132,9 +121,8 @@
     border-radius: 4px;
     */
     border: 1px solid #e7e7e7;
-    padding: 14px 12px 0px 12px;
-    height : 360px;
-    overflow: hidden;
+    border-bottom: none;
+    padding: 14px 0 0px 0;
 }
 
 .ui-block-a .team{
@@ -145,43 +133,23 @@
 	padding: 0 3px 0 3px;
 }
 
-.service-list.team .service-content {padding: 0px 0px 6px 0;}
-.service-list.team .service-title {font-size: 16px; line-height: 24px; margin-bottom: 8px; text-align: left;}
-.service-list.team .service-title a {color: #644370; text-decoration: none;}
+.service-list.team .service-content {
+    padding: 0px 12px 6px 12px;
+    font-size: 12px;
+    height : 335px;
+    overflow: hidden;
+}
+.service-list.team .service-title {font-size: 14px; line-height: 24px; margin-bottom: 8px; text-align: left;}
+.service-list.team .service-title a {color: black; text-decoration: none;}
+.service-list.team .service-title a:hover {
+    text-decoration: underline;
+}
+.service-list.team .service-title a:visited {
+    color: black;
+}
+
 .service-list.team .service-subtitle {color: #bf5d90; text-transform: uppercase; margin-bottom: 22px;}
 .service-list.team .service-image {margin: 0 0px 6px; width : 100%;}
 .service-image img{width : 100%;}
 .service-list.team .service-links li {width: 50%; font-size: 14px;}
 
-
-/*Green Links*/
-.service-links.green {background: #b8c901; box-shadow: none;}
-.service-links.green:before {color: #989f01;}
-.service-links.green a {
-	text-decoration:none;
-    border-left: 1px solid #b4c201;
-    -webkit-transition: all 0.16s ease;
-    -moz-transition: all 0.16s ease;
-    -ms-transition: all 0.16s ease;
-    transition: all 0.16s ease;
-}
-.service-links.green a:hover {background: #989f01; box-shadow: inset 0 16px 10px -10px rgba(77, 83, 14, 0.8);}
-.service-links.green [class*="icon-small-"] {color: #fff;}
-.service-links.green a:hover [class*="icon-small-"] {color: #b8c901;}
-
-
-
-.product-bottom-menu li {
-    float: left;
-    width: 50%;
-    border-left: 1px solid #eee;
-}
-
-.product-bottom-menu{
-    background-color: #fbfbfb;
-    padding: 8px 0;
-    text-align: center;
-    border-top: 1px solid #eee;
-    font-size: 12px;
-    color: #777777;
-}

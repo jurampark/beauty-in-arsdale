@@ -4,12 +4,12 @@
 
 {% endblock %}
 {% block productGrid %}
-    {% for cart in carts%}
+    {% for product in carts%}
     <div class="product-info product-item">
         <div class="product-contents">
-            <h4><a href="{{ url_for('productDetail', product_key=cart.product.key) }}">{{product.product_name  }}</a></h4>
+            <h5><a href="{{ url_for('productDetailWeb', product_key=product.key) }}">{{product.name  }}</a></h5>
             <div class="product-price-box">
-                Price : <b>￦{{cart.product.price}}</b> ({{ cart.product.capacity  }}ml)<br/>
+                Price : <b>￦{{product.price}}</b> ({{ product.capacity  }})<br/>
             </div>
         </div>
         <div class="list-btn-wrapper btn-group-vertical">
@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="product-img">
-            <img src="{{cart.product.big_img_url }}" alt="" />
+            <img src="{{product.big_img_url }}" alt="" />
         </div>
         <div class="clearfix"></div>
     </div>

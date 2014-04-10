@@ -16,25 +16,38 @@
 
 {% block content %}
 <div>
+    <div data-role="controlgroup" data-type="horizontal">
+        <select id="categoryList">
+            <option value="#">카테고리 선택</option>
+            <option value="all">모두 보기</option>
+            {% for category in categories %}
+               <option value="{{ category.key }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
     {% for product in products %}
-    <div class="product-item" id="item-{{ product.product_id }}" data-attr="{{ product.product_id }}">
+    <div class="product-item" id="item-{{ product.key}}" data-attr="{{ product.key }}">
         <div class="product-img">
-            <img src="{{ product.product_big_img}}" alt="" />
+            <img src="{{ product.big_img_url}}" alt="" />
         </div>
         <div class="product-contents">
             <div class="product-info">
-                [{{ product.product_brand }}]<br/>
-                <a href="{{ url_for('productDetail') }}">{{product.product_name  }}</a>
+                [{{ product.brandname }}]<br/>
+                <a href="{{ url_for('productDetail') }}">{{product.name }}</a>
                 <div class="product-price-box">
-                    Price : <b>￦{{ product.product_price }} ({{product.product_capacity }}ml)</b><br/>
-                    Category : <b>{{ product.product_type }}</b>
+                    Price : <b>￦{{ product.price }} ({{product.capacity }})</b><br/>
+                    Category : <b>{{ product.category_name}}</b>
                 </div>
             </div>
         </div>
         <div class="product-bottom-menu">
             <ul class="menu-links clearfix">
-                <li class=""><a href="#">관심</a></li>
-                <li class=""><a href="#">장바구니</a></li>
+               {% if product.isInterested  %}
+                <li class=""><a href="#" data-product="{{ product.key }}" data-set="true" class="btn-for-interest btn-motion9-disable">관심</a></li>
+            {%  else  %}
+                <li class=""><a href="#" data-product="{{ product.key }}" data-set="true" class="btn-for-interest">관심</a></li>
+            {% endif %}
+                <li class=""><a href="#" class="btn-for-cart" data-set="true" data-product="{{ product.key }}">장바구니</a></li>
             </ul>
         </div>
     </div>

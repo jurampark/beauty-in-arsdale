@@ -15,31 +15,43 @@
 {% endblock %}
 
 {% block content %}
+<div data-role="controlgroup" data-type="horizontal">
+    <select id="categoryList">
+        <option value="#">카테고리 선택</option>
+        <option value="all">모두 보기</option>
+        {% for category in categories %}
+           <option value="{{ category.key }}">{{ category.name }}</option>
+        {% endfor %}
+    </select>
+</div>
 <div id="productGrid">
     {% for product in products %}
     <div class="product-item" id="item-{{ product.key }}" data-attr="{{ product.key }}">
         <div class="product-img">
-            <img src="{{ product.big_img_url}}" alt="" />
+            <a href="/productdetail/{{ product.key }}" data-ajax="false"><img src="{{ product.big_img_url}}" alt="" /></a>
         </div>
         <div class="product-contents">
             <div class="product-info">
                 [{{ product.brandname }}]<br/>
                 {% if (product.name|length) > 16 %}
-                    <a href="{{ url_for('productDetail',product_key = product.key) }}">{{product.name[:16] }}..</a>
+                    <a href="{{ url_for('productDetail',product_key = product.key) }}" data-ajax="false">{{product.name[:16] }}..</a>
                 {% else %}
-                    <a href="{{ url_for('productDetail', product_key=product.key) }}">{{product.name  }}</a>
+                    <a href="{{ url_for('productDetail', product_key=product.key) }}"  data-ajax="false">{{product.name  }}</a>
                 {% endif %}
 
                 <div class="product-price-box">
-                    Price : <b>￦{{ product.price }} ({{product.capacity}}ml)</b><br/>
+                    Price : <b>￦{{ product.price }} ({{product.capacity}})</b><br/>
                     Category : <b>{{ product.category.name}}</b>
                 </div>
             </div>
         </div>
         <div class="product-bottom-menu">
             <ul class="menu-links clearfix">
-
-                <li class=""><a href="#" class="btn-for-interest" data-product="{{ product.key }}">관심</a></li>
+            {% if product.isInterested  %}
+                <li class=""><a href="#" data-product="{{ product.key }}" class="btn-for-interest btn-motion9-disable">관심</a></li>
+            {%  else  %}
+                <li class=""><a href="#" data-product="{{ product.key }}" class="btn-for-interest">관심</a></li>
+            {% endif %}
                 <li class=""><a href="#" class="btn-for-cart" data-product="{{ product.key }}">장바구니</a></li>
             </ul>
         </div>

@@ -7,8 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.1/jquery.mobile-1.4.1.min.css" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/common_style.css') }}"/>
+    <script type="text/javascript">
+        var url_for_login_next = "{{ url_for('login', next=request.url ) }}";
+    </script>
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.1/jquery.mobile-1.4.1.min.js"></script>
+    <script src="{{ url_for('static', filename='js/common_js.js') }}"></script>
     <script src="{{ url_for('static', filename='js/common_js_mobile.js') }}"></script>
     {% block header %}
     {% endblock %}
@@ -24,9 +28,8 @@
 	   <ul data-role="listview" id="menuListView">
 		    <li data-icon="false"><a href="/">홈</a></li>
 		    <li data-icon="false"><a href="/mypage" data-ajax="false">프로필</a></li>
-		    <li data-icon="false"><a href="/mshopping1">쇼핑1</a></li>
-		    <li data-icon="false"><a href="/mshopping2">쇼핑2</a></li>
-		    <li data-icon="false"><a href="/comparablelist" data-ajax="false">제품 비교</a></li>
+		    <li data-icon="false"><a href="/mshopping1" data-ajax="false">쇼핑1</a></li>
+		    <li data-icon="false"><a href="/mshopping2" data-ajax="false">쇼핑2</a></li>
 		    <li data-icon="false"><a href="#">About</a></li>
 		    <li data-icon="false"><a href="#">Help</a></li>
            {% if g.user %}
