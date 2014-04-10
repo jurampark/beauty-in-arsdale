@@ -8,8 +8,9 @@ $(function(){
 
         var btn = $(this);
         var productKey = btn.attr('data-product');
+        var isSet = btn.attr('data-set')==true;
         var url = '';
-        var done = btn.hasClass('disable');
+        var done = btn.hasClass('btn-motion9-disable');
 
         if(!done)
             url = "/addProductToInterest";
@@ -31,9 +32,9 @@ $(function(){
                           alert('에러가 발생하였습니다. 관리자에게 문의 해주세요.');
                       }else{
                           if(!done){
-                            btn.addClass('disable');
+                            btn.addClass('btn-motion9-disable');
                           }else{
-                              btn.removeClass('disable');
+                              btn.removeClass('btn-motion9-disable');
                           }
                       }
 
@@ -47,6 +48,7 @@ $(function(){
     $('.btn-for-cart').click(function(e){
         e.preventDefault();
         var productKey = $(this).attr('data-product');
+        var isSet = btn.attr('data-set')==true;
 
         if(!confirm('장바구니에 추가 하시겠습니까?'))
             return;

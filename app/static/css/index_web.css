@@ -10,7 +10,7 @@
     padding :0;
 }
 
-#productList{
+.product-list{
     margin:0;
     padding : 0;
 }
@@ -121,6 +121,7 @@
     border-radius: 4px;
     */
     border: 1px solid #e7e7e7;
+    border-bottom: none;
     padding: 14px 0 0px 0;
 }
 
@@ -139,29 +140,16 @@
     overflow: hidden;
 }
 .service-list.team .service-title {font-size: 14px; line-height: 24px; margin-bottom: 8px; text-align: left;}
-.service-list.team .service-title a {color: #644370; text-decoration: none;}
+.service-list.team .service-title a {color: black; text-decoration: none;}
+.service-list.team .service-title a:hover {
+    text-decoration: underline;
+}
+.service-list.team .service-title a:visited {
+    color: black;
+}
+
 .service-list.team .service-subtitle {color: #bf5d90; text-transform: uppercase; margin-bottom: 22px;}
 .service-list.team .service-image {margin: 0 0px 6px; width : 100%;}
 .service-image img{width : 100%;}
 .service-list.team .service-links li {width: 50%; font-size: 14px;}
 
-
-
-.product-bottom-menu li {
-    float: left;
-    width: 50%;
-    border-left: 1px solid #eee;
-}
-
-.product-bottom-menu{
-    background-color: #fbfbfb;
-    padding: 8px 0;
-    text-align: center;
-    border-top: 1px solid #eee;
-    font-size: 12px;
-    color: #777777;
-}
-
-.btn-for-interest .disable{
-    background-color: black;
-}

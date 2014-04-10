@@ -12,13 +12,13 @@
     <div id="hoverButtonList">
         <div class="btn-group-vertical">
           <div class="btn-group">
-            <button type="button" class="btn btn-default btn-for-cart">장바구니 넣기</button>
+            <button type="button" id="addCartBtn" class="btn btn-default btn-for-cart">장바구니 넣기</button>
           </div>
           <div class="btn-group">
             <button type="button" class="btn btn-default">바로 구매</button>
           </div>
           <div class="btn-group">
-            <button type="button" class="btn btn-danger">삭제</button>
+            <a href="#" id="cancelInterestBtn"class="btn btn-danger">삭제</a>
           </div>
         </div>
     </div>
@@ -39,7 +39,7 @@
         {% endif %}
 
         <div class="product-price-box">
-            Price : <b>￦{{ product.price }} ({{product.capacity }}ml)</b><br/>
+            Price : <b>￦{{ product.price }} ({{product.capacity }})</b><br/>
             Category : <b>{{ product.category_name }}</b>
         </div>
     </div>

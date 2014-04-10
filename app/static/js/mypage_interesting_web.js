@@ -25,10 +25,16 @@ $(function(){
 
     $('.product-item').hover(function(e){
         var id = $(this).attr('data-attr');
+
+        $('#addCartBtn').attr('data-product', id);
+        $('#cancelInterestBtn').attr('href', '/cancelproductinterest/'+id);
+
         var hoverArea = $('#productHoverArea');
         hoverArea.appendTo($('#item-'+id));
-        $('#productHoverArea').css({position : 'absolute', top : 0, left: 0});
+
+        hoverArea.css({position : 'absolute', top : 0, left: 0});
         $('#opacityBg').css({opacity:0.7});
+
         hoverArea.css({display:'block'});
 
     }, function(e){

@@ -65,7 +65,7 @@ def getProductListInCart():
     return_products = []
     query = g.db.session.query( Product, Category.name.label('category_name') ).\
     filter( Cart.product_key == Product.key ).\
-    filter( Category.key == Product.category_key ).all()
+    filter( Category.key == Product.category_key )
     if g.user:
         query = query.filter( Cart.user_key == g.user.key )
 
@@ -201,12 +201,16 @@ def addProductOrSetToInterest( product_or_set_key, is_set ):
 
 def deleteProductOrSetInInterest( product_or_set_key, is_set ):
     if is_set:
-        interest = g.db.session.query( Interest ).filter( Interest.set_key == product_or_set_key )
+        interest = g.db.session.query( Interest ).filter( Interest.set_key == product_or_set_key ).first()
     else:
-        interest = g.db.session.query( Interest ).filter( Interest.product_key == product_or_set_key )
+        interest = g.db.session.query( Interest ).filter( Interest.product_key == product_or_set_key ).first()
 
-    g.db.session.delete( interest )
-    g.db.session.commit()
+    try:
+        g.db.session.delete( interest )
+        g.db.session.commit()
+        return True
+    except Exception, e:
+        return False
 
 def addProductOrSetToCart( product_or_set_key, is_set ):
     if is_set:
@@ -223,12 +227,16 @@ def addProductOrSetToCart( product_or_set_key, is_set ):
 
 def deleteProductOrSetInCart( product_or_set_key, is_set ):
     if is_set:
-        cart = g.db.session.query( Cart ).filter( Cart.set_key == product_or_set_key )
+        cart = g.db.session.query( Cart ).filter( Cart.set_key == product_or_set_key ).first()
     else:
-        cart = g.db.session.query( Cart ).filter( Cart.product_key == product_or_set_key )
+        cart = g.db.session.query( Cart ).filter( Cart.product_key == product_or_set_key ).first()
 
-    g.db.session.delete( cart )
-    g.db.session.commit()
+    try:
+        g.db.session.delete( cart )
+        g.db.session.commit()
+        return True
+    except Exception, e:
+        return False
 
 # @app.route('/add_product_to_interest/<int:product_key>')
 # @login_required
@@ -497,7 +505,7 @@ def join():
 ###@login_required
 def productDetail(product_key):
     product = getProduct(product_key)
-    blogList = getBlogReviewList()
+    blogList = getBlogReviewList(product_key)
     return render_template('product_detail.html', product=product, blogList = blogList)
 
 @app.route('/blogdetail/', methods=['GET'])
@@ -544,7 +552,10 @@ def index():
 @app.route('/indexweb', methods = ['GET'])
 def indexweb():
     products = getProductList()
-    return render_template('index_web.html', products = products)
+    sets = getProductList()
+    categories = getCategoryList(False)
+    setCategories = getCategoryList(True)
+    return render_template('index_web.html', products = products[0:6], sets=sets[0:4], categories=categories, setCategories = setCategories)
 
 
 @app.route('/mypageweb', methods = ['GET'])
@@ -560,26 +571,33 @@ def purchaselist():
     carts = getProductListInCart()
     return render_template('mypage_purchase_web.html', tabName='purchase', carts = carts)
 
-
 @app.route('/shopping1', methods = ['GET'])
-def shoppingSet():
-    products = None
-    return render_template('shopping_set_web.html', products = products)
+@app.route('/shopping1/<int:category_key>', methods = ['GET'])
+def shoppingSet(category_key=None):
+    products = getSetList(category_key)
+    categories = getCategoryList(True)
+    return render_template('shopping_set_web.html', products = products, current_page='shopping1',current_category=category_key, categories=categories)
 
 @app.route('/mshopping1', methods = ['GET'])
-def mshoppingSet():
-    products = g.db.session.query(Product).all()
-    return render_template('shopping_set.html', products = products)
+@app.route('/mshopping1/<int:category_key>', methods = ['GET'])
+def mshoppingSet(category_key=None):
+    products = getSetList(category_key)
+    categories = getCategoryList(True)
+    return render_template('shopping_set.html', products = products, current_category=category_key, categories=categories)
 
 @app.route('/shopping2', methods = ['GET'])
-def shoppingProduct():
-    products = getProductList()
-    return render_template('shopping_product_web.html', products = products)
+@app.route('/shopping2/<int:category_key>', methods = ['GET'])
+def shoppingProduct(category_key=None):
+    products = getProductList(category_key)
+    categories = getCategoryList(False)
+    return render_template('shopping_product_web.html', products = products, current_page='shopping2', current_category=category_key, categories=categories)
 
 @app.route('/mshopping2', methods = ['GET'])
-def mshoppingProduct():
-    products = getProductList()
-    return render_template('shopping_product.html', products = products)
+@app.route('/mshopping2/<int:category_key>', methods = ['GET'])
+def mshoppingProduct(category_key=None):
+    products = getProductList(category_key)
+    categories = getCategoryList(False)
+    return render_template('shopping_product.html', products = products, current_category=category_key, categories=categories)
 
 @app.route('/setdetail', methods = ['GET'])
 def setDetail():
@@ -591,5 +609,9 @@ def setDetailWeb():
      product =g.db.session.query(Product).all()[0]
      return render_template('set_detail_web.html', product= product)
 
-
+@app.route('/cancelproductinterest/<int:product_key>', methods = ['GET'])
+@login_required
+def cancelProductInterest(product_key):
+    deleteProductOrSetInInterest(product_key, False)
+    return  redirect( url_for('mypageweb'))
 
