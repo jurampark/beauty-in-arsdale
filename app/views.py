@@ -2,16 +2,20 @@
 from app import app, db
 from app.models import Users, Product, Interest, Cart, Category, Tag, BlogReview, SetProduct, Set, Purchase
 from flask import flash, redirect, render_template, request, session, url_for, g, jsonify
-from sqlalchemy import and_
+from sqlalchemy import and_, desc
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.sql import func
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 from werkzeug import generate_password_hash, check_password_hash
 from functools import wraps
 
+PAGE_COUNT = 3
+
 @app.route('/print_sample_module', methods = ['GET', 'POST'])
 def printSampleModule():
-    products = getProductListInInterest()
+    products = getProductList(2)
+
+    print products
 
     return jsonify(
         success = True,
@@ -34,6 +38,17 @@ def printSampleModule():
 
     # return 'good'
 
+def makePagingData( pageTotalCount, page_num, page_count, data ):
+    return_data = {}
+    return_data['page_total_count'] = pageTotalCount
+    return_data['page_left_count'] = page_num - (page_num%page_count) + 1
+    return_data['page_right_count'] = pageTotalCount if pageTotalCount < return_data['page_left_count'] + page_count - 1 else return_data['page_left_count'] + page_count - 1
+    return_data['page_hasPrev'] = True if return_data['page_left_count'] is not 1 else False
+    return_data['page_hasNext'] = True if return_data['page_right_count'] < pageTotalCount else False
+    return_data['data'] = data
+
+    return return_data
+
 def getProduct( product_key ):
     # print g.db.session.query( Product, Category.name ).filter( Product.key == product_key ).filter( Product.category_key == Category.key )
     return_products = []
@@ -45,7 +60,8 @@ def getProduct( product_key ):
 
     return return_products[0]
 
-def getProductListInInterest():
+def getProductListInInterest( page_num = 1 ):
+    page_count = PAGE_COUNT
     return_products = []
     query = g.db.session.query( Product, Category.name.label('category_name') ).\
     filter( Interest.product_key == Product.key ).\
@@ -53,15 +69,19 @@ def getProductListInInterest():
     if g.user:
         query = query.filter( Interest.user_key == g.user.key)
 
-    products = query.all()
+    pageTotalCount = int(query.count())
+    products = query.slice( (page_num-1)*page_count , page_num*page_count ).all()
 
     for product, category_name in products:
         product.category_name = category_name
         return_products.append( product )
 
-    return return_products;
+    return_data = makePagingData( pageTotalCount, page_num, page_count, return_products )
 
-def getProductListInCart():
+    return return_data
+
+def getProductListInCart( page_num = 1 ):
+    page_count = PAGE_COUNT
     return_products = []
     query = g.db.session.query( Product, Category.name.label('category_name') ).\
     filter( Cart.product_key == Product.key ).\
@@ -70,15 +90,19 @@ def getProductListInCart():
     if g.user:
         query = query.filter( Cart.user_key == g.user.key )
 
-    products = query.all()
+    pageTotalCount = int(query.count())
+    products = query.slice( (page_num-1)*page_count , page_num*page_count ).all()
 
     for product, category_name in products:
         product.category_name = category_name
         return_products.append( product )
 
-    return return_products
+    return_data = makePagingData( pageTotalCount, page_num, page_count, return_products )
 
-def getProductListInPurchase():
+    return return_data
+
+def getProductListInPurchase( page_num = 1 ):
+    page_count = PAGE_COUNT
     return_products = []
     query = g.db.session.query( Product, Category.name.label('category_name') ).\
     filter( Purchase.product_key == Product.key ).\
@@ -87,15 +111,19 @@ def getProductListInPurchase():
     if g.user:
         query = query.filter( Purchase.user_key == g.user.key )
 
-    products = query.all()
+    pageTotalCount = int(query.count())
+    products = query.slice( (page_num-1)*page_count , page_num*page_count ).all()
 
     for product, category_name in products:
         product.category_name = category_name
         return_products.append( product )
 
-    return return_products
+    return_data = makePagingData( pageTotalCount, page_num, page_count, return_products )
 
-def getProductList( category_key = None, set_key = None ):
+    return return_data
+
+def getProductList( page_num = 1, category_key = None, set_key = None ):
+    page_count = PAGE_COUNT
     if g.user:
         stmt = g.db.session.query( Interest ).filter( Interest.user_key == g.user.key ).subquery()
     else:
@@ -108,7 +136,8 @@ def getProductList( category_key = None, set_key = None ):
 
     if category_key is not None:
         query = query.filter( Product.category_key == category_key )
-    interestedProducts = query.all()
+    pageTotalCount = int(query.count())
+    interestedProducts = query.order_by( Product.key ).slice( (page_num-1)*page_count , page_num*page_count ).all()
     products = []
     for product, category_name, isInterested in interestedProducts:
         product.category_name = category_name
@@ -118,9 +147,12 @@ def getProductList( category_key = None, set_key = None ):
             product.isInterested = True
         products.append( product )
 
-    return products
+    return_data = makePagingData( pageTotalCount, page_num, page_count, products )
 
-def getProductListInTag( tag_key ):
+    return return_data
+
+def getProductListInTag( page_num = 1, tag_key = None ):
+    page_count = PAGE_COUNT
     if g.user:
         stmt = g.db.session.query( Interest ).filter( Interest.user_key == g.user.key ).subquery()
     else:
@@ -128,7 +160,8 @@ def getProductListInTag( tag_key ):
 
     query = g.db.session.query( Product, Category.name.label('category_name'), stmt.c.key ).outerjoin( stmt, Product.key == stmt.c.product_key ).filter( Category.key == Product.category_key )
     query = query.filter( and_(Product.key == ProductTag.product_key, ProductTag.tag_key == tag_key ) )
-    interestedProducts = query.all()
+    pageTotalCount = int(query.count())
+    interestedProducts = query.slice( (page_num-1)*page_count , page_num*page_count ).all()
     products = []
     for product, category_name, isInterested in interestedProducts:
         product.category_name = category_name
@@ -138,7 +171,9 @@ def getProductListInTag( tag_key ):
             product.isInterested = True
         products.append( product )
 
-    return products
+    return_data = makePagingData( pageTotalCount, page_num, page_count, products )
+
+    return return_data
 
 def getSetList( category_key = None ):
     if g.user:
