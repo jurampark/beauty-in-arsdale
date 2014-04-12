@@ -1,0 +1,174 @@
+{% extends "web_base.html" %}
+{% block header %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/common_style_web.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/change_product_in_set_web.css') }}"/>
+<script src="{{ url_for('static', filename='js/change_product_in_set_web.js') }}"></script>
+{% block subHeader %}
+{% endblock %}
+{% endblock %}
+{% block content %}
+<div class="row" id="changeProductWrapper">
+    <div class="col-xs-10 col-xs-offset-1">
+        <h4>감성적인 남자를 위한 세트 - 스킨 제품 변경</h4>
+        <div class="row">
+            <div class="col-xs-8">
+                <div class="box-css">
+                    <div class="box-header">
+                        <h4 class="contents-header">변경가능 제품</h4>
+                    </div>
+                    <div class="available-list">
+                        {%  for product in availableList %}
+                        <div class="available-product">
+                            <div class="available-product-hover-menu">
+                                 <a href="#" class="available-item-btn product-info-btn">자세히<br/>보기</a>&nbsp;&nbsp;
+                                 <a href="/setdetailweb" class="available-item-btn">바로<br/>선택</a>
+                           </div>
+                            <div class="product-img">
+                                <img src="{{ product.big_img_url}}" alt="" />
+                            </div>
+                            <div class="product-info">
+                                <div>
+                                    <b>{{ product.name }}</b>
+                                </div>
+                                <div>
+                                    {{ product.price }}원
+                                </div>
+                                <div>
+                                    세트 포함시 할인 가격 : 19000원
+                                </div>
+                                <div>
+                                    단품 할인율 : 14%
+                                </div>
+                                <div>
+                                    세트 총 가격 : 118000원
+                                </div>
+                                <div>
+                                    세트 할인율 : 18%
+                                </div>
+                                <div>
+                                    카테고리 : {{ product.category_name }}
+                                </div>
+                                <div>브랜드 : {{ product.brandname }}</div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <hr/>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="box-css" id="originProductWrapper">
+                    <div class="box-header">
+                        <h4 class="contents-header">원래 제품</h4>
+                    </div>
+                    <div class="origin-product-area">
+                        <div class="origin-product-img">
+                            <img src="{{ product.big_img_url }}">
+                        </div>
+                        <div>
+                            <div class="product-info">
+                                [{{ product.brandname }}]<br/>
+                                {% if (product.name|length) > 20 %}
+                                    <b>{{product.name[:20] }}..</b>
+                                {% else %}
+                                    <b>{{product.name }}</b>
+                                {% endif %}
+
+                                <div class="product-price-box">
+                                    <div>
+                                        원가 : <b>￦{{ product.price }} ({{product.capacity }})</b><br/>
+                                    </div>
+                                    <div>
+                                        세트 포함시 할인 가격 : 19000원
+                                    </div>
+                                    <div>
+                                        단품 할인율 : 14%
+                                    </div>
+                                    <div>
+                                        세트 총 가격 : 118000원
+                                    </div>
+                                    <div>
+                                        세트 할인율 : 18%
+                                    </div>
+                                    Category : <b>{{ product.category_name}}</b>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="product-detail-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="padding : 12px;">
+      <div class="row">
+        <div class="col-xs-12">
+            <div class="row">
+                <div class="col-xs-7">
+                    <div class="box-css">
+                        <div class="box-header">
+                            <h4 class="contents-header">제품 상세 설명</h4>
+                        </div>
+                        <div class="product-contents">
+                            <div class="product-img">
+                                <img src="{{ product.big_img_url}}" alt="" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-5">
+                    <div class="box-css">
+                        <div class="box-header">
+                            <h4 class="contents-header">구매</h4>
+                        </div>
+                        <div class="price-area">
+                            <div class="product-name"><a href="#">{{product.name  }}</a></div>
+                            <div class="product-price"><span>{{ product.price }}</span>원</div>
+                            <div class="product-btn-area">
+                                <a href="#" class="btn btn-danger">선택하기</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-css" style="margin-top: 14px;">
+                        <div class="box-header">
+                            <h4 class="contents-header">상품 정보</h4>
+                        </div>
+                        <div>
+                            <ul class="nav nav-tabs nav-justified set-info-tab" style="margin-left:-1px;">
+                               <li class="active"><a href="#modalProductInfo" data-toggle="tab">상품 정보</a></li>
+                               <li><a href="#modalProductReview" data-toggle="tab">제품 리뷰</a></li>
+                               <li><a href="#modalProductEtc" data-toggle="tab">기타</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="modalProductInfo">
+                                   <div class="product-description">
+                                        <h4  class="contents-header" style="padding-left:0px;">상세 설명</h4>
+                                        {{ product.description }}
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="modalProductReview">
+                                     <div class="video-review">
+                                        <iframe width="96%" height="225" src="//www.youtube.com/embed/PxSXrJ0ircg" frameborder="0" allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="modalProductEtc">
+                                     상품 정보가 어쩌구 저쩌구 <button class="btn btn-primary" data-toggle="modal" data-target=".product-detail-modal">Large modal</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+       </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

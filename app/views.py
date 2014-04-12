@@ -688,3 +688,10 @@ def cartWeb():
     products = getProductListInCart()
     sets = getProductListInCart()
     return render_template('cart_web.html', products = products, sets = sets[0:1])
+
+@app.route('/changeproductinsetweb', methods = ['GET'])
+@login_required
+def changeProductInSetWeb():
+    products = getProductList()
+    availableList = getProductListInCart()
+    return render_template('change_product_in_set_web.html', product = products[0], availableList = availableList)

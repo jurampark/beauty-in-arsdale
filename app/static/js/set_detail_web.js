@@ -25,4 +25,10 @@ $(function(){
 			tError: '<a href="%url%">The image #%curr%</a> could not be loaded.'
 		}
 	});
+
+    $('.belong-to-set-item').hover(function(e){
+       $(this).children('.belong-item-hover-menu').show();
+    },function(e){
+       $(this).children('.belong-item-hover-menu').hide();
+    });
 });

@@ -85,8 +85,8 @@
 }
 
 #setComposition .product-img img{
-    width : 186px;
-    height : 186px;
+    width : 184px;
+    height : 184px;
 }
 
 #setComposition .product-info{
@@ -179,3 +179,59 @@
 #modalProductInfo{
    padding : 10px;
 }
+
+.belong-to-set-item{
+    border : 1px solid white;
+    position: relative;
+
+}
+
+.belong-to-set-item:hover{
+    border : 1px solid #797979;
+}
+
+.belong-item-hover-menu{
+    display : none;
+    width : 100%;
+    position: absolute;
+    top : 10%;
+    background-color: transparent;
+    padding : 14px 0;
+    text-align: center;
+}
+
+
+
+
+
+.belong-item-btn {
+	-moz-box-shadow: 0px 0px 0px 0px #1c1b18;
+	-webkit-box-shadow: 0px 0px 0px 0px #1c1b18;
+	box-shadow: 0px 0px 0px 0px #1c1b18;
+	background-color:black;
+	-moz-border-radius:42px;
+	-webkit-border-radius:42px;
+	border-radius:42px;
+	display:inline-block;
+	cursor:pointer;
+	color:#505739;
+	font-size:14px;
+	font-weight:bold;
+	padding:17px 12px;
+	text-decoration:none;
+    width : 70px;
+    height : 70px;
+    text-align: center;
+    color : white;
+}
+
+.belong-item-btn:hover{
+    color : #e7e7e7;
+    text-decoration: none;
+}
+
+.belong-item-btn:active {
+	position:relative;
+	top:1px;
+}
+

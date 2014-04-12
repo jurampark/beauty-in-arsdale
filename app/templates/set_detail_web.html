@@ -37,24 +37,30 @@
                                <div class="row">
                                {% for number in range(1, 4)  %}
                                    <div class="col-xs-4">
-                                       <div class="product-img">
-                                             <a class="product-info-btn" href="#"><img src="{{ product.big_img_url}}" alt="" /></a>
-                                        </div>
-                                        <div class="product-contents">
-                                            <div class="product-info">
-                                                [{{ product.brandname }}]<br/>
-                                                {% if (product.name|length) > 16 %}
-                                                    <a class="product-info-btn" href="{{ url_for('productDetail', product_key=product.key) }}">{{product.name[:16] }}..</a>
-                                                {% else %}
-                                                    <a class="product-info-btn" href="{{ url_for('productDetail', product_key=product.key) }}">{{product.name }}</a>
-                                                {% endif %}
+                                       <div class="belong-to-set-item">
+                                           <div class="belong-item-hover-menu">
+                                                 <a href="#" class="belong-item-btn product-info-btn">자세히<br/>보기</a>&nbsp;&nbsp;
+                                                 <a href="/changeproductinsetweb" class="belong-item-btn">제품<br/>변경</a>
+                                           </div>
+                                           <div class="product-img">
+                                                 <img src="{{ product.big_img_url}}" alt="" />
+                                           </div>
+                                           <div class="product-contents">
+                                                <div class="product-info">
+                                                    [{{ product.brandname }}]<br/>
+                                                    {% if (product.name|length) > 16 %}
+                                                        <b>{{product.name[:16] }}..</b>
+                                                    {% else %}
+                                                        <b>{{product.name }}</b>
+                                                    {% endif %}
 
-                                                <div class="product-price-box">
-                                                    Price : <b>￦{{ product.price }} ({{product.capacity }})</b><br/>
-                                                    Category : <b>{{ product.category_name}}</b>
+                                                    <div class="product-price-box">
+                                                        Price : <b>￦{{ product.price }} ({{product.capacity }})</b><br/>
+                                                        Category : <b>{{ product.category_name}}</b>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
+                                           </div>
+                                       </div>
                                    </div>
                                {% endfor %}
                                </div>
@@ -65,7 +71,7 @@
                                 </div>
                             </div>
                             <div class="tab-pane" id="productInfo">
-                                 상품 정보가 어쩌구 저쩌구 <button class="btn btn-primary" data-toggle="modal" data-target=".product-detail-modal">Large modal</button>
+                                 상품 정보가 어쩌구 저쩌구
                             </div>
                         </div>
                     </div>
@@ -214,5 +220,7 @@
     </div>
   </div>
 </div>
+
+
 
 {% endblock %}
