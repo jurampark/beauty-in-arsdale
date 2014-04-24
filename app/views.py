@@ -15,9 +15,9 @@ PAGER_INDICATOR_LENGTH_PER_PAGE = 5
 
 @app.route('/print_sample_module', methods = ['GET', 'POST'])
 def printSampleModule():
-    products = getProduct( 3 )
+    sets = getSetList(1)
 
-    print products
+    print sets['data'][0], sets['data'][0].discount_price
 
     return jsonify(
         success = True,
@@ -51,25 +51,23 @@ def makePagingData( pageTotalCount, page_num, data ):
 
     return return_data
 
-def getProduct( product_key ):
+def getProduct(product_key):
     if g.user:
-        stmt = g.db.session.query( Interest ).filter( Interest.user_key == g.user.key ).subquery()
+        stmt = g.db.session.query(Interest).filter( Interest.user_key == g.user.key ).subquery()
     else:
-        stmt = g.db.session.query( Interest ).filter( Interest.user_key == -1 ).subquery()
+        stmt = g.db.session.query(Interest).filter( Interest.user_key == -1 ).subquery()
 
     return_products = []
-    products = g.db.session.query( Product, Category.name.label('category_name'), stmt.c.key ).outerjoin( stmt, Product.key == stmt.c.product_key ).filter( Product.key == product_key ).filter( Product.category_key == Category.key ).all()
+    products = g.db.session.query( Product, Category.name.label('category_name'), stmt.c.key ).outerjoin( stmt, Product.key == stmt.c.product_key ).filter( Product.key == product_key ).filter( Product.category_key == Category.key ).first()
 
-    for product, category_name, isInterested in products:
-        product.category_name = category_name
-        if isInterested == None:
-            product.isInterested = False
-        else:
-            product.isInterested = True
+    (product, category_name, isInterested ) = products
+    product.category_name = category_name
+    if isInterested == None:
+        product.isInterested = False
+    else:
+        product.isInterested = True
 
-        return_products.append( product )
-
-    return return_products[0]
+    return product
 
 def getProductListInInterest( page_num = 1 ):
     return_products = []
@@ -81,8 +79,6 @@ def getProductListInInterest( page_num = 1 ):
 
     pager_indicator_total_length = int( math.ceil( float( query.count() ) / ITEM_COUNT_PER_PAGE ) )
     products = query.slice( (page_num-1)*ITEM_COUNT_PER_PAGE, page_num*ITEM_COUNT_PER_PAGE ).all()
-
-    print products
 
     for product, category_name in products:
         product.category_name = category_name
@@ -200,15 +196,47 @@ def getSetList( page_num = 1, category_key = None ):
     sets = []
     for set_, category_name, isInterested in interestedSets:
         set_.category_name = category_name
+        set_.original_price = 0
+        set_.discount_price = 0
         if isInterested == None:
             set_.isInterested = False
         else:
             set_.isInterested = True
+
+        setProducts = set_.set_products.all()
+        for setProduct in setProducts:
+            product = setProduct.product
+            set_.original_price += product.original_price
+            set_.discount_price += product.discount_price
+
         sets.append( set_ )
 
     sets = makePagingData( pager_indicator_total_length, page_num, sets )
 
     return sets
+
+def getSet( set_key ):
+    if g.user:
+        stmt = g.db.session.query( Interest ).filter( Interest.user_key == g.user.key ).subquery()
+    else:
+        stmt = g.db.session.query( Interest ).filter( Interest.user_key == -1 ).subquery()
+
+    sets = g.db.session.query( Set, Category.name.label('category_name'), stmt.c.key ).outerjoin( stmt, Set.key == stmt.c.set_key ).filter( Set.key == set_key ).filter( Set.category_key == Category.key ).first()
+    (set, category_name, isInterested ) = sets
+    set.category_name = category_name
+    set.isInterested = isInterested
+    set.products = []
+    set.original_price = 0
+    set.discount_price = 0
+
+    setProducts = set.set_products.all()
+    for setProduct in setProducts:
+        product = setProduct.product
+        set.products.append( product )
+        set.original_price += product.original_price
+        set.discount_price += product.discount_price
+
+    return set
 
 def getCategoryList( is_set ):
     categorys = g.db.session.query( Category ).filter( Category.is_set == is_set ).all()
