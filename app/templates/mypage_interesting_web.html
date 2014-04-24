@@ -24,7 +24,7 @@
     </div>
 </div>
 
-{% for product in interests %}
+{% for product in interests.data %}
 
 <div class="product-item" id="item-{{ product.key}}" data-attr="{{ product.key }}">
     <div class="product-img">
@@ -33,9 +33,9 @@
     <div class="product-info">
         [{{ product.brandname }}]<br/>
         {% if (product.name|length) > 17 %}
-            <a href="{{ url_for('productDetailWeb',product_key=product.key) }}">{{product.name[:17] }}..</a>
+            <a href="{{ url_for('productWeb',product_key=product.key) }}">{{product.name[:17] }}..</a>
         {% else %}
-            <a href="{{ url_for('productDetailWeb', product_key=product.key) }}">{{product.name  }}</a>
+            <a href="{{ url_for('productWeb', product_key=product.key) }}">{{product.name  }}</a>
         {% endif %}
 
         <div class="product-price-box">
@@ -47,4 +47,15 @@
 
 {% endfor %}
 
+{% endblock %}
+
+{% block productPaging %}
+
+    <ul class="pagination">
+      <li {% if not interests.page_hasPrev  %} class="disabled" {% endif %}><a href="#">&laquo;</a></li>
+      {% for pageNum in range(interests.page_left_count, interests.page_right_count+1 )%}
+      <li><a href="{{ url_for('myPageWeb', pageNum = pageNum) }}">{{ pageNum  }}</a></li>
+      {% endfor %}
+      <li {% if not interests.page_hasNext  %} class="disabled" {% endif %}><a href="#">&raquo;</a></li>
+    </ul>
 {% endblock %}

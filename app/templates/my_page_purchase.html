@@ -1,0 +1,39 @@
+{% extends "my_page.html" %}
+{% block productGrid %}
+  <div id="purchaseList">
+    <div class="ui-grid-solo">
+        {% for product in carts.data %}
+        <div class="ui-block-a purchase-row">
+            <div class="comment-body boxed">
+                <div class="comment-avatar">
+                  <div class="avatar"><img src="{{ product.big_img_url }}" alt="" /></div>
+                </div>
+                <div class="comment-text ">
+                    <div class="comment-author clearfix">
+                        <a href="/productdetail/{{ product.key }}" data-ajax="false" class="link-author">{{ product.name }}</a>
+                        <span class="comment-meta"><span class="comment-date">{{ product.created_time }}</span></span>
+                    </div>
+                    <div class="comment-entry">
+                        <div data-role="controlgroup" data-mini="true" data-type="horizontal">
+                            <a href="#" class="ui-btn ui-corner-all purchased-list-btn">반품 신청</a>
+                            <a href="#" class="ui-btn ui-corner-all purchased-list-btn">배송 조회</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block productPaging %}
+    <ul class="pagination pagination-lg">
+      <li {% if not carts.page_hasPrev  %} class="disabled" {% endif %}><a href="#">&laquo;</a></li>
+      {% for pageNum in range(carts.page_left_count, carts.page_right_count+1 )%}
+      <li><a href="{{ url_for('myPagePurchaseMobile', pageNum = pageNum) }}"  data-ajax="false">{{ pageNum  }}</a></li>
+      {% endfor %}
+      <li {% if not carts.page_hasNext  %} class="disabled" {% endif %}><a href="#">&raquo;</a></li>
+    </ul>
+{% endblock %}

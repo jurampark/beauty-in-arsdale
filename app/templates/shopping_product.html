@@ -25,18 +25,18 @@
     </select>
 </div>
 <div id="productGrid">
-    {% for product in products %}
+    {% for product in products.data %}
     <div class="product-item" id="item-{{ product.key }}" data-attr="{{ product.key }}">
         <div class="product-img">
-            <a href="/productdetail/{{ product.key }}" data-ajax="false"><img src="{{ product.big_img_url}}" alt="" /></a>
+            <a href="/product/{{ product.key }}" data-ajax="false"><img src="{{ product.big_img_url}}" alt="" /></a>
         </div>
         <div class="product-contents">
             <div class="product-info">
                 [{{ product.brandname }}]<br/>
                 {% if (product.name|length) > 16 %}
-                    <a href="{{ url_for('productDetail',product_key = product.key) }}" data-ajax="false">{{product.name[:16] }}..</a>
+                    <a href="{{ url_for('productMobile',product_key = product.key) }}" data-ajax="false">{{product.name[:16] }}..</a>
                 {% else %}
-                    <a href="{{ url_for('productDetail', product_key=product.key) }}"  data-ajax="false">{{product.name  }}</a>
+                    <a href="{{ url_for('productMobile', product_key=product.key) }}"  data-ajax="false">{{product.name  }}</a>
                 {% endif %}
 
                 <div class="product-price-box">
@@ -60,5 +60,17 @@
     {% endfor %}
 
 </div>
-
+<div class="paging-area">
+    <ul class="pagination">
+      <li {% if not products.page_hasPrev  %} class="disabled" {% endif %}><a href="#">&laquo;</a></li>
+      {% for pageNum in range(products.page_left_count, products.page_right_count+1 )%}
+          {% if current_category != None %}
+            <li><a href="{{ url_for('mshoppingProduct', pageNum = pageNum, category_key = current_category) }}" data-ajax="false">{{ pageNum  }}</a></li>
+          {% else %}
+             <li><a href="{{ url_for('mshoppingProduct', pageNum = pageNum) }}"  data-ajax="false">{{ pageNum  }}</a></li>
+          {% endif %}
+      {% endfor %}
+      <li {% if not products.page_hasNext  %} class="disabled" {% endif %}><a href="#">&raquo;</a></li>
+    </ul>
+</div>
 {% endblock %}

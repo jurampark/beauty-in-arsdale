@@ -32,9 +32,9 @@
                         <div class="product-info">
                             [{{ product.brandname}}]<br/>
                             {% if (product.name|length) > 30 %}
-                                <a href="{{ url_for('productDetailWeb', product_key=product.key) }}">{{product.name[:30] }}..</a>
+                                <a href="{{ url_for('productWeb', product_key=product.key) }}">{{product.name[:30] }}..</a>
                             {% else %}
-                                <a href="{{ url_for('productDetailWeb', product_key=product.key) }}">{{product.name  }}</a>
+                                <a href="{{ url_for('productWeb', product_key=product.key) }}">{{product.name  }}</a>
                             {% endif %}
 
                             <div class="product-price-box">

@@ -8,12 +8,14 @@ from sqlalchemy.sql import func
 from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 from werkzeug import generate_password_hash, check_password_hash
 from functools import wraps
+import math
 
-PAGE_COUNT = 3
+ITEM_COUNT_PER_PAGE = 6
+PAGER_INDICATOR_LENGTH_PER_PAGE = 5
 
 @app.route('/print_sample_module', methods = ['GET', 'POST'])
 def printSampleModule():
-    products = getProductList(2)
+    products = getProduct( 3 )
 
     print products
 
@@ -38,30 +40,38 @@ def printSampleModule():
 
     # return 'good'
 
-def makePagingData( pageTotalCount, page_num, page_count, data ):
+def makePagingData( pageTotalCount, page_num, data ):
     return_data = {}
     return_data['page_total_count'] = pageTotalCount
-    return_data['page_left_count'] = page_num - (page_num%page_count) + 1
-    return_data['page_right_count'] = pageTotalCount if pageTotalCount < return_data['page_left_count'] + page_count - 1 else return_data['page_left_count'] + page_count - 1
+    return_data['page_left_count'] = page_num - (page_num%PAGER_INDICATOR_LENGTH_PER_PAGE) + 1
+    return_data['page_right_count'] = pageTotalCount if pageTotalCount < return_data['page_left_count'] + PAGER_INDICATOR_LENGTH_PER_PAGE - 1 else return_data['page_left_count'] + PAGER_INDICATOR_LENGTH_PER_PAGE - 1
     return_data['page_hasPrev'] = True if return_data['page_left_count'] is not 1 else False
-    return_data['page_hasNext'] = True if return_data['page_right_count'] < pageTotalCount else False
+    return_data['page_hasNext'] = True if return_data['page_right_count'] is not pageTotalCount else False
     return_data['data'] = data
 
     return return_data
 
 def getProduct( product_key ):
-    # print g.db.session.query( Product, Category.name ).filter( Product.key == product_key ).filter( Product.category_key == Category.key )
-    return_products = []
-    products = g.db.session.query( Product, Category.name.label('category_name') ).filter( Product.key == product_key ).filter( Product.category_key == Category.key ).all()
+    if g.user:
+        stmt = g.db.session.query( Interest ).filter( Interest.user_key == g.user.key ).subquery()
+    else:
+        stmt = g.db.session.query( Interest ).filter( Interest.user_key == -1 ).subquery()
 
-    for product, category_name in products:
+    return_products = []
+    products = g.db.session.query( Product, Category.name.label('category_name'), stmt.c.key ).outerjoin( stmt, Product.key == stmt.c.product_key ).filter( Product.key == product_key ).filter( Product.category_key == Category.key ).all()
+
+    for product, category_name, isInterested in products:
         product.category_name = category_name
+        if isInterested == None:
+            product.isInterested = False
+        else:
+            product.isInterested = True
+
         return_products.append( product )
 
     return return_products[0]
 
 def getProductListInInterest( page_num = 1 ):
-    page_count = PAGE_COUNT
     return_products = []
     query = g.db.session.query( Product, Category.name.label('category_name') ).\
     filter( Interest.product_key == Product.key ).\
@@ -69,19 +79,20 @@ def getProductListInInterest( page_num = 1 ):
     if g.user:
         query = query.filter( Interest.user_key == g.user.key)
 
-    pageTotalCount = int(query.count())
-    products = query.slice( (page_num-1)*page_count , page_num*page_count ).all()
+    pager_indicator_total_length = int( math.ceil( float( query.count() ) / ITEM_COUNT_PER_PAGE ) )
+    products = query.slice( (page_num-1)*ITEM_COUNT_PER_PAGE, page_num*ITEM_COUNT_PER_PAGE ).all()
+
+    print products
 
     for product, category_name in products:
         product.category_name = category_name
         return_products.append( product )
 
-    return_data = makePagingData( pageTotalCount, page_num, page_count, return_products )
+    return_products = makePagingData( pager_indicator_total_length, page_num, return_products )
 
-    return return_data
+    return return_products
 
 def getProductListInCart( page_num = 1 ):
-    page_count = PAGE_COUNT
     return_products = []
     query = g.db.session.query( Product, Category.name.label('category_name') ).\
     filter( Cart.product_key == Product.key ).\
@@ -90,19 +101,18 @@ def getProductListInCart( page_num = 1 ):
     if g.user:
         query = query.filter( Cart.user_key == g.user.key )
 
-    pageTotalCount = int(query.count())
-    products = query.slice( (page_num-1)*page_count , page_num*page_count ).all()
+    pager_indicator_total_length = int( math.ceil( float( query.count() ) / ITEM_COUNT_PER_PAGE ) )
+    products = query.slice( (page_num-1)*ITEM_COUNT_PER_PAGE, page_num*ITEM_COUNT_PER_PAGE ).all()
 
     for product, category_name in products:
         product.category_name = category_name
         return_products.append( product )
 
-    return_data = makePagingData( pageTotalCount, page_num, page_count, return_products )
+    return_products = makePagingData( pager_indicator_total_length, page_num, return_products )
 
-    return return_data
+    return return_products
 
 def getProductListInPurchase( page_num = 1 ):
-    page_count = PAGE_COUNT
     return_products = []
     query = g.db.session.query( Product, Category.name.label('category_name') ).\
     filter( Purchase.product_key == Product.key ).\
@@ -111,19 +121,18 @@ def getProductListInPurchase( page_num = 1 ):
     if g.user:
         query = query.filter( Purchase.user_key == g.user.key )
 
-    pageTotalCount = int(query.count())
-    products = query.slice( (page_num-1)*page_count , page_num*page_count ).all()
+    pager_indicator_total_length = int( math.ceil( float( query.count() ) / ITEM_COUNT_PER_PAGE ) )
+    products = query.slice( (page_num-1)*ITEM_COUNT_PER_PAGE, page_num*ITEM_COUNT_PER_PAGE ).all()
 
     for product, category_name in products:
         product.category_name = category_name
         return_products.append( product )
 
-    return_data = makePagingData( pageTotalCount, page_num, page_count, return_products )
+    return_products = makePagingData( pager_indicator_total_length, page_num, return_products )
 
-    return return_data
+    return return_products
 
 def getProductList( page_num = 1, category_key = None, set_key = None ):
-    page_count = PAGE_COUNT
     if g.user:
         stmt = g.db.session.query( Interest ).filter( Interest.user_key == g.user.key ).subquery()
     else:
@@ -136,8 +145,9 @@ def getProductList( page_num = 1, category_key = None, set_key = None ):
 
     if category_key is not None:
         query = query.filter( Product.category_key == category_key )
-    pageTotalCount = int(query.count())
-    interestedProducts = query.order_by( Product.key ).slice( (page_num-1)*page_count , page_num*page_count ).all()
+
+    pager_indicator_total_length = int( math.ceil( float( query.count() ) / ITEM_COUNT_PER_PAGE ) )
+    interestedProducts = query.order_by( Product.key ).slice( (page_num-1)*ITEM_COUNT_PER_PAGE, page_num*ITEM_COUNT_PER_PAGE ).all()
     products = []
     for product, category_name, isInterested in interestedProducts:
         product.category_name = category_name
@@ -147,12 +157,11 @@ def getProductList( page_num = 1, category_key = None, set_key = None ):
             product.isInterested = True
         products.append( product )
 
-    return_data = makePagingData( pageTotalCount, page_num, page_count, products )
+    products = makePagingData( pager_indicator_total_length, page_num, products )
 
-    return return_data
+    return products
 
 def getProductListInTag( page_num = 1, tag_key = None ):
-    page_count = PAGE_COUNT
     if g.user:
         stmt = g.db.session.query( Interest ).filter( Interest.user_key == g.user.key ).subquery()
     else:
@@ -160,8 +169,9 @@ def getProductListInTag( page_num = 1, tag_key = None ):
 
     query = g.db.session.query( Product, Category.name.label('category_name'), stmt.c.key ).outerjoin( stmt, Product.key == stmt.c.product_key ).filter( Category.key == Product.category_key )
     query = query.filter( and_(Product.key == ProductTag.product_key, ProductTag.tag_key == tag_key ) )
-    pageTotalCount = int(query.count())
-    interestedProducts = query.slice( (page_num-1)*page_count , page_num*page_count ).all()
+
+    pager_indicator_total_length = int( math.ceil( float( query.count() ) / ITEM_COUNT_PER_PAGE ) )
+    interestedProducts = query.slice( (page_num-1)*ITEM_COUNT_PER_PAGE, page_num*ITEM_COUNT_PER_PAGE ).all()
     products = []
     for product, category_name, isInterested in interestedProducts:
         product.category_name = category_name
@@ -171,28 +181,32 @@ def getProductListInTag( page_num = 1, tag_key = None ):
             product.isInterested = True
         products.append( product )
 
-    return_data = makePagingData( pageTotalCount, page_num, page_count, products )
+    products = makePagingData( pager_indicator_total_length, page_num, products )
 
-    return return_data
+    return products
 
-def getSetList( category_key = None ):
+def getSetList( page_num = 1, category_key = None ):
     if g.user:
         stmt = g.db.session.query( Interest ).filter( Interest.user_key == g.user.key ).subquery()
     else:
         stmt = g.db.session.query( Interest ).filter( Interest.user_key == -1 ).subquery()
 
-    query = g.db.session.query( Set, stmt.c.key ).outerjoin( stmt, Set.key == stmt.c.set_key )
+    query = g.db.session.query( Set, Category.name.label('category_name'), stmt.c.key ).outerjoin( stmt, Set.key == stmt.c.set_key ).filter( Category.key == Set.category_key )
     if category_key is not None:
         query = query.filter( Set.category_key == category_key )
 
-    interestedSets = query.all()
+    pager_indicator_total_length = int( math.ceil( float( query.count() ) / ITEM_COUNT_PER_PAGE ) )
+    interestedSets = query.slice( (page_num-1)*ITEM_COUNT_PER_PAGE, page_num*ITEM_COUNT_PER_PAGE ).all()
     sets = []
-    for set_, isInterested in interestedSets:
+    for set_, category_name, isInterested in interestedSets:
+        set_.category_name = category_name
         if isInterested == None:
             set_.isInterested = False
         else:
             set_.isInterested = True
         sets.append( set_ )
+
+    sets = makePagingData( pager_indicator_total_length, page_num, sets )
 
     return sets
 
@@ -428,15 +442,10 @@ def delProductCart():
         message = message
     )
 
-@app.route('/productdetailweb/<int:product_key>', methods = ['GET'])
-def productDetailWeb(product_key):
-    product = getProduct(product_key)
-    blogList = getBlogReviewList(product_key, False)
-    return render_template('product_detail_web.html', product=product, blogList=blogList)
 
 @app.route('/')
 def home():
-    return redirect( url_for('index') )
+    return redirect( url_for('indexWeb') )
 
 @app.route('/login', methods=['GET', 'POST'] )
 @app.route('/login/<path:next>', methods=['GET', 'POST'] )
@@ -516,12 +525,130 @@ def product_detail(product_key):
 def validate_register( name, email, password, sex ):
     return None
 
-@app.route('/mypage')
+@app.route('/mypage/mobile', methods = ['GET'])
+@app.route('/mypage/mobile/<int:pageNum>', methods = ['GET'])
 @login_required
-def myPage():
-    interests = getProductListInInterest();
+def myPageMobile(pageNum=None):
+    if pageNum == None:
+        interests = getProductListInInterest(1);
+    else:
+        interests = getProductListInInterest(pageNum);
+
+    return render_template('my_page_interesting.html', tabName='interesting', interests = interests)
+
+
+@app.route('/mypage/mobile/purchase', methods = ['GET'])
+@app.route('/mypage/mobile/purchase/<int:pageNum>', methods = ['GET'])
+@login_required
+def myPagePurchaseMobile(pageNum=None):
+    if pageNum == None:
+        carts = getProductListInCart(1)
+    else:
+        carts = getProductListInCart(pageNum)
+
+    return render_template('my_page_purchase.html', tabName='purchase', carts = carts)
+
+
+@app.route('/mypage', methods = ['GET'])
+@app.route('/mypage/<int:pageNum>', methods = ['GET'])
+@login_required
+def myPageWeb(pageNum=None):
+    if pageNum == None:
+        interests = getProductListInInterest(1)
+    else :
+        interests = getProductListInInterest(pageNum)
+
+    return render_template('mypage_interesting_web.html', tabName='interesting', interests = interests)
+
+@app.route('/mypage/purchase', methods = ['GET'])
+@app.route('/mypage/purchase/<int:pageNum>', methods = ['GET'])
+@login_required
+def myPageWebPurchase(pageNum=None):
+    if pageNum == None :
+        carts = getProductListInCart(1)
+    else :
+        carts = getProductListInCart(pageNum)
+
+    return render_template('mypage_purchase_web.html', tabName='purchase', carts = carts)
+
+@app.route('/product/mobile/<int:product_key>', methods=['GET'])
+###@login_required
+def productMobile(product_key):
+    product = getProduct(product_key)
+    blogList = getBlogReviewList(product_key)
+    return render_template('product_detail.html', product=product, blogList = blogList)
+
+@app.route('/product/<int:product_key>', methods = ['GET'])
+def productWeb(product_key):
+    product = getProduct(product_key)
+    blogList = getBlogReviewList(product_key, False)
+    return render_template('product_detail_web.html', product=product, blogList=blogList)
+
+@app.route('/cart/mobile', methods = ['GET'])
+def cartMobile():
     carts = getProductListInCart()
-    return render_template('my_page.html', interests = interests, carts = carts)
+    return render_template('cart.html', carts = carts)
+
+@app.route('/cart', methods = ['GET'])
+@login_required
+def cartWeb():
+    products = getProductListInCart()
+    sets = getProductListInCart()
+
+    return render_template('cart_web.html', products = products, sets = sets[0:1])
+
+
+@app.route('/index/mobile', methods = ['GET'])
+def indexMobile():
+    products = getProductList(1)
+    return render_template('index.html', products = products)
+
+@app.route('/index', methods = ['GET'])
+def indexWeb():
+    products = getProductList(1)
+    sets = getProductList()
+    categories = getCategoryList(False)
+    setCategories = getCategoryList(True)
+    return render_template('index_web.html', products = products, sets=sets, categories=categories, setCategories = setCategories)
+
+
+@app.route('/shop/product', methods = ['GET'])
+@app.route('/shop/product/<int:category_key>', methods = ['GET'])
+@app.route('/shop/product/page/<int:pageNum>', methods = ['GET'])
+@app.route('/shop/product/<int:category_key>/page/<int:pageNum>', methods = ['GET'])
+def shoppingProduct(category_key=None, pageNum=None):
+    if pageNum == None:
+        if category_key == None:
+            products = getProductList(1)
+        else :
+            products = getProductList(1,category_key)
+    else :
+        if category_key == None:
+            products = getProductList(pageNum)
+        else :
+            products = getProductList(pageNum, category_key)
+
+    categories = getCategoryList(False)
+    return render_template('shopping_product_web.html', products = products, current_page='shopping2', current_category=category_key, categories=categories)
+
+@app.route('/shop/product/mobile', methods = ['GET'])
+@app.route('/shop/product/mobile/<int:category_key>', methods = ['GET'])
+@app.route('/shop/product/mobile/page/<int:pageNum>', methods = ['GET'])
+@app.route('/shop/product/mobile/<int:category_key>/page/<int:pageNum>', methods = ['GET'])
+def mshoppingProduct(category_key=None, pageNum = None):
+    if pageNum == None:
+        if category_key == None:
+            products = getProductList(1)
+        else :
+            products = getProductList(1,category_key)
+    else :
+        if category_key == None:
+            products = getProductList(pageNum)
+        else :
+            products = getProductList(pageNum, category_key)
+
+    categories = getCategoryList(False)
+    return render_template('shopping_product.html', products = products, current_category=category_key, categories=categories)
 
 
 @app.route('/update_user_profile', methods=['GET', 'POST'])
@@ -568,12 +695,6 @@ def test():
 def join():
     return render_template('join.html')
 
-@app.route('/productdetail/<int:product_key>', methods=['GET'])
-###@login_required
-def productDetail(product_key):
-    product = getProduct(product_key)
-    blogList = getBlogReviewList(product_key)
-    return render_template('product_detail.html', product=product, blogList = blogList)
 
 @app.route('/blogdetail/', methods=['GET'])
 ###@login_required
@@ -605,38 +726,9 @@ def internal_error(error):
 
 
 
-@app.route('/cart', methods = ['GET'])
-def cart():
-    carts = getProductListInCart()
-    return render_template('cart.html', carts = carts)
 
 
-@app.route('/index', methods = ['GET'])
-def index():
-    products = getProductList()
-    return render_template('index.html', products = products)
 
-@app.route('/indexweb', methods = ['GET'])
-def indexweb():
-    products = getProductList()
-    sets = getProductList()
-    categories = getCategoryList(False)
-    setCategories = getCategoryList(True)
-    return render_template('index_web.html', products = products[0:6], sets=sets[0:4], categories=categories, setCategories = setCategories)
-
-
-@app.route('/mypageweb', methods = ['GET'])
-@login_required
-def mypageweb():
-    interests = getProductListInInterest()
-    return render_template('mypage_interesting_web.html', tabName='interesting', interests = interests)
-
-
-@app.route('/purchaselist', methods = ['GET'])
-@login_required
-def purchaselist():
-    carts = getProductListInCart()
-    return render_template('mypage_purchase_web.html', tabName='purchase', carts = carts)
 
 @app.route('/shopping1', methods = ['GET'])
 @app.route('/shopping1/<int:category_key>', methods = ['GET'])
@@ -651,20 +743,6 @@ def mshoppingSet(category_key=None):
     products = getSetList(category_key)
     categories = getCategoryList(True)
     return render_template('shopping_set.html', products = products, current_category=category_key, categories=categories)
-
-@app.route('/shopping2', methods = ['GET'])
-@app.route('/shopping2/<int:category_key>', methods = ['GET'])
-def shoppingProduct(category_key=None):
-    products = getProductList(category_key)
-    categories = getCategoryList(False)
-    return render_template('shopping_product_web.html', products = products, current_page='shopping2', current_category=category_key, categories=categories)
-
-@app.route('/mshopping2', methods = ['GET'])
-@app.route('/mshopping2/<int:category_key>', methods = ['GET'])
-def mshoppingProduct(category_key=None):
-    products = getProductList(category_key)
-    categories = getCategoryList(False)
-    return render_template('shopping_product.html', products = products, current_category=category_key, categories=categories)
 
 @app.route('/setdetail', methods = ['GET'])
 def setDetail():
@@ -682,16 +760,16 @@ def cancelProductInterest(product_key):
     deleteProductOrSetInInterest(product_key, False)
     return  redirect( url_for('mypageweb'))
 
-@app.route('/cartweb', methods = ['GET'])
-@login_required
-def cartWeb():
-    products = getProductListInCart()
-    sets = getProductListInCart()
-    return render_template('cart_web.html', products = products, sets = sets[0:1])
-
 @app.route('/changeproductinsetweb', methods = ['GET'])
 @login_required
 def changeProductInSetWeb():
     products = getProductList()
     availableList = getProductListInCart()
     return render_template('change_product_in_set_web.html', product = products[0], availableList = availableList)
+
+@app.route('/testsss', methods = ['GET'])
+@login_required
+def cartWebss():
+    interests = getProductListInInterest()
+
+    return render_template('my_page_interesting.html', interests = interests)

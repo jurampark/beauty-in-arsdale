@@ -98,8 +98,10 @@ class Product(db.Model):
     brandname = db.Column(db.String(100))
     maker = db.Column(db.String(100))
     capacity = db.Column(db.String(100))
-    price = db.Column(db.Integer)
-    discount_rate = db.Column(db.Float, default=1, nullable=False)
+    original_price = db.Column(db.Integer, default=0 )
+    discount_price = db.Column(db.Integer, default=0 )
+    # price = db.Column(db.Integer)
+    # discount_rate = db.Column(db.Float, default=1, nullable=False)
     fit_skin_type = db.Column(db.String(100))
     color_description = db.Column(db.Text)
     color_rgb = db.Column(db.String(10))
@@ -151,7 +153,7 @@ class Set(db.Model):
     description = db.Column(db.Text)
     big_img_url = db.Column(db.String(255))
     small_img_url = db.Column(db.String(255))
-    discount_rate = db.Column(db.Float, default=1, nullable=False)
+    discount_difference = db.Column(db.Integer, default=0)
     category_key = db.Column(db.Integer, db.ForeignKey('category.key'))
     created_time = db.Column(db.DateTime, default=db.func.now())
 
@@ -189,6 +191,7 @@ class SetProduct(db.Model):
     key = db.Column(db.Integer, primary_key=True)
     set_key = db.Column(db.Integer, db.ForeignKey('set.key'))
     product_key = db.Column(db.Integer, db.ForeignKey('product.key'))
+    is_changeable = db.Column(db.Boolean, default=False)
     created_time = db.Column(db.DateTime, default=db.func.now())
 
     def __init__(self, set_key, product_key):

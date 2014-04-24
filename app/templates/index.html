@@ -39,12 +39,12 @@
 
 <div id="productList">
   <div id="productGrid">
-        {% for product in products %}
+        {% for product in products.index %}
             <div class="service-list team">
                 <div class="service-item boxed bg-image-star2">
                     <div class="service-content">
                         <div class="service-image ">
-                            <a href="/productdetail/{{ product.key }}" data-ajax="false"><img src="{{ product.big_img_url }}" alt="" /></a>
+                            <a href="{{ url_for('productMobile', product_key = product.key) }}" data-ajax="false"><img src="{{ product.big_img_url }}" alt="" /></a>
                         </div>
                         <div class="service-title profile-interesting-title">
                              {{ product.name}}

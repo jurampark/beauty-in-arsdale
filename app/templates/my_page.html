@@ -51,67 +51,27 @@
 		</div>
 		<div class="ui-grid-solo">
 			<div class="ui-block-a">
-				<div data-role="tabs" id="profileTabs">
-				  <div data-role="navbar">
-				    <ul>
-				      <li><a href="#interest" class="ui-btn-active " data-ajax="false">관심상품</a></li>
-				      <li><a href="#purchaseList" class="" data-ajax="false">구매목록</a></li>
-				    </ul>
-				  </div>
+				<div id="profileTabs">
+				  <div class="tab-list">
+                     <ul class="tabs">
+                        {% if tabName == "interesting"%}
+                            <li class="active">관심 상품</li>
+                            <li><a href="{{ url_for('myPagePurchaseMobile') }}" data-ajax="false">구매 목록</a></li>
+                        {% elif tabName == "purchase" %}
+                            <li><a href="{{ url_for('myPageMobile') }}" data-ajax="false">관심 상품</a></li>
+                            <li class="active">구매 목록</li>
+                        {% endif%}
+                     </ul>
+                     <div class="clearfix"></div>
+                  </div>
 				  <div id="interest">
-                      <div id="interestGrid">
-				    		{% for product in interests%}
-                            <div class="service-list team">
-				    			<div class="service-item boxed bg-image-star2">
-						            <div class="service-content">
-						                <div class="service-image ">
-						                    <a href="/productdetail/{{ product.key }}" data-ajax="false"><img src="{{ product.big_img_url }}" alt="" /></a>
-						                </div>
-						                <div class="service-title profile-interesting-title">
-						                	{{ product.name }}
-						                	<div class="product-price-box">
-						                		Price : <b>{{ product.price }}원</b><br/>
-                                                Category : <b>{{ product.category_name}}</b>
-						                	</div>
-						                </div>
-						            </div>
-						            <div class="service-meta-bot">
-						                <ul class="service-links clearfix">
-						                     <li class="service-social"><a href="#" class="">구매</a></li>
-						                    <li class="service-social"><a href="/cancelproductinterest/{{ product.key }}" >삭제</a></li>
-						                </ul>
-						            </div>
-						        </div>
-				    		</div>
-                            {% endfor %}
-                      </div>
+                      {% block productGrid %}
+                      {% endblock %}
 				  </div>
-				  <div id="purchaseList">
-				    <div class="ui-grid-solo">
-				    	{% for product in carts %}
-                        <div class="ui-block-a purchase-row">
-				    		<div class="comment-body boxed">
-				    			<div class="comment-avatar">
-                                  <div class="avatar"><img src="{{ product.big_img_url }}" alt="" /></div>
-	                            </div>
-                                <div class="comment-text ">
-                                    <div class="comment-author clearfix">
-                                        <a href="/productdetail/{{ product.key }}" data-ajax="false" class="link-author">{{ product.name }}</a>
-                                        <span class="comment-meta"><span class="comment-date">{{ product.created_time }}</span></span>
-                                    </div>
-                                    <div class="comment-entry">
-                                    	<div data-role="controlgroup" data-mini="true" data-type="horizontal">
-                                    		<a href="#" class="ui-btn ui-corner-all purchased-list-btn">반품 신청</a>
-                                    		<a href="#" class="ui-btn ui-corner-all purchased-list-btn">배송 조회</a>
-                                    	</div>
-                                    </div>
-                                </div>
-				    		</div>
-				    	</div>
-                        {% endfor %}
-				    	</div>
-				    </div>
-				  </div>
+                  <div class="paging-area">
+                      {% block productPaging %}
+                      {% endblock %}
+                  </div>
 				</div>
 			</div>
 		</div>

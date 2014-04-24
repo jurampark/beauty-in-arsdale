@@ -51,18 +51,18 @@
         </div>
         <div class="product-list">
           <div id="setGrid">
-              {% for set in sets %}
+              {% for set in sets.data %}
                 <div class="service-list team">
                     <div class="service-item">
                         <div class="service-content">
                             <div class="service-image ">
-                                <a href="/productdetailWeb/{{set.key  }}" data-ajax="false"><img src="{{ set.big_img_url}}" alt="" /></a>
+                                <a href="/product/{{set.key  }}" data-ajax="false"><img src="{{ set.big_img_url}}" alt="" /></a>
                             </div>
                             <div class="service-title product-contents">
                                 {% if (set.name|length) > 40 %}
-                                    <a href="{{ url_for('productDetailWeb', product_key=set.key) }}">{{set.name[:40] }}..</a>
+                                    <a href="{{ url_for('productWeb', product_key=set.key) }}">{{set.name[:40] }}..</a>
                                 {% else %}
-                                    <a href="{{ url_for('productDetailWeb', product_key=set.key) }}">{{set.name }}</a>
+                                    <a href="{{ url_for('productWeb', product_key=set.key) }}">{{set.name }}</a>
                                 {% endif %}
                                 <div class="product-price-box">
                                     <b>\{{ set.price }}</b>
@@ -101,18 +101,18 @@
         </div>
         <div class="product-list">
           <div id="productGrid">
-              {% for product in products %}
+              {% for product in products.data %}
                 <div class="service-list team">
                     <div class="service-item">
                         <div class="service-content">
                             <div class="service-image ">
-                                <a href="/productdetailWeb/{{product.key  }}" data-ajax="false"><img src="{{ product.big_img_url}}" alt="" /></a>
+                                <a href="/product/{{product.key  }}" data-ajax="false"><img src="{{ product.big_img_url}}" alt="" /></a>
                             </div>
                             <div class="service-title product-contents">
                                 {% if (product.name|length) > 40 %}
-                                    <a href="{{ url_for('productDetailWeb', product_key=product.key) }}">{{product.name[:40] }}..</a>
+                                    <a href="{{ url_for('productWeb', product_key=product.key) }}">{{product.name[:40] }}..</a>
                                 {% else %}
-                                    <a href="{{ url_for('productDetailWeb', product_key=product.key) }}">{{product.name }}</a>
+                                    <a href="{{ url_for('productWeb', product_key=product.key) }}">{{product.name }}</a>
                                 {% endif %}
                                 <div class="product-price-box">
                                     <b>\{{ product.price }}</b>

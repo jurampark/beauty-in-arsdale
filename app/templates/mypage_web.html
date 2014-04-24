@@ -15,9 +15,9 @@
                         <ul class="tabs">
                             {% if tabName == "interesting"%}
                                 <li class="active">관심 상품</li>
-                                <li><a href="{{ url_for('purchaselist') }}">구매 목록</a></li>
+                                <li><a href="{{ url_for('myPageWebPurchase') }}">구매 목록</a></li>
                             {% elif tabName == "purchase" %}
-                                <li><a href="{{ url_for('mypageweb') }}">관심 상품</a></li>
+                                <li><a href="{{ url_for('myPageWeb') }}">관심 상품</a></li>
                                 <li class="active">구매 목록</li>
                             {% endif%}
                         </ul>
@@ -27,6 +27,11 @@
                         {% block productGrid %}
                         {% endblock %}
                     </div>
+                    <div class="paging-area">
+                        {% block productPaging %}
+                        {% endblock %}
+                    </div>
+
                 </div>
             </div>
             <div class="col-xs-4">

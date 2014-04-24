@@ -27,9 +27,9 @@
 	   </div>
 	   <ul data-role="listview" id="menuListView">
 		    <li data-icon="false"><a href="/">홈</a></li>
-		    <li data-icon="false"><a href="/mypage" data-ajax="false">프로필</a></li>
+		    <li data-icon="false"><a href="{{ url_for('myPageMobile') }}" data-ajax="false">프로필</a></li>
 		    <li data-icon="false"><a href="/mshopping1" data-ajax="false">쇼핑1</a></li>
-		    <li data-icon="false"><a href="/mshopping2" data-ajax="false">쇼핑2</a></li>
+		    <li data-icon="false"><a href="{{ url_for('mshoppingProduct') }}" data-ajax="false">쇼핑2</a></li>
 		    <li data-icon="false"><a href="#">About</a></li>
 		    <li data-icon="false"><a href="#">Help</a></li>
            {% if g.user %}
@@ -71,7 +71,7 @@
     	<h2 class="ui-title">Motion9</h2>
         {% endblock %}
     	<div  class="ui-btn-right">
-	    	<a href="{{ url_for('cart') }}" data-ajax="false" class="ui-btn ui-btn-inline ui-icon-shop ui-btn-icon-notext ui-corner-all">No text</a>
+	    	<a href="{{ url_for('cartMobile') }}" data-ajax="false" class="ui-btn ui-btn-inline ui-icon-shop ui-btn-icon-notext ui-corner-all">No text</a>
 	    	<a href="#loginForm" class="ui-btn ui-btn-inline ui-icon-user ui-btn-icon-notext ui-corner-all">No text</a>
     	</div>
         {% block special_header %}
